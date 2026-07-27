@@ -128,7 +128,7 @@ export default function Home() {
                   View source
                 </GitHubButton>
               </div>
-              <p className="mt-4 text-sm text-neutral-500">
+              <p className="mt-4 max-w-2xl text-[1.03rem] leading-8 text-neutral-300">
                 Design system and UI kit developed for{" "}
                 <TextLink href="https://jay.ai/writing" tone="amber">
                   Jay Hack
@@ -314,7 +314,7 @@ export default function Home() {
                       Build the sharpest version.
                     </div>
                   </div>
-                  <div className="p-6">
+                  <div className="border-b border-white/10 p-6">
                     <div className="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-neutral-600">
                       Body / 16.5 / 32
                     </div>
@@ -323,6 +323,23 @@ export default function Home() {
                       useful thing appears first, then let detail reward
                       attention.
                     </p>
+                  </div>
+                  <div className="border-b border-white/10 p-6">
+                    <div className="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-neutral-600">
+                      Subtle / 14 / 24
+                    </div>
+                    <p className="mt-3 text-sm leading-6 text-neutral-500">
+                      Supporting context stays present without competing with
+                      the work.
+                    </p>
+                  </div>
+                  <div className="p-6">
+                    <div className="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-neutral-600">
+                      Code / 12.5 / 20
+                    </div>
+                    <code className="mt-3 block font-mono text-[0.78rem] leading-5 text-neutral-500">
+                      wave-orange&nbsp;&nbsp;#f97316
+                    </code>
                   </div>
                 </div>
               </section>

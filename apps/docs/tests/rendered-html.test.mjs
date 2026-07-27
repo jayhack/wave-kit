@@ -21,6 +21,9 @@ test("server-renders the canonical jay.ai design page", async () => {
   assert.match(html, /\/design\/growth-inspiration\.webp/);
   assert.match(html, /npm install wave-kit tailwindcss/);
   assert.match(html, /Four color anchors|four color anchors/);
+  assert.match(html, /Subtle \/ 14 \/ 24/);
+  assert.match(html, /Code \/ 12\.5 \/ 20/);
+  assert.match(html, /wave-orange.*#f97316/);
   assert.match(html, />Tech stack</);
   assert.match(html, />Next\.js</);
   assert.match(html, />Vercel</);
