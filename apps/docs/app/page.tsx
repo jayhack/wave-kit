@@ -134,8 +134,8 @@ export default function Home() {
                   Jay Hack
                 </TextLink>
                 &apos;s personal projects. Emphasizes simplicity + legibility,
-                drawing inspiration from physics diagrams and classic
-                math/physics diagrams.
+                drawing inspiration from classic math/physics diagrams and
+                60s Japanese poster art, specifically Kazumasa Nagai.
               </p>
             </header>
 
