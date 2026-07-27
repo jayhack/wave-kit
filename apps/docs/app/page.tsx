@@ -27,6 +27,11 @@ const inspirationItems: LightboxItem[] = [
     alt: "Growth poster with red radial geometry and a blue gridded sphere on black",
     caption: "Secondary reference for radial systems and optical depth",
   },
+  {
+    src: "/design/no-more-war-inspiration.png",
+    alt: "No More War poster with repeated blue and red circular forms around an orange center",
+    caption: "No More War, repeated form and concentrated color",
+  },
 ];
 
 const progressiveImageItems: LightboxItem[] = [
@@ -151,9 +156,11 @@ export default function Home() {
                   against concentrated heat, and movement created from
                   disciplined geometry. The second image is a related reference
                   for radial repetition, optical depth, and sparse type on
-                  black.
+                  black. The third uses repeated circles and a restricted blue,
+                  red, orange, and black palette to create a field that feels
+                  both systematic and explosive.
                 </p>
-                <div className="mt-7 grid items-start gap-5 sm:grid-cols-2">
+                <div className="mt-7 grid items-start gap-5 sm:grid-cols-3">
                   <figure>
                     <button
                       aria-label="Open Kazumasa Nagai inspiration image"
@@ -196,6 +203,28 @@ export default function Home() {
                     </button>
                     <figcaption className="mt-3 text-sm leading-6 text-neutral-500">
                       Secondary reference for radial systems and optical depth
+                    </figcaption>
+                  </figure>
+                  <figure>
+                    <button
+                      aria-label="Open No More War inspiration image"
+                      className="group block w-full cursor-zoom-in text-left"
+                      onClick={() =>
+                        setLightbox({ items: inspirationItems, index: 2 })
+                      }
+                      type="button"
+                    >
+                      <ProgressiveImage
+                        alt={inspirationItems[2].alt}
+                        className="w-full rounded-xl border border-white/10 group-hover:border-white/25"
+                        height={898}
+                        loading="eager"
+                        src={inspirationItems[2].src}
+                        width={640}
+                      />
+                    </button>
+                    <figcaption className="mt-3 text-sm leading-6 text-neutral-500">
+                      No More War, repeated form and concentrated color
                     </figcaption>
                   </figure>
                 </div>

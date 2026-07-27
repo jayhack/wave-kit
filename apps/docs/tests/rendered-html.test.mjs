@@ -19,6 +19,8 @@ test("server-renders the canonical jay.ai design page", async () => {
   assert.match(html, /Kazumasa Nagai, primary reference/);
   assert.match(html, /\/design\/kazumasa-nagai-inspiration\.webp/);
   assert.match(html, /\/design\/growth-inspiration\.webp/);
+  assert.match(html, /\/design\/no-more-war-inspiration\.png/);
+  assert.match(html, /No More War, repeated form and concentrated color/);
   assert.match(html, /npm install wave-kit tailwindcss/);
   assert.match(html, /Four color anchors|four color anchors/);
   assert.match(html, /Subtle \/ 14 \/ 24/);
