@@ -25,7 +25,8 @@ test("server-renders the canonical jay.ai design page", async () => {
     html,
     /npx skills add jayhack\/wave-kit --skill build-with-wave-kit -y/,
   );
-  assert.match(html, /href="\/llms\.txt"/);
+  assert.match(html, /aria-label="Copy skill install command"/);
+  assert.doesNotMatch(html, /Add the agent skill/);
   assert.match(html, /npm install wave-kit tailwindcss/);
   assert.match(html, /git clone https:\/\/github\.com\/jayhack\/wave-kit\.git/);
   assert.match(html, /Four color anchors|four color anchors/);
@@ -36,6 +37,9 @@ test("server-renders the canonical jay.ai design page", async () => {
   assert.match(html, /NavigationIndex, WaveField/);
   assert.match(html, /ProgressiveImage/);
   assert.match(html, /border-wave-blue-vivid/);
+  assert.match(html, /text-wave-blue-light/);
+  assert.match(html, /text-wave-yellow/);
+  assert.match(html, /text-wave-orange-light/);
   assert.match(html, />Tech stack</);
   assert.match(html, />Next\.js</);
   assert.match(html, />Vercel</);

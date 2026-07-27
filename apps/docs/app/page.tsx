@@ -160,6 +160,9 @@ export function ProjectImage() {
   },
 ] as const;
 
+const syntaxTokenPattern =
+  /(\/\/[^\n]*|\/\*[\s\S]*?\*\/|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`|<\/?[A-Za-z][\w.-]*|@[a-z-]+|\b(?:import|from|const|export|function|return|as|if|else|true|false|null|useState)\b|\b\d+(?:\.\d+)?\b)/g;
+
 function SectionTitle({ id, children }: { id: string; children: ReactNode }) {
   return (
     <header className="mb-6">
@@ -196,24 +199,83 @@ function CodeSample({
         {label}
       </div>
       <pre className="overflow-x-auto p-5 pt-3 font-mono text-[0.78rem] leading-5 text-neutral-400">
-        <code>{code}</code>
+        <SyntaxCode code={code} />
       </pre>
     </div>
   );
 }
 
+function SyntaxCode({ code }: { code: string }) {
+  const nodes: ReactNode[] = [];
+  let cursor = 0;
+
+  for (const match of code.matchAll(syntaxTokenPattern)) {
+    const index = match.index;
+    const token = match[0];
+
+    if (index > cursor) {
+      nodes.push(code.slice(cursor, index));
+    }
+
+    let className = "text-neutral-400";
+    if (token.startsWith("//") || token.startsWith("/*")) {
+      className = "text-neutral-600";
+    } else if (
+      token.startsWith('"') ||
+      token.startsWith("'") ||
+      token.startsWith("`")
+    ) {
+      className = "text-wave-yellow";
+    } else if (token.startsWith("<")) {
+      className = "text-wave-orange-light";
+    } else if (token.startsWith("@")) {
+      className = "text-wave-red-vivid";
+    } else if (/^\d/.test(token)) {
+      className = "text-wave-orange";
+    } else if (/^(true|false|null)$/.test(token)) {
+      className = "text-wave-red-vivid";
+    } else {
+      className = "text-wave-blue-light";
+    }
+
+    nodes.push(
+      <span className={className} key={`${index}-${token}`}>
+        {token}
+      </span>,
+    );
+    cursor = index + token.length;
+  }
+
+  if (cursor < code.length) {
+    nodes.push(code.slice(cursor));
+  }
+
+  return <code>{nodes}</code>;
+}
+
 export default function Home() {
+  const [skillCopied, setSkillCopied] = useState(false);
   const [lightbox, setLightbox] = useState<{
     items: LightboxItem[];
     index: number;
   } | null>(null);
+
+  async function copySkillCommand() {
+    try {
+      await navigator.clipboard.writeText(skillInstallCommand);
+      setSkillCopied(true);
+      window.setTimeout(() => setSkillCopied(false), 1800);
+    } catch {
+      setSkillCopied(false);
+    }
+  }
 
   return (
     <div className="min-h-screen bg-black text-neutral-200">
       <div className="mx-auto w-full max-w-[78rem] px-5 py-10 sm:py-16">
         <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_minmax(0,42rem)_minmax(0,1fr)] xl:gap-8">
           <aside className="hidden min-w-0 xl:block">
-            <div className="sticky top-12 py-1 pr-2">
+            <div className="sticky top-16 py-1 pr-2">
               <NavigationIndex items={sections} label="Index" />
             </div>
           </aside>
@@ -237,18 +299,20 @@ export default function Home() {
                 drawing inspiration from classic math/physics diagrams and
                 60s Japanese poster art, specifically Kazumasa Nagai.
               </p>
-              <div className="mt-6 rounded-md border border-white/10 bg-white/[0.02]">
-                <div className="border-b border-white/10 px-4 py-2 font-sans text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-neutral-600">
-                  Add the agent skill
-                </div>
-                <pre className="overflow-x-auto px-4 py-3 font-mono text-[0.78rem] leading-5 text-neutral-300">
+              <div className="mt-6 flex min-w-0 overflow-hidden rounded-md border border-white/10 bg-white/[0.02]">
+                <pre className="min-w-0 flex-1 overflow-x-auto px-4 py-3 font-mono text-[0.78rem] leading-5 text-neutral-300">
                   <code>{skillInstallCommand}</code>
                 </pre>
-                <div className="border-t border-white/10 px-4 py-2 text-sm text-neutral-500">
-                  <TextLink href="/llms.txt" tone="quiet">
-                    Plain-text agent reference
-                  </TextLink>
-                </div>
+                <button
+                  aria-label="Copy skill install command"
+                  className="shrink-0 border-l border-white/10 px-4 font-sans text-sm font-semibold text-neutral-400 hover:bg-white/[0.06] hover:text-white"
+                  onClick={copySkillCommand}
+                  type="button"
+                >
+                  <span aria-live="polite">
+                    {skillCopied ? "Copied" : "Copy"}
+                  </span>
+                </button>
               </div>
             </header>
 
