@@ -1,43 +1,55 @@
 ---
 name: build-with-wave-kit
-description: Build or restyle React interfaces with Wave Kit, the open jay.ai component system. Use when a user requests the jay.ai aesthetic, Wave Kit components, its cellular wave motif, lightbox images, navigation index, rectangular controls, tabs, dividers, typography, or palette.
+description: Build, migrate, or restyle React and Next.js interfaces with Wave Kit, Jay Hack's open component system for jay.ai. Use when a user requests the jay.ai aesthetic, Wave Kit installation or components, its cellular wave motif, progressive lightbox images, navigation index, rectangular controls, tabs, dividers, typography, or named cool-to-warm Tailwind palette.
 ---
 
 # Build With Wave Kit
 
-Use the published `wave-kit` package as the source of truth. Compose its real
-exports; do not copy component implementations into the host project.
+Wave Kit is the public React design system behind
+[jay.ai](https://jay.ai). It emphasizes simplicity and legibility, drawing
+from classic math and physics diagrams and 1960s Japanese poster art,
+especially Kazumasa Nagai.
+
+Treat [jay.ai/design](https://jay.ai/design) as the canonical visual reference
+and the installed `wave-kit` package as the implementation source of truth.
+Compose real exports; do not copy component implementations into the host
+project.
 
 ## Workflow
 
 1. Inspect the project framework, package manager, React version, styling entry
    point, and existing user changes.
-2. Ensure the project uses React and Tailwind CSS v4. Install `wave-kit` and
-   `tailwindcss` with the project's package manager when either is missing.
-3. Import Tailwind, then `wave-kit/styles.css`, exactly once in the application
-   stylesheet:
-   ```css
-   @import "tailwindcss";
-   @import "wave-kit/styles.css";
-   ```
-4. Read [references/components.md](references/components.md) for the export and
-   prop needed by the request.
-5. Read [references/composition-rules.md](references/composition-rules.md) before
-   making visual decisions.
-6. Build with package components and CSS variables. Add project-specific layout
-   CSS only where the package intentionally leaves composition open.
-7. Run the project's typecheck/build and exercise keyboard interactions for tabs
-   and lightboxes.
+2. Read [references/setup.md](references/setup.md), then install and configure
+   the package without replacing the host project's architecture.
+3. Read [references/composition-rules.md](references/composition-rules.md)
+   before making visual decisions.
+4. Read the relevant portion of
+   [references/components.md](references/components.md). Verify the installed
+   package exports if its version differs from this skill.
+5. Build with Wave Kit components and named Tailwind colors. Use shadcn/ui only
+   for application primitives the kit does not provide.
+6. Keep content and page structure project-specific. Extend Wave Kit with
+   composition, not copied or subtly modified package source.
+7. Run typecheck, lint, tests, and a production build. Exercise keyboard
+   interactions for tabs and lightboxes and inspect narrow and wide layouts.
 
 ## Guardrails
 
 - Preserve existing application architecture and unrelated user changes.
-- Keep React, React DOM, and Tailwind CSS in the host application. They are peer
-  dependencies.
+- Keep React, React DOM, and Tailwind CSS v4 in the host application; they are
+  peer dependencies.
+- Keep the intended stack Next.js, Vercel, Tailwind CSS, and shadcn/ui unless
+  the host project already has an equivalent architecture.
 - Prefer semantic page structure over wrapping every section in a card.
 - Keep hover state changes immediate. Image loading fades are allowed.
 - Keep the resting wave field black with visible black gutters between cells.
+- Use four chromatic anchors: signal blue, heat red, energy orange, and light
+  yellow. Associated shades are not separate color families.
 - Do not add brown as a color family.
+- Use system sans for headings, body, labels, and eyebrows. Reserve monospace
+  for code, tokens, metrics, and technical values.
+- Use original supplied imagery with `ProgressiveImage` and `Lightbox`; do not
+  substitute generic cards or a second gallery implementation.
 - Do not package copyrighted inspiration artwork.
 
 ## Missing Package Support

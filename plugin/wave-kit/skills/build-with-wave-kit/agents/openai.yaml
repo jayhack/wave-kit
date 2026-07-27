@@ -1,4 +1,4 @@
 interface:
   display_name: "Build with Wave Kit"
-  short_description: "Install and compose the jay.ai component system"
-  default_prompt: "Use Wave Kit to build this interface with jay.ai's visual language."
+  short_description: "Install and compose the jay.ai design system"
+  default_prompt: "Use $build-with-wave-kit to build this interface with the component system and visual language behind jay.ai."

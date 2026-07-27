@@ -1,5 +1,13 @@
 # Composition rules
 
+## Origin
+
+Wave Kit is Jay Hack's personal-project design system and the public component
+language behind [jay.ai](https://jay.ai). Its references combine classic
+math/physics diagrams with 1960s Japanese poster art, specifically Kazumasa
+Nagai: strict geometry, repeated lines, optical depth, black negative space,
+and concentrated cool-to-warm energy.
+
 ## Palette
 
 Use four anchors: signal blue, heat red, energy orange, and light yellow. Black
@@ -19,6 +27,9 @@ Long-form pages use a centered 42rem reading column inside a 78rem shell, with a
 quiet sticky index on wide screens. Panels use Tailwind `rounded-lg`; images use
 `rounded-xl`. Prefer dividers and whitespace to unnecessary nested cards.
 
+Buttons and backlinks are compact and rectangular. Do not turn them into pills.
+Use modest radii on panels and sections.
+
 ## Motion
 
 Hover and focus changes are immediate: do not add transition utilities to
@@ -37,3 +48,9 @@ asynchronously, and open the original asset through `Lightbox`.
 Use the package `WaveField`; do not reimplement it. The resting state is black,
 cells have generous black gutters, and energy moves through the canonical
 cool-to-warm palette.
+
+## Application stack
+
+Prefer Next.js, deploy on Vercel, compose with Tailwind CSS v4, and use shadcn/ui
+for accessible application controls outside Wave Kit's scope. Restyle shadcn
+primitives with Wave Kit tokens; do not introduce a competing theme.

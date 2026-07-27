@@ -1,7 +1,7 @@
 {
   "name": "wave-kit",
-  "version": "0.1.0",
-  "description": "Build interfaces with the open jay.ai React component system.",
+  "version": "0.2.0",
+  "description": "Install and compose the open React design system behind jay.ai.",
   "author": {
     "name": "Jay Hack"
   },
@@ -9,7 +9,7 @@
   "interface": {
     "displayName": "Wave Kit",
     "shortDescription": "Compose interfaces with the jay.ai component kit.",
-    "longDescription": "Installs Wave Kit and guides agents to build with its real React components, design tokens, image lightbox, navigation, and generative wave field.",
+    "longDescription": "Guides agents to install Wave Kit and build with the real React components, named Tailwind tokens, progressive image lightbox, navigation, and generative wave field used by jay.ai.",
     "developerName": "Jay Hack",
     "category": "Developer Tools",
     "capabilities": [
