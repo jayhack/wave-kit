@@ -1,0 +1,56 @@
+# Wave Kit
+
+Wave Kit is Jay Hack's open React design system for jay.ai and personal
+projects. It emphasizes simplicity, legibility, classic math and physics
+diagrams, and 1960s Japanese poster art, especially Kazumasa Nagai.
+
+## Install the agent skill
+
+npx skills add jayhack/wave-kit --skill build-with-wave-kit -y
+
+Skill source:
+https://github.com/jayhack/wave-kit/tree/main/plugin/wave-kit/skills/build-with-wave-kit
+
+Raw skill instructions:
+https://raw.githubusercontent.com/jayhack/wave-kit/main/plugin/wave-kit/skills/build-with-wave-kit/SKILL.md
+
+## Install the React package
+
+npm install wave-kit tailwindcss
+
+If the npm package is not yet available, install it from a checkout:
+
+git clone https://github.com/jayhack/wave-kit.git
+npm install ./wave-kit/packages/wave-kit tailwindcss
+
+Then import both stylesheets once:
+
+@import "tailwindcss";
+@import "wave-kit/styles.css";
+
+## Main exports
+
+WaveField, FluidAnimation, NavigationIndex, BackLink, GitHubButton, TextLink,
+Tabs, Divider, ProgressiveImage, and Lightbox.
+
+## Design rules
+
+Use a black canvas with signal blue, heat red, energy orange, and light yellow.
+Use native system sans for display, heading, body, subtle text, and labels.
+Use the platform monospace stack for code and color tokens. Keep controls
+rectangular with modest radii. Keep hover changes immediate. Use original
+images with progressive loading and the package Lightbox.
+
+## Code and documentation
+
+The homepage contains working React examples for the global stylesheet, wave
+field, navigation index, progressive image lightbox, and named Tailwind colors.
+
+Source repository:
+https://github.com/jayhack/wave-kit
+
+Current live documentation:
+https://wave-kit-eight.vercel.app
+
+Canonical design reference:
+https://jay.ai/design

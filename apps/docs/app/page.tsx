@@ -45,6 +45,9 @@ const progressiveImageItems: LightboxItem[] = [
 const progressivePlaceholder =
   "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAACwAwCdASoYAA4APwFqrU8rJiQiMAgBYCAJaQAAW+jWTMSLo8ilgAD+6xxW0lfTE6TztZXxADvMdGbfPQxLHo+vJiSWKlkfxW7nIRbC/YNB2YooAAA=";
 
+const skillInstallCommand =
+  "npx skills add jayhack/wave-kit --skill build-with-wave-kit -y";
+
 const sections = [
   ["inspiration", "Inspiration"],
   ["wave", "Wave motif"],
@@ -54,6 +57,7 @@ const sections = [
   ["navigation", "Navigation"],
   ["images", "Images"],
   ["dividers", "Dividers"],
+  ["code", "Code samples"],
   ["stack", "Tech stack"],
   ["install", "Install"],
 ] as const;
@@ -86,6 +90,76 @@ const techStack = [
   ["shadcn/ui", "Extended interface primitives"],
 ] as const;
 
+const codeSamples = [
+  {
+    label: "Global CSS",
+    code: `@import "tailwindcss";
+@import "wave-kit/styles.css";`,
+  },
+  {
+    label: "Wave field and page index",
+    code: `import { NavigationIndex, WaveField } from "wave-kit";
+
+const sections = [
+  ["overview", "Overview"],
+  ["details", "Details"],
+] as const;
+
+export function ProjectPage() {
+  return (
+    <main className="min-h-screen bg-wave-ink text-neutral-300">
+      <aside className="fixed left-8 top-12">
+        <NavigationIndex items={sections} />
+      </aside>
+      <section id="overview">
+        <div className="relative aspect-[16/7] overflow-hidden rounded-lg">
+          <WaveField className="absolute inset-0 h-full w-full" />
+        </div>
+      </section>
+    </main>
+  );
+}`,
+  },
+  {
+    label: "Progressive image and lightbox",
+    code: `"use client";
+
+import { useState } from "react";
+import { Lightbox, ProgressiveImage } from "wave-kit";
+
+const images = [
+  { src: "/project-full.png", alt: "Project system diagram" },
+];
+
+export function ProjectImage() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <button onClick={() => setOpen(true)} type="button">
+        <ProgressiveImage
+          alt={images[0].alt}
+          height={900}
+          src="/project-1024.webp"
+          srcSet="/project-672.webp 672w, /project-1024.webp 1024w"
+          width={1024}
+        />
+      </button>
+      {open ? (
+        <Lightbox items={images} onClose={() => setOpen(false)} startIndex={0} />
+      ) : null}
+    </>
+  );
+}`,
+  },
+  {
+    label: "Named colors",
+    code: `<div className="border border-wave-blue-vivid bg-wave-ink text-wave-paper">
+  <span className="text-wave-amber">High energy</span>
+</div>`,
+  },
+] as const;
+
 function SectionTitle({ id, children }: { id: string; children: ReactNode }) {
   return (
     <header className="mb-6">
@@ -104,6 +178,27 @@ function TokenLabel({ children }: { children: ReactNode }) {
     <code className="rounded bg-white/[0.07] px-1.5 py-0.5 font-mono text-[0.78rem] text-neutral-300">
       {children}
     </code>
+  );
+}
+
+function CodeSample({
+  label,
+  code,
+  isLast = false,
+}: {
+  label: string;
+  code: string;
+  isLast?: boolean;
+}) {
+  return (
+    <div className={isLast ? "" : "border-b border-white/10"}>
+      <div className="px-5 pt-4 font-sans text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-neutral-600">
+        {label}
+      </div>
+      <pre className="overflow-x-auto p-5 pt-3 font-mono text-[0.78rem] leading-5 text-neutral-400">
+        <code>{code}</code>
+      </pre>
+    </div>
   );
 }
 
@@ -142,6 +237,19 @@ export default function Home() {
                 drawing inspiration from classic math/physics diagrams and
                 60s Japanese poster art, specifically Kazumasa Nagai.
               </p>
+              <div className="mt-6 rounded-md border border-white/10 bg-white/[0.02]">
+                <div className="border-b border-white/10 px-4 py-2 font-sans text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-neutral-600">
+                  Add the agent skill
+                </div>
+                <pre className="overflow-x-auto px-4 py-3 font-mono text-[0.78rem] leading-5 text-neutral-300">
+                  <code>{skillInstallCommand}</code>
+                </pre>
+                <div className="border-t border-white/10 px-4 py-2 text-sm text-neutral-500">
+                  <TextLink href="/llms.txt" tone="quiet">
+                    Plain-text agent reference
+                  </TextLink>
+                </div>
+              </div>
             </header>
 
             <article className="mt-10 space-y-16 text-[1.03rem] leading-8 text-neutral-300">
@@ -454,6 +562,26 @@ export default function Home() {
                 </div>
               </section>
 
+              <section aria-labelledby="code">
+                <SectionTitle id="code">Code samples</SectionTitle>
+                <p>
+                  Install the package, import the global stylesheet once, then
+                  compose the real components. These examples are complete
+                  enough for an agent to copy into a React or Next.js project
+                  and adapt without recreating the design system.
+                </p>
+                <div className="mt-6 overflow-hidden rounded-md border border-white/10 bg-white/[0.02]">
+                  {codeSamples.map((sample, index) => (
+                    <CodeSample
+                      code={sample.code}
+                      isLast={index === codeSamples.length - 1}
+                      key={sample.label}
+                      label={sample.label}
+                    />
+                  ))}
+                </div>
+              </section>
+
               <section aria-labelledby="stack">
                 <SectionTitle id="stack">Tech stack</SectionTitle>
                 <p>
@@ -484,8 +612,16 @@ export default function Home() {
 
               <section aria-labelledby="install">
                 <SectionTitle id="install">Install</SectionTitle>
+                <p className="mb-5">
+                  Use npm when the package release is available. Until then,
+                  install the package workspace from a GitHub checkout.
+                </p>
                 <pre className="overflow-x-auto rounded-lg border border-white/10 bg-white/[0.02] p-5 font-mono text-sm text-neutral-300">
                   <code>npm install wave-kit tailwindcss</code>
+                </pre>
+                <pre className="mt-3 overflow-x-auto rounded-lg border border-white/10 bg-white/[0.02] p-5 font-mono text-sm leading-6 text-neutral-300">
+                  <code>{`git clone https://github.com/jayhack/wave-kit.git
+npm install ./wave-kit/packages/wave-kit tailwindcss`}</code>
                 </pre>
                 <pre className="mt-3 overflow-x-auto rounded-lg border border-white/10 bg-white/[0.02] p-5 font-mono text-sm leading-6 text-neutral-300">
                   <code>{`@import "tailwindcss";

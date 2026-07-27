@@ -46,8 +46,10 @@ asynchronously, and open the original asset through `Lightbox`.
 ## Wave field
 
 Use the package `WaveField`; do not reimplement it. The resting state is black,
-cells have generous black gutters, and energy moves through the canonical
-cool-to-warm palette.
+cells have slightly rounded corners and generous black gutters, and energy
+moves through the canonical cool-to-warm palette. Let the built-in decay settle
+low energy to black. Do not add a second automatic ripple loop around the
+component.
 
 ## Application stack
 

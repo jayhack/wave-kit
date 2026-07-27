@@ -21,11 +21,21 @@ test("server-renders the canonical jay.ai design page", async () => {
   assert.match(html, /\/design\/growth-inspiration\.webp/);
   assert.match(html, /\/design\/no-more-war-inspiration\.png/);
   assert.match(html, /No More War, repeated form and concentrated color/);
+  assert.match(
+    html,
+    /npx skills add jayhack\/wave-kit --skill build-with-wave-kit -y/,
+  );
+  assert.match(html, /href="\/llms\.txt"/);
   assert.match(html, /npm install wave-kit tailwindcss/);
+  assert.match(html, /git clone https:\/\/github\.com\/jayhack\/wave-kit\.git/);
   assert.match(html, /Four color anchors|four color anchors/);
   assert.match(html, /Subtle \/ 14 \/ 24/);
   assert.match(html, /Code \/ 12\.5 \/ 20/);
   assert.match(html, /wave-orange.*#f97316/);
+  assert.match(html, />Code samples</);
+  assert.match(html, /NavigationIndex, WaveField/);
+  assert.match(html, /ProgressiveImage/);
+  assert.match(html, /border-wave-blue-vivid/);
   assert.match(html, />Tech stack</);
   assert.match(html, />Next\.js</);
   assert.match(html, />Vercel</);
@@ -59,4 +69,20 @@ test("the package exposes semantic Tailwind color names", async () => {
   assert.match(styles, /--color-wave-red-vivid: #dc2626/);
   assert.match(styles, /--color-wave-orange: #f97316/);
   assert.match(styles, /--color-wave-amber: #fbbf24/);
+});
+
+test("the cellular wave field settles and uses rounded cells", async () => {
+  const source = await readFile(
+    new URL(
+      "../../../packages/wave-kit/src/components/FluidAnimation.tsx",
+      import.meta.url,
+    ),
+    "utf8",
+  );
+
+  assert.match(source, /const DAMPING = 0\.955/);
+  assert.match(source, /const SETTLE_THRESHOLD = 0\.02/);
+  assert.match(source, /next\[\(gridH - 1\) \* gridW \+ x\] = 0/);
+  assert.match(source, /path\.roundRect/);
+  assert.match(source, /const AUTO_RIPPLE_IDLE_MS = 8000/);
 });

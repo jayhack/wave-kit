@@ -24,7 +24,9 @@ const CELL_COOL_COLORS = WAVE_COLORS.slice(0, 6);
 const CELL_WARM_COLORS = [WAVE_COLORS[0], ...WAVE_COLORS.slice(6)];
 
 const SOURCE_GRID_SIZE = 100; // Underlying face letter art (do not change)
-const DAMPING = 0.97;
+const DAMPING = 0.955;
+const SETTLE_THRESHOLD = 0.02;
+const AUTO_RIPPLE_IDLE_MS = 8000;
 const DEFAULT_TARGET_FPS = 30;
 const DEFAULT_MAX_DPR = 2;
 
@@ -202,7 +204,7 @@ export function FluidAnimation({
         for (let dx = -2; dx <= 2; dx++) {
           const nx = gx + dx;
           const ny = gy + dy;
-          if (nx >= 0 && nx < gridW && ny >= 0 && ny < gridH) {
+          if (nx > 0 && nx < gridW - 1 && ny > 0 && ny < gridH - 1) {
             const distance = Math.sqrt(dx * dx + dy * dy);
             const intensity = Math.max(0, amplitude - distance * 2);
             current[ny * gridW + nx] += intensity;
@@ -225,6 +227,16 @@ export function FluidAnimation({
     const current = currentWave.current;
     const next = nextWave.current;
 
+    for (let x = 0; x < gridW; x++) {
+      next[x] = 0;
+      next[(gridH - 1) * gridW + x] = 0;
+    }
+    for (let y = 1; y < gridH - 1; y++) {
+      const row = y * gridW;
+      next[row] = 0;
+      next[row + gridW - 1] = 0;
+    }
+
     for (let y = 1; y < gridH - 1; y++) {
       const row = y * gridW;
       for (let x = 1; x < gridW - 1; x++) {
@@ -235,7 +247,9 @@ export function FluidAnimation({
           current[i - 1] +
           current[i + 1];
 
-        next[i] = (neighbors / 2 - next[i]) * DAMPING;
+        const nextValue = (neighbors / 2 - next[i]) * DAMPING;
+        next[i] =
+          Math.abs(nextValue) < SETTLE_THRESHOLD ? 0 : nextValue;
       }
     }
 
@@ -267,6 +281,8 @@ export function FluidAnimation({
     const pointHeight = Math.max(2, cellH * 0.46);
     const pointOffsetX = (cellW - pointWidth) / 2;
     const pointOffsetY = (cellH - pointHeight) / 2;
+    const pointRadius = Math.min(pointWidth, pointHeight) * 0.22;
+    const cellPaths = new Map<string, Path2D>();
     if (
       current.length === 0 ||
       (renderMode === "characters" && chars.length === 0)
@@ -299,12 +315,18 @@ export function FluidAnimation({
           const colorIndex = Math.floor(
             normalizedValue * (palette.length - 1),
           );
-          ctx.fillStyle = palette[colorIndex];
-          ctx.fillRect(
+          const color = palette[colorIndex];
+          let path = cellPaths.get(color);
+          if (!path) {
+            path = new Path2D();
+            cellPaths.set(color, path);
+          }
+          path.roundRect(
             x * cellW + pointOffsetX,
             y * cellH + pointOffsetY,
             pointWidth,
             pointHeight,
+            pointRadius,
           );
         } else {
           const colorIndex = Math.floor(
@@ -313,6 +335,13 @@ export function FluidAnimation({
           ctx.fillStyle = WAVE_COLORS[colorIndex];
           ctx.fillText(chars[i], x * cellW, y * cellH);
         }
+      }
+    }
+
+    if (renderMode === "cells") {
+      for (const [color, path] of cellPaths) {
+        ctx.fillStyle = color;
+        ctx.fill(path);
       }
     }
   }, [renderMode]);
@@ -440,9 +469,7 @@ export function FluidAnimation({
     }
 
     const timeouts = autoRipple
-      ? [0, 5000, 10000, 15000].map((delay) =>
-          setTimeout(() => addRandomRipple(), delay)
-        )
+      ? [setTimeout(() => addRandomRipple(), 250)]
       : [];
 
     return () => {
@@ -486,10 +513,14 @@ export function FluidAnimation({
 
     const checkInactivity = setInterval(() => {
       const timeSinceInteraction = Date.now() - lastInteractionTime.current;
-      if (timeSinceInteraction >= 5000 && !autoRippleInterval.current) {
+      if (
+        timeSinceInteraction >= AUTO_RIPPLE_IDLE_MS &&
+        !autoRippleInterval.current
+      ) {
+        addRandomRipple();
         autoRippleInterval.current = setInterval(() => {
           addRandomRipple();
-        }, 5000);
+        }, AUTO_RIPPLE_IDLE_MS);
       }
     }, 1000);
 
