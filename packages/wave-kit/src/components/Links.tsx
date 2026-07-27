@@ -1,6 +1,8 @@
 import type { MouseEvent, ReactNode } from "react";
 
 const linkStyles = {
+  orange:
+    "text-wave-orange decoration-wave-orange/55 hover:text-wave-orange-light hover:decoration-wave-orange-light",
   sky: "text-sky-300 decoration-sky-300/55 hover:text-sky-200 hover:decoration-sky-200",
   amber:
     "text-amber-300 decoration-amber-300/40 hover:text-amber-200 hover:decoration-amber-200",
@@ -14,7 +16,7 @@ export type TextLinkProps = {
   children: ReactNode;
 };
 
-export function TextLink({ href, tone = "sky", children }: TextLinkProps) {
+export function TextLink({ href, tone = "orange", children }: TextLinkProps) {
   const external = /^(https?:)?\/\//.test(href);
   return (
     <a

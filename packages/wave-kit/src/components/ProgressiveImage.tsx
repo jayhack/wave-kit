@@ -16,6 +16,7 @@ export function ProgressiveImage({
   sizes = "(max-width: 712px) calc(100vw - 2.5rem), 672px",
   className = "mx-auto w-full rounded-xl border border-white/10",
   loading = "lazy",
+  onLoad,
   ...props
 }: ProgressiveImageProps) {
   const [loaded, setLoaded] = useState(false);
@@ -58,7 +59,10 @@ export function ProgressiveImage({
         decoding="async"
         height={height}
         loading={loading}
-        onLoad={() => setLoaded(true)}
+        onLoad={(event) => {
+          setLoaded(true);
+          onLoad?.(event);
+        }}
         ref={imageRef}
         sizes={sizes}
         src={src}

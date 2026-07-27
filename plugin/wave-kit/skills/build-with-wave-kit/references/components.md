@@ -9,8 +9,9 @@ Import runtime pieces from `wave-kit`. In the application stylesheet, import
   Pass `fallbackHref` for direct visits and optional string children.
 - `GitHubButton`: compact external source button. Pass `href`, children, and
   optional `className`.
-- `TextLink`: inline link with `sky`, `amber`, or `quiet` tone. Amber is the
-  long-form accent; do not make an entire supporting sentence a link.
+- `TextLink`: inline link with `orange`, `sky`, `amber`, or `quiet` tone.
+  Ripe orange is the default long-form accent; do not make an entire
+  supporting sentence a link.
 - `NavigationIndex`: pass readonly `[id, label]` tuples whose IDs match page
   heading IDs. It renders a continuous rail and tracks the active section.
 
@@ -25,6 +26,8 @@ const sections = [
 
 ## Structure
 
+- `CodeBlock`: consistently highlighted `bash`, `css`, `text`, or `tsx`.
+  Pass the source as `code` and an optional technical `label`.
 - `Divider`: quiet full-width rule with `subtle` or `strong` emphasis.
 - `Tabs`: accepts `items: { id, label, content }[]` and optional `label`.
   Arrow, Home, and End keys move focus.
@@ -33,20 +36,25 @@ const sections = [
 
 - `ProgressiveImage`: use the blog image pipeline's responsive `src`,
   `srcSet`, intrinsic `width`/`height`, and tiny inline `placeholder`.
-- `Lightbox`: accepts `items: { src, alt, caption? }[]`, `startIndex`, and
-  `onClose`. It includes gallery arrows, counter, thumbnails, backdrop close,
-  and keyboard controls.
+- `Lightbox`: accepts
+  `items: { src, alt, caption?, previewSrc?, placeholder? }[]`, `startIndex`,
+  and `onClose`. Pass the responsive image's `currentSrc` as `previewSrc` so
+  the lightbox paints the already-decoded candidate immediately, then fades in
+  `src`. It includes gallery arrows, counter, thumbnails, backdrop close, and
+  keyboard controls.
 
 Keep lightbox state in a client component:
 
 ```tsx
 const [openIndex, setOpenIndex] = useState<number | null>(null);
+const [previewSrc, setPreviewSrc] = useState<string>();
 const images = [{ src: "/work.webp", alt: "Project diagram" }];
 
 <button onClick={() => setOpenIndex(0)} type="button">
   <ProgressiveImage
     alt={images[0].alt}
     height={900}
+    onLoad={(event) => setPreviewSrc(event.currentTarget.currentSrc)}
     placeholder={tinyPlaceholder}
     src="/work-1024.webp"
     srcSet="/work-672.webp 672w, /work-1024.webp 1024w"
@@ -55,12 +63,19 @@ const images = [{ src: "/work.webp", alt: "Project diagram" }];
 </button>
 {openIndex !== null ? (
   <Lightbox
-    items={images}
+    items={[{ ...images[0], previewSrc, placeholder: tinyPlaceholder }]}
     onClose={() => setOpenIndex(null)}
     startIndex={openIndex}
   />
 ) : null}
 ```
+
+## Diagrams
+
+Create diagrams as original SVG assets with intrinsic dimensions and complete
+text labels. Present them through `ProgressiveImage` and open the source SVG
+through `Lightbox`. Keep axes, series, stages, units, and color roles explicit.
+Do not rely on color alone to communicate a distinction.
 
 ## Generative field
 

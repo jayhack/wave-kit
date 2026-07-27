@@ -56,6 +56,27 @@ Use the original project assets when they are supplied. Reserve intrinsic
 dimensions, load a tiny inline placeholder, use responsive sources, decode
 asynchronously, and open the original asset through `Lightbox`.
 
+## Diagrams
+
+Treat diagrams as academic figures rather than illustrations. Prefer original
+SVGs with crisp geometry, sparse composition, explicit axes, units, legends,
+stage labels, and captions. Every color has a stable semantic role:
+
+- `wave-paper` for primary labels and high-contrast values
+- `wave-blue-vivid` for observations, measured structure, and primary series
+- `wave-red-vivid` for interventions, causal emphasis, and comparison series
+- `neutral-700` for axes, guides, borders, and secondary structure
+
+Use shape, position, line style, or a direct text label alongside color so the
+meaning survives grayscale and color-vision differences. Make diagrams
+clickable and open the source SVG through `Lightbox`.
+
+## Code
+
+Use the package `CodeBlock` for displayed code so bash, CSS, text, and TSX use
+one syntax-color mapping. Reserve monospace for the code and its optional
+technical label; do not hand-roll page-specific tokenizers.
+
 ## Wave field
 
 Use the package `WaveField`; do not reimplement it. The resting state is black,

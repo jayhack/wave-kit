@@ -1,3 +1,5 @@
+![wave-kit over the expanding cellular WaveField](.github/assets/wave-kit-header.png)
+
 # Wave Kit
 
 The public component system behind jay.ai: a compact React package, a working

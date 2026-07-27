@@ -70,7 +70,7 @@ Give canvas components real dimensions:
 Use named colors instead of copying hex values:
 
 ```tsx
-<TextLink href="/writing" tone="amber">Read the essay</TextLink>
+<TextLink href="/writing">Read the essay</TextLink>
 <div className="border-wave-blue-vivid bg-wave-ink text-wave-paper" />
 ```
 

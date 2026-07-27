@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" role="img" aria-labelledby="title description">
+  <title id="title">Probe accuracy across representation depth</title>
+  <desc id="description">A labeled line chart compares direction and speed probe accuracy from embedding through block six.</desc>
+  <style>
+    .sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  </style>
+
+  <rect width="1200" height="640" fill="#000000"/>
+  <rect x="1" y="1" width="1198" height="638" fill="none" stroke="#262626" stroke-width="2"/>
+
+  <text class="sans" x="56" y="70" fill="#f4f1e8" font-size="30" font-weight="700">Probe accuracy across representation depth</text>
+  <text class="sans" x="56" y="102" fill="#a3a3a3" font-size="17">Held-out linear-probe R²; higher values indicate a more readable representation.</text>
+
+  <g class="sans" font-size="15">
+    <circle cx="798" cy="69" r="7" fill="#2090c8"/>
+    <text x="815" y="74" fill="#d4d4d4">Direction</text>
+    <circle cx="942" cy="69" r="7" fill="#dc2626"/>
+    <text x="959" y="74" fill="#d4d4d4">Speed</text>
+  </g>
+
+  <g transform="translate(132 148)">
+    <g fill="none" stroke="#262626">
+      <line x1="0" y1="0" x2="950" y2="0"/>
+      <line x1="0" y1="100" x2="950" y2="100"/>
+      <line x1="0" y1="200" x2="950" y2="200"/>
+      <line x1="0" y1="300" x2="950" y2="300"/>
+      <line x1="0" y1="400" x2="950" y2="400"/>
+    </g>
+    <path d="M0 0V400H950" fill="none" stroke="#737373" stroke-width="2"/>
+
+    <g class="mono" fill="#a3a3a3" font-size="13" text-anchor="end">
+      <text x="-18" y="5">1.0</text>
+      <text x="-18" y="105">0.75</text>
+      <text x="-18" y="205">0.50</text>
+      <text x="-18" y="305">0.25</text>
+      <text x="-18" y="405">0.0</text>
+    </g>
+
+    <g class="mono" fill="#a3a3a3" font-size="13" text-anchor="middle">
+      <text x="0" y="432">Embed</text>
+      <text x="158" y="432">Block 1</text>
+      <text x="317" y="432">Block 2</text>
+      <text x="475" y="432">Block 3</text>
+      <text x="633" y="432">Block 4</text>
+      <text x="792" y="432">Block 5</text>
+      <text x="950" y="432">Block 6</text>
+    </g>
+
+    <path d="M0 368 158 258 317 180 475 128 633 92 792 60 950 72" fill="none" stroke="#2090c8" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+    <path d="M0 380 158 320 317 246 475 192 633 142 792 118 950 130" fill="none" stroke="#dc2626" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+
+    <g fill="#000000" stroke="#2090c8" stroke-width="4">
+      <circle cx="0" cy="368" r="7"/>
+      <circle cx="158" cy="258" r="7"/>
+      <circle cx="317" cy="180" r="7"/>
+      <circle cx="475" cy="128" r="7"/>
+      <circle cx="633" cy="92" r="7"/>
+      <circle cx="792" cy="60" r="7"/>
+      <circle cx="950" cy="72" r="7"/>
+    </g>
+    <g fill="#000000" stroke="#dc2626" stroke-width="4">
+      <circle cx="0" cy="380" r="7"/>
+      <circle cx="158" cy="320" r="7"/>
+      <circle cx="317" cy="246" r="7"/>
+      <circle cx="475" cy="192" r="7"/>
+      <circle cx="633" cy="142" r="7"/>
+      <circle cx="792" cy="118" r="7"/>
+      <circle cx="950" cy="130" r="7"/>
+    </g>
+
+    <path d="M792 46V10H908" fill="none" stroke="#737373"/>
+    <text class="sans" x="918" y="15" fill="#d4d4d4" font-size="15">peak readability</text>
+  </g>
+
+  <text class="sans" x="34" y="388" fill="#a3a3a3" font-size="14" text-anchor="middle" transform="rotate(-90 34 388)">held-out R²</text>
+  <text class="sans" x="607" y="612" fill="#a3a3a3" font-size="14" text-anchor="middle">representation depth</text>
+</svg>

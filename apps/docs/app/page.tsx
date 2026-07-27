@@ -3,6 +3,7 @@
 import { useState, type ReactNode } from "react";
 import {
   BackLink,
+  CodeBlock,
   Divider,
   GitHubButton,
   Lightbox,
@@ -42,6 +43,21 @@ const progressiveImageItems: LightboxItem[] = [
   },
 ];
 
+const diagramItems: LightboxItem[] = [
+  {
+    src: "/design/diagrams/intervention-pipeline.svg",
+    alt: "Intervention pipeline diagram showing observation, measurement, and causal intervention stages",
+    caption:
+      "Process diagram · signal blue encodes observed structure; heat red encodes the intervention.",
+  },
+  {
+    src: "/design/diagrams/probe-depth.svg",
+    alt: "Line chart comparing direction and speed probe accuracy across representation depth",
+    caption:
+      "Measurement chart · every axis, series, and annotation remains labeled without relying on color alone.",
+  },
+];
+
 const progressivePlaceholder =
   "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAACwAwCdASoYAA4APwFqrU8rJiQiMAgBYCAJaQAAW+jWTMSLo8ilgAD+6xxW0lfTE6TztZXxADvMdGbfPQxLHo+vJiSWKlkfxW7nIRbC/YNB2YooAAA=";
 
@@ -56,6 +72,7 @@ const sections = [
   ["links", "Links"],
   ["navigation", "Navigation"],
   ["images", "Images"],
+  ["diagrams", "Diagrams"],
   ["dividers", "Dividers"],
   ["style-guide", "Style guide"],
   ["code", "Code samples"],
@@ -94,11 +111,13 @@ const techStack = [
 const codeSamples = [
   {
     label: "Global CSS",
+    language: "css",
     code: `@import "tailwindcss";
 @import "@jayhack/wave-kit/styles.css";`,
   },
   {
     label: "Wave field and page index",
+    language: "tsx",
     code: `import { NavigationIndex, WaveField } from "@jayhack/wave-kit";
 
 const sections = [
@@ -123,6 +142,7 @@ export function ProjectPage() {
   },
   {
     label: "Progressive image and lightbox",
+    language: "tsx",
     code: `"use client";
 
 import { useState } from "react";
@@ -134,6 +154,7 @@ const images = [
 
 export function ProjectImage() {
   const [open, setOpen] = useState(false);
+  const [previewSrc, setPreviewSrc] = useState<string>();
 
   return (
     <>
@@ -141,13 +162,18 @@ export function ProjectImage() {
         <ProgressiveImage
           alt={images[0].alt}
           height={900}
+          onLoad={(event) => setPreviewSrc(event.currentTarget.currentSrc)}
           src="/project-1024.webp"
           srcSet="/project-672.webp 672w, /project-1024.webp 1024w"
           width={1024}
         />
       </button>
       {open ? (
-        <Lightbox items={images} onClose={() => setOpen(false)} startIndex={0} />
+        <Lightbox
+          items={[{ ...images[0], previewSrc }]}
+          onClose={() => setOpen(false)}
+          startIndex={0}
+        />
       ) : null}
     </>
   );
@@ -155,14 +181,23 @@ export function ProjectImage() {
   },
   {
     label: "Named colors",
+    language: "tsx",
     code: `<div className="border border-wave-blue-vivid bg-wave-ink text-wave-paper">
   <span className="text-wave-amber">High energy</span>
 </div>`,
   },
-] as const;
+  {
+    label: "Highlighted code",
+    language: "tsx",
+    code: `import { CodeBlock } from "@jayhack/wave-kit";
 
-const syntaxTokenPattern =
-  /(\/\/[^\n]*|\/\*[\s\S]*?\*\/|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`|<\/?[A-Za-z][\w.-]*|@[a-z-]+|\b(?:import|from|const|export|function|return|as|if|else)\b|\b(?:true|false|null)\b|\b(?:useState|setOpen)\b|\b\d+(?:\.\d+)?\b)/g;
+<CodeBlock
+  code={'const energy = "wave-orange";'}
+  label="Theme token"
+  language="tsx"
+/>`,
+  },
+] as const;
 
 function SectionTitle({ id, children }: { id: string; children: ReactNode }) {
   return (
@@ -185,79 +220,12 @@ function TokenLabel({ children }: { children: ReactNode }) {
   );
 }
 
-function CodeSample({
-  label,
-  code,
-  isLast = false,
-}: {
-  label: string;
-  code: string;
-  isLast?: boolean;
-}) {
-  return (
-    <div className={isLast ? "" : "border-b border-white/10"}>
-      <div className="px-5 pt-4 font-sans text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-neutral-600">
-        {label}
-      </div>
-      <pre className="overflow-x-auto p-5 pt-3 font-mono text-[0.78rem] leading-5 text-neutral-400">
-        <SyntaxCode code={code} />
-      </pre>
-    </div>
-  );
-}
-
-function SyntaxCode({ code }: { code: string }) {
-  const nodes: ReactNode[] = [];
-  let cursor = 0;
-
-  for (const match of code.matchAll(syntaxTokenPattern)) {
-    const index = match.index;
-    const token = match[0];
-
-    if (index > cursor) {
-      nodes.push(code.slice(cursor, index));
-    }
-
-    let className = "text-neutral-400";
-    if (token.startsWith("//") || token.startsWith("/*")) {
-      className = "text-neutral-600";
-    } else if (
-      token.startsWith('"') ||
-      token.startsWith("'") ||
-      token.startsWith("`")
-    ) {
-      className = "text-wave-yellow-pale/80";
-    } else if (token.startsWith("<")) {
-      className = "text-wave-orange";
-    } else if (token.startsWith("@")) {
-      className = "text-wave-blue-light";
-    } else if (/^\d/.test(token)) {
-      className = "text-wave-red-vivid";
-    } else if (/^(true|false|null)$/.test(token)) {
-      className = "text-wave-orange-light";
-    } else if (/^(useState|setOpen)$/.test(token)) {
-      className = "text-wave-blue-300";
-    } else {
-      className = "text-wave-blue-light";
-    }
-
-    nodes.push(
-      <span className={className} key={`${index}-${token}`}>
-        {token}
-      </span>,
-    );
-    cursor = index + token.length;
-  }
-
-  if (cursor < code.length) {
-    nodes.push(code.slice(cursor));
-  }
-
-  return <code>{nodes}</code>;
-}
 
 export default function Home() {
   const [skillCopied, setSkillCopied] = useState(false);
+  const [progressivePreviewSrc, setProgressivePreviewSrc] = useState<
+    string | undefined
+  >();
   const [lightbox, setLightbox] = useState<{
     items: LightboxItem[];
     index: number;
@@ -284,7 +252,7 @@ export default function Home() {
           </aside>
 
           <main className="mx-auto min-w-0 max-w-2xl xl:mx-0 xl:max-w-none">
-            <header className="mt-10 border-b border-white/10 pb-9">
+            <header className="mt-10 pb-9">
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <h1 className="text-4xl font-extrabold tracking-[-0.035em] text-white sm:text-5xl">
                   wave-kit
@@ -295,12 +263,11 @@ export default function Home() {
               </div>
               <p className="mt-4 max-w-2xl text-[1.03rem] leading-8 text-neutral-300">
                 Design system and UI kit developed for{" "}
-                <TextLink href="https://jay.ai/writing" tone="amber">
+                <TextLink href="https://jay.ai/writing">
                   Jay Hack
                 </TextLink>
-                &apos;s personal projects. Emphasizes simplicity + legibility,
-                drawing inspiration from classic math/physics diagrams and
-                60s Japanese poster art, specifically Kazumasa Nagai.
+                &apos;s personal projects. Emphasizes simplicity, legibility and
+                performance for technical writing.
               </p>
               <div className="mt-6 flex min-w-0 overflow-hidden rounded-md border border-white/10 bg-white/[0.02]">
                 <pre className="min-w-0 flex-1 overflow-x-auto px-4 py-3 font-mono text-[0.78rem] leading-5 text-neutral-300">
@@ -318,10 +285,49 @@ export default function Home() {
                 </pre>
                 <button
                   aria-label="Copy skill install command"
-                  className="shrink-0 border-l border-white/10 px-4 font-sans text-sm font-semibold text-neutral-400 hover:bg-white/[0.06] hover:text-white"
+                  className="inline-flex shrink-0 items-center gap-2 border-l border-white/10 px-4 font-sans text-sm font-semibold text-neutral-400 hover:bg-white/[0.06] hover:text-white"
                   onClick={copySkillCommand}
                   type="button"
                 >
+                  {skillCopied ? (
+                    <svg
+                      aria-hidden="true"
+                      className="size-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="m5 12 4.5 4.5L19 7"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      aria-hidden="true"
+                      className="size-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <rect
+                        height="13"
+                        rx="2"
+                        stroke="currentColor"
+                        strokeWidth="1.75"
+                        width="13"
+                        x="8"
+                        y="8"
+                      />
+                      <path
+                        d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeWidth="1.75"
+                      />
+                    </svg>
+                  )}
                   <span aria-live="polite">
                     {skillCopied ? "Copied" : "Copy"}
                   </span>
@@ -333,17 +339,13 @@ export default function Home() {
               <section aria-labelledby="inspiration">
                 <SectionTitle id="inspiration">Inspiration</SectionTitle>
                 <p>
-                  The visual system takes its clearest cue from{" "}
+                  This design system is inspired by the work of{" "}
                   <strong className="font-semibold text-neutral-100">
                     Kazumasa Nagai
-                  </strong>. The first poster below is the primary reference,
-                  with repeated lines behaving like a field, cool blue set
-                  against concentrated heat, and movement created from
-                  disciplined geometry. The second image is a related reference
-                  for radial repetition, optical depth, and sparse type on
-                  black. The third uses repeated circles and a restricted blue,
-                  red, orange, and black palette to create a field that feels
-                  both systematic and explosive.
+                  </strong>
+                  , a Japanese graphic designer, and other poster art from the
+                  &apos;60s onward. Clean, abstract forms reminiscent of HAL
+                  9000, but in a benevolent manner.
                 </p>
                 <div className="mt-7 grid items-start gap-5 sm:grid-cols-3">
                   <figure>
@@ -562,9 +564,9 @@ export default function Home() {
                 <SectionTitle id="links">Links</SectionTitle>
                 <div className="rounded-lg border border-white/10 bg-white/[0.02] p-6">
                   <p>
-                    Use <TextLink href="#navigation">sky links for navigation</TextLink>,{" "}
-                    <TextLink href="#images" tone="amber">
-                      amber links in long-form reading
+                    Use <TextLink href="#navigation">ripe orange links by default</TextLink>,{" "}
+                    <TextLink href="#images" tone="sky">
+                      sky links for secondary navigation
                     </TextLink>
                     , and{" "}
                     <TextLink href="https://github.com/jayhack" tone="quiet">
@@ -605,7 +607,16 @@ export default function Home() {
                     aria-label="Open full-resolution image"
                     className="group block w-full cursor-zoom-in text-left"
                     onClick={() =>
-                      setLightbox({ items: progressiveImageItems, index: 0 })
+                      setLightbox({
+                        items: [
+                          {
+                            ...progressiveImageItems[0],
+                            placeholder: progressivePlaceholder,
+                            previewSrc: progressivePreviewSrc,
+                          },
+                        ],
+                        index: 0,
+                      })
                     }
                     type="button"
                   >
@@ -613,6 +624,9 @@ export default function Home() {
                       alt={progressiveImageItems[0].alt}
                       className="w-full rounded-xl border border-white/10 group-hover:border-white/25"
                       height={583}
+                      onLoad={(event) =>
+                        setProgressivePreviewSrc(event.currentTarget.currentSrc)
+                      }
                       placeholder={progressivePlaceholder}
                       src="/blog/image-cache/llms-are-not-a-black-box/header-55330a11a7-1024.webp"
                       srcSet="/blog/image-cache/llms-are-not-a-black-box/header-55330a11a7-672.webp 672w, /blog/image-cache/llms-are-not-a-black-box/header-55330a11a7-1024.webp 1024w"
@@ -623,6 +637,79 @@ export default function Home() {
                     Placeholder → responsive source set → full-resolution lightbox
                   </figcaption>
                 </figure>
+              </section>
+
+              <section aria-labelledby="diagrams">
+                <SectionTitle id="diagrams">Diagrams</SectionTitle>
+                <p>
+                  Treat diagrams as academic figures: use crisp SVG geometry,
+                  label every stage, axis, and series, and keep the composition
+                  minimal. Color must encode a stated meaning rather than act as
+                  decoration. Click either figure to inspect the original SVG.
+                </p>
+                <div className="mt-6 space-y-6">
+                  {diagramItems.map((item, index) => (
+                    <figure key={item.src}>
+                      <button
+                        aria-label={`Open diagram: ${item.alt}`}
+                        className="group block w-full cursor-zoom-in text-left"
+                        onClick={() =>
+                          setLightbox({ items: diagramItems, index })
+                        }
+                        type="button"
+                      >
+                        <ProgressiveImage
+                          alt={item.alt}
+                          className="w-full rounded-lg border border-white/10 group-hover:border-white/25"
+                          height={640}
+                          src={item.src}
+                          width={1200}
+                        />
+                      </button>
+                      <figcaption className="mt-3 text-sm leading-6 text-neutral-500">
+                        {item.caption}
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+                <div className="mt-7 border-y border-white/10 text-sm">
+                  <div className="grid grid-cols-[auto_1fr] gap-4 border-b border-white/10 py-3">
+                    <span className="mt-1 size-3 rounded-full bg-wave-paper" />
+                    <p>
+                      <TokenLabel>wave-paper</TokenLabel>{" "}
+                      <span className="text-neutral-500">
+                        Primary labels, titles, and high-contrast values.
+                      </span>
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-[auto_1fr] gap-4 border-b border-white/10 py-3">
+                    <span className="mt-1 size-3 rounded-full bg-wave-blue-vivid" />
+                    <p>
+                      <TokenLabel>wave-blue-vivid</TokenLabel>{" "}
+                      <span className="text-neutral-500">
+                        Observations, measured structure, and primary series.
+                      </span>
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-[auto_1fr] gap-4 border-b border-white/10 py-3">
+                    <span className="mt-1 size-3 rounded-full bg-wave-red-vivid" />
+                    <p>
+                      <TokenLabel>wave-red-vivid</TokenLabel>{" "}
+                      <span className="text-neutral-500">
+                        Interventions, causal emphasis, and comparison series.
+                      </span>
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-[auto_1fr] gap-4 py-3">
+                    <span className="mt-1 size-3 rounded-full bg-neutral-700" />
+                    <p>
+                      <TokenLabel>neutral-700</TokenLabel>{" "}
+                      <span className="text-neutral-500">
+                        Axes, guides, borders, and secondary structure.
+                      </span>
+                    </p>
+                  </div>
+                </div>
               </section>
 
               <section aria-labelledby="dividers">
@@ -690,13 +777,13 @@ export default function Home() {
                   enough for an agent to copy into a React or Next.js project
                   and adapt without recreating the design system.
                 </p>
-                <div className="mt-6 overflow-hidden rounded-md border border-white/10 bg-white/[0.02]">
-                  {codeSamples.map((sample, index) => (
-                    <CodeSample
+                <div className="mt-6 space-y-4">
+                  {codeSamples.map((sample) => (
+                    <CodeBlock
                       code={sample.code}
-                      isLast={index === codeSamples.length - 1}
                       key={sample.label}
                       label={sample.label}
+                      language={sample.language}
                     />
                   ))}
                 </div>
@@ -736,17 +823,22 @@ export default function Home() {
                   Install the public package from npm. Use the GitHub checkout
                   when contributing to Wave Kit itself.
                 </p>
-                <pre className="overflow-x-auto rounded-lg border border-white/10 bg-white/[0.02] p-5 font-mono text-sm text-neutral-300">
-                  <code>npm install @jayhack/wave-kit tailwindcss</code>
-                </pre>
-                <pre className="mt-3 overflow-x-auto rounded-lg border border-white/10 bg-white/[0.02] p-5 font-mono text-sm leading-6 text-neutral-300">
-                  <code>{`git clone https://github.com/jayhack/wave-kit.git
-npm install ./wave-kit/packages/wave-kit tailwindcss`}</code>
-                </pre>
-                <pre className="mt-3 overflow-x-auto rounded-lg border border-white/10 bg-white/[0.02] p-5 font-mono text-sm leading-6 text-neutral-300">
-                  <code>{`@import "tailwindcss";
-@import "@jayhack/wave-kit/styles.css";`}</code>
-                </pre>
+                <div className="space-y-3">
+                  <CodeBlock
+                    code="npm install @jayhack/wave-kit tailwindcss"
+                    language="bash"
+                  />
+                  <CodeBlock
+                    code={`git clone https://github.com/jayhack/wave-kit.git
+npm install ./wave-kit/packages/wave-kit tailwindcss`}
+                    language="bash"
+                  />
+                  <CodeBlock
+                    code={`@import "tailwindcss";
+@import "@jayhack/wave-kit/styles.css";`}
+                    language="css"
+                  />
+                </div>
               </section>
             </article>
 

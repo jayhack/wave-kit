@@ -2,7 +2,7 @@
 
 A small, dark-by-default React component system with a generative cellular
 wave field, progressive lightbox images, typography, links, tabs, navigation,
-and dividers.
+syntax-highlighted code blocks, and dividers.
 
 ```bash
 npm install @jayhack/wave-kit
