@@ -161,7 +161,7 @@ export function ProjectImage() {
 ] as const;
 
 const syntaxTokenPattern =
-  /(\/\/[^\n]*|\/\*[\s\S]*?\*\/|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`|<\/?[A-Za-z][\w.-]*|@[a-z-]+|\b(?:import|from|const|export|function|return|as|if|else|true|false|null|useState)\b|\b\d+(?:\.\d+)?\b)/g;
+  /(\/\/[^\n]*|\/\*[\s\S]*?\*\/|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`|<\/?[A-Za-z][\w.-]*|@[a-z-]+|\b(?:import|from|const|export|function|return|as|if|else)\b|\b(?:true|false|null)\b|\b(?:useState|setOpen)\b|\b\d+(?:\.\d+)?\b)/g;
 
 function SectionTitle({ id, children }: { id: string; children: ReactNode }) {
   return (
@@ -225,15 +225,17 @@ function SyntaxCode({ code }: { code: string }) {
       token.startsWith("'") ||
       token.startsWith("`")
     ) {
-      className = "text-wave-yellow";
+      className = "text-wave-yellow-pale/80";
     } else if (token.startsWith("<")) {
-      className = "text-wave-orange-light";
+    className = "text-wave-orange";
     } else if (token.startsWith("@")) {
-      className = "text-wave-red-vivid";
+      className = "text-wave-blue-light";
     } else if (/^\d/.test(token)) {
       className = "text-wave-orange";
     } else if (/^(true|false|null)$/.test(token)) {
-      className = "text-wave-red-vivid";
+      className = "text-wave-orange-light";
+    } else if (/^(useState|setOpen)$/.test(token)) {
+      className = "text-wave-blue-300";
     } else {
       className = "text-wave-blue-light";
     }
@@ -301,7 +303,19 @@ export default function Home() {
               </p>
               <div className="mt-6 flex min-w-0 overflow-hidden rounded-md border border-white/10 bg-white/[0.02]">
                 <pre className="min-w-0 flex-1 overflow-x-auto px-4 py-3 font-mono text-[0.78rem] leading-5 text-neutral-300">
-                  <code>{skillInstallCommand}</code>
+                  <code>
+                    <span className="text-wave-blue-light">
+                      npx skills add
+                    </span>{" "}
+                    <span className="text-wave-red-vivid">
+                      jayhack/wave-kit
+                    </span>{" "}
+                    <span className="text-wave-blue-300">--skill</span>{" "}
+                    <span className="text-wave-yellow-pale/80">
+                      build-with-wave-kit
+                    </span>{" "}
+                    <span className="text-wave-orange">-y</span>
+                  </code>
                 </pre>
                 <button
                   aria-label="Copy skill install command"

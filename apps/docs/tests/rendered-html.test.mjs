@@ -21,10 +21,9 @@ test("server-renders the canonical jay.ai design page", async () => {
   assert.match(html, /\/design\/growth-inspiration\.webp/);
   assert.match(html, /\/design\/no-more-war-inspiration\.png/);
   assert.match(html, /No More War, repeated form and concentrated color/);
-  assert.match(
-    html,
-    /npx skills add jayhack\/wave-kit --skill build-with-wave-kit -y/,
-  );
+  assert.match(html, />npx skills add<\/span>/);
+  assert.match(html, />jayhack\/wave-kit<\/span>/);
+  assert.match(html, />build-with-wave-kit<\/span>/);
   assert.match(html, /aria-label="Copy skill install command"/);
   assert.doesNotMatch(html, /Add the agent skill/);
   assert.match(html, /npm install wave-kit tailwindcss/);
@@ -38,8 +37,10 @@ test("server-renders the canonical jay.ai design page", async () => {
   assert.match(html, /ProgressiveImage/);
   assert.match(html, /border-wave-blue-vivid/);
   assert.match(html, /text-wave-blue-light/);
-  assert.match(html, /text-wave-yellow/);
-  assert.match(html, /text-wave-orange-light/);
+  assert.match(html, /text-wave-blue-300/);
+  assert.match(html, /text-wave-yellow-pale\/80/);
+  assert.match(html, /text-wave-red-vivid/);
+  assert.match(html, /text-wave-orange/);
   assert.match(html, />Tech stack</);
   assert.match(html, />Next\.js</);
   assert.match(html, />Vercel</);

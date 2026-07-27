@@ -62,12 +62,24 @@ export function Lightbox({
     >
       <button
         aria-label="Close image"
-        className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-2xl leading-none text-gray-100 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+        className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-md bg-white/10 text-gray-100 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
         onClick={onClose}
         ref={closeRef}
         type="button"
       >
-        <span aria-hidden="true">&times;</span>
+        <svg
+          aria-hidden="true"
+          className="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M6 6l12 12M18 6L6 18"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeWidth="2"
+          />
+        </svg>
       </button>
 
       {hasMultiple ? (
@@ -80,25 +92,51 @@ export function Lightbox({
         <>
           <button
             aria-label="Previous image"
-            className="absolute left-2 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-3xl leading-none text-gray-100 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 sm:left-4"
+            className="absolute left-2 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-md bg-white/10 text-gray-100 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 sm:left-4"
             onClick={(event) => {
               event.stopPropagation();
               setIndex((value) => (value - 1 + count) % count);
             }}
             type="button"
           >
-            <span aria-hidden="true">&#8249;</span>
+            <svg
+              aria-hidden="true"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M15 18l-6-6 6-6"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+              />
+            </svg>
           </button>
           <button
             aria-label="Next image"
-            className="absolute right-2 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-3xl leading-none text-gray-100 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 sm:right-4"
+            className="absolute right-2 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-md bg-white/10 text-gray-100 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 sm:right-4"
             onClick={(event) => {
               event.stopPropagation();
               setIndex((value) => (value + 1) % count);
             }}
             type="button"
           >
-            <span aria-hidden="true">&#8250;</span>
+            <svg
+              aria-hidden="true"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M9 6l6 6-6 6"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+              />
+            </svg>
           </button>
         </>
       ) : null}
