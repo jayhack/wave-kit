@@ -17,7 +17,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Wave Kit",
     description: "The open component system behind jay.ai.",
-    images: ["/design-og.png"],
+    images: [
+      {
+        url: "/design-og.png",
+        width: 1200,
+        height: 630,
+        alt: "wave-kit over the expanding cellular WaveField",
+      },
+    ],
   },
 };
 

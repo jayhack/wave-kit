@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" role="img" aria-labelledby="title description">
+  <title id="title">Intervention pipeline</title>
+  <desc id="description">Three labeled stages show an observed state, a measured representation, and a causal intervention.</desc>
+  <defs>
+    <marker id="arrow" markerHeight="8" markerWidth="8" orient="auto" refX="7" refY="4">
+      <path d="M0 0 8 4 0 8Z" fill="#737373"/>
+    </marker>
+    <style>
+      .sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="640" fill="#000000"/>
+  <rect x="1" y="1" width="1198" height="638" fill="none" stroke="#262626" stroke-width="2"/>
+
+  <text class="sans" x="56" y="70" fill="#f4f1e8" font-size="30" font-weight="700">Intervention pipeline</text>
+  <text class="sans" x="56" y="102" fill="#a3a3a3" font-size="17">Move from observation to a labeled causal write.</text>
+
+  <g transform="translate(56 150)">
+    <text class="sans" y="42" fill="#f4f1e8" font-size="23" font-weight="600">Record the state</text>
+    <rect y="76" width="292" height="230" rx="4" fill="#050a12" stroke="#34507a" stroke-width="2"/>
+    <path d="M0 152H292M97 76V306M194 76V306" stroke="#2a3550" stroke-width="1"/>
+    <circle cx="70" cy="226" r="17" fill="#2090c8"/>
+    <circle cx="70" cy="226" r="28" fill="none" stroke="#2090c8" stroke-opacity=".3" stroke-width="2"/>
+    <path d="M101 210C137 172 178 184 216 138" fill="none" stroke="#2090c8" stroke-width="4"/>
+    <path d="m205 138 14-3-3 14" fill="none" stroke="#2090c8" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+    <text class="mono" x="18" y="290" fill="#a3a3a3" font-size="13">xₜ = [position, velocity]</text>
+  </g>
+
+  <path d="M370 312H420" fill="none" marker-end="url(#arrow)" stroke="#737373" stroke-width="2"/>
+
+  <g transform="translate(450 150)">
+    <text class="sans" y="42" fill="#f4f1e8" font-size="23" font-weight="600">Locate the signal</text>
+    <rect y="76" width="292" height="230" rx="4" fill="#050a12" stroke="#34507a" stroke-width="2"/>
+    <g fill="none" stroke="#34507a" stroke-width="1.5">
+      <rect x="46" y="112" width="34" height="34"/>
+      <rect x="92" y="112" width="34" height="34"/>
+      <rect x="138" y="112" width="34" height="34"/>
+      <rect x="184" y="112" width="34" height="34"/>
+      <rect x="46" y="158" width="34" height="34"/>
+      <rect x="92" y="158" width="34" height="34"/>
+      <rect x="138" y="158" width="34" height="34"/>
+      <rect x="184" y="158" width="34" height="34"/>
+      <rect x="46" y="204" width="34" height="34"/>
+      <rect x="92" y="204" width="34" height="34"/>
+      <rect x="138" y="204" width="34" height="34"/>
+      <rect x="184" y="204" width="34" height="34"/>
+    </g>
+    <rect x="138" y="158" width="34" height="34" fill="#2090c8" fill-opacity=".28" stroke="#2090c8" stroke-width="2"/>
+    <path d="M155 139V211M119 175H191" stroke="#dc2626" stroke-width="2"/>
+    <circle cx="155" cy="175" r="7" fill="#dc2626"/>
+    <text class="mono" x="18" y="290" fill="#a3a3a3" font-size="13">h⁽⁵⁾ → v̂direction</text>
+  </g>
+
+  <path d="M764 312H814" fill="none" marker-end="url(#arrow)" stroke="#737373" stroke-width="2"/>
+
+  <g transform="translate(844 150)">
+    <text class="sans" y="42" fill="#f4f1e8" font-size="23" font-weight="600">Write the vector</text>
+    <rect y="76" width="300" height="230" rx="4" fill="#050a12" stroke="#34507a" stroke-width="2"/>
+    <line x1="32" y1="191" x2="268" y2="191" stroke="#2a3550"/>
+    <line x1="150" y1="102" x2="150" y2="278" stroke="#2a3550"/>
+    <circle cx="94" cy="224" r="14" fill="#2090c8"/>
+    <path d="M115 211C151 188 186 168 231 133" fill="none" stroke="#dc2626" stroke-width="5"/>
+    <path d="m217 133 17-2-5 16" fill="none" stroke="#dc2626" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+    <path d="M94 224C139 216 190 187 231 133" fill="none" stroke="#2090c8" stroke-dasharray="5 8" stroke-width="2"/>
+    <text class="mono" x="18" y="290" fill="#a3a3a3" font-size="13">h′ = h + αv̂direction</text>
+  </g>
+
+  <line x1="56" y1="532" x2="1144" y2="532" stroke="#262626"/>
+  <g class="sans" font-size="15">
+    <circle cx="70" cy="576" r="7" fill="#2090c8"/>
+    <text x="88" y="581" fill="#d4d4d4">Signal blue · observed state and measured structure</text>
+    <circle cx="575" cy="576" r="7" fill="#dc2626"/>
+    <text x="593" y="581" fill="#d4d4d4">Heat red · intervention and causal emphasis</text>
+  </g>
+</svg>

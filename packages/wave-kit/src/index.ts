@@ -1,3 +1,5 @@
+export { CodeBlock } from "./components/CodeBlock";
+export type { CodeBlockProps, CodeLanguage } from "./components/CodeBlock";
 export { Divider } from "./components/Divider";
 export { BackLink, GitHubButton, TextLink } from "./components/Links";
 export type { BackLinkProps, GitHubButtonProps, TextLinkProps } from "./components/Links";

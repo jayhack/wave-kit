@@ -3,7 +3,68 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
-export type LightboxItem = { src: string; alt: string; caption?: string };
+export type LightboxItem = {
+  src: string;
+  alt: string;
+  caption?: string;
+  /**
+   * A smaller, already-loaded source to paint while `src` loads and decodes.
+   * Read `event.currentTarget.currentSrc` from ProgressiveImage's onLoad to
+   * pass the exact responsive candidate selected by the browser.
+   */
+  previewSrc?: string;
+  /** A tiny inline image shown blurred when no decoded preview is available. */
+  placeholder?: string;
+};
+
+function LightboxImage({ item }: { item: LightboxItem }) {
+  const [fullLoaded, setFullLoaded] = useState(false);
+  const showPreview = item.previewSrc && item.previewSrc !== item.src;
+
+  return (
+    <div className="grid min-h-0 w-full flex-1 place-items-center">
+      {item.placeholder ? (
+        <img
+          alt=""
+          aria-hidden="true"
+          className={`pointer-events-none col-start-1 row-start-1 h-full w-full scale-105 rounded-lg object-contain blur-md transition-opacity duration-300 ${
+            fullLoaded || showPreview ? "opacity-0" : "opacity-100"
+          }`}
+          src={item.placeholder}
+        />
+      ) : null}
+      {showPreview ? (
+        <img
+          alt=""
+          aria-hidden="true"
+          className={`pointer-events-none col-start-1 row-start-1 h-full w-full rounded-lg object-contain shadow-2xl transition-opacity duration-300 ${
+            fullLoaded ? "opacity-0" : "opacity-100"
+          }`}
+          src={item.previewSrc}
+        />
+      ) : null}
+      <img
+        alt={item.alt}
+        className={`col-start-1 row-start-1 h-full w-full rounded-lg object-contain shadow-2xl transition-opacity duration-300 ${
+          fullLoaded || !showPreview ? "opacity-100" : "opacity-0"
+        }`}
+        decoding="async"
+        onLoad={(event) => {
+          const image = event.currentTarget;
+          if (typeof image.decode === "function") {
+            void image
+              .decode()
+              .catch(() => undefined)
+              .then(() => setFullLoaded(true));
+          } else {
+            setFullLoaded(true);
+          }
+        }}
+        src={item.src}
+      />
+    </div>
+  );
+}
 
 export function Lightbox({
   items,
@@ -142,14 +203,10 @@ export function Lightbox({
       ) : null}
 
       <figure
-        className="flex min-h-0 max-h-[72vh] max-w-[88vw] flex-col items-center gap-3"
+        className="flex h-[72vh] w-[88vw] min-h-0 flex-col items-center gap-3"
         onClick={(event) => event.stopPropagation()}
       >
-        <img
-          alt={current.alt}
-          className="min-h-0 flex-1 rounded-lg object-contain shadow-2xl"
-          src={current.src}
-        />
+        <LightboxImage item={current} key={current.src} />
         {current.caption ? (
           <figcaption className="max-w-2xl shrink-0 text-center text-sm text-gray-300">
             {current.caption}
@@ -175,7 +232,11 @@ export function Lightbox({
               onClick={() => setIndex(itemIndex)}
               type="button"
             >
-              <img alt="" className="h-14 w-24 object-cover" src={item.src} />
+              <img
+                alt=""
+                className="h-14 w-24 object-cover"
+                src={item.previewSrc ?? item.src}
+              />
             </button>
           ))}
         </div>
