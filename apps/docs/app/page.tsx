@@ -227,11 +227,11 @@ function SyntaxCode({ code }: { code: string }) {
     ) {
       className = "text-wave-yellow-pale/80";
     } else if (token.startsWith("<")) {
-    className = "text-wave-orange";
+      className = "text-wave-orange";
     } else if (token.startsWith("@")) {
       className = "text-wave-blue-light";
     } else if (/^\d/.test(token)) {
-      className = "text-wave-orange";
+      className = "text-wave-red-vivid";
     } else if (/^(true|false|null)$/.test(token)) {
       className = "text-wave-orange-light";
     } else if (/^(useState|setOpen)$/.test(token)) {
@@ -304,17 +304,13 @@ export default function Home() {
               <div className="mt-6 flex min-w-0 overflow-hidden rounded-md border border-white/10 bg-white/[0.02]">
                 <pre className="min-w-0 flex-1 overflow-x-auto px-4 py-3 font-mono text-[0.78rem] leading-5 text-neutral-300">
                   <code>
+                    npx skills add jayhack/
+                    <span className="text-wave-blue-light">wave-kit</span>
+                    {" --skill "}
                     <span className="text-wave-blue-light">
-                      npx skills add
-                    </span>{" "}
-                    <span className="text-wave-red-vivid">
-                      jayhack/wave-kit
-                    </span>{" "}
-                    <span className="text-wave-blue-300">--skill</span>{" "}
-                    <span className="text-wave-yellow-pale/80">
                       build-with-wave-kit
-                    </span>{" "}
-                    <span className="text-wave-orange">-y</span>
+                    </span>
+                    {" -y"}
                   </code>
                 </pre>
                 <button
