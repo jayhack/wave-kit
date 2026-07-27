@@ -16,7 +16,7 @@ them as independent color families.
 
 ## Type
 
-Use the native system sans stack installed by `wave-kit/styles.css`. Headlines
+Use the native system sans stack installed by `@jayhack/wave-kit/styles.css`. Headlines
 are extrabold and tightly tracked; body copy is approximately 16.5px with a
 32px line height. Small labels and eyebrows stay in system sans. Reserve the
 platform monospace stack for tokens and technical values.

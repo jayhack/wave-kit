@@ -1,7 +1,7 @@
 # Component reference
 
 Import runtime pieces from `wave-kit`. In the application stylesheet, import
-`tailwindcss` first and `wave-kit/styles.css` second.
+`tailwindcss` first and `@jayhack/wave-kit/styles.css` second.
 
 ## Navigation and links
 
@@ -77,7 +77,7 @@ const images = [{ src: "/work.webp", alt: "Project diagram" }];
 - `waveColors`, `waveTailwindColors`, and `waveRadii`: lower-level token
   objects.
 
-Importing `wave-kit/styles.css` adds named Tailwind utilities for:
+Importing `@jayhack/wave-kit/styles.css` adds named Tailwind utilities for:
 
 - `wave-ink` and `wave-paper`
 - `wave-blue`, `wave-blue-vivid`, and supporting blue shades

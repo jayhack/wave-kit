@@ -30,7 +30,7 @@ test("server-renders the canonical jay.ai design page", async () => {
   );
   assert.match(html, /aria-label="Copy skill install command"/);
   assert.doesNotMatch(html, /Add the agent skill/);
-  assert.match(html, /npm install wave-kit tailwindcss/);
+  assert.match(html, /npm install @jayhack\/wave-kit tailwindcss/);
   assert.match(html, /git clone https:\/\/github\.com\/jayhack\/wave-kit\.git/);
   assert.match(html, /Four color anchors|four color anchors/);
   assert.match(html, /Subtle \/ 14 \/ 24/);
@@ -61,10 +61,10 @@ test("the showcase consumes React, Tailwind, and package components", async () =
     readFile(new URL("../package.json", import.meta.url), "utf8"),
   ]);
 
-  assert.match(page, /from "wave-kit"/);
+  assert.match(page, /from "@jayhack\/wave-kit"/);
   assert.match(styles, /@import "tailwindcss"/);
-  assert.match(styles, /@import "wave-kit\/styles\.css"/);
-  assert.match(packageJson, /"wave-kit": "\*"/);
+  assert.match(styles, /@import "@jayhack\/wave-kit\/styles\.css"/);
+  assert.match(packageJson, /"@jayhack\/wave-kit": "\*"/);
   assert.doesNotMatch(packageJson, /vinext|wrangler|vite/);
   assert.doesNotMatch(page, /function (WaveField|ProgressiveImage|NavigationIndex)/);
 });

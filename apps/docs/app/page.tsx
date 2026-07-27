@@ -14,7 +14,7 @@ import {
   waveColorFamilies,
   wavePalette,
   type LightboxItem,
-} from "wave-kit";
+} from "@jayhack/wave-kit";
 
 const inspirationItems: LightboxItem[] = [
   {
@@ -94,11 +94,11 @@ const codeSamples = [
   {
     label: "Global CSS",
     code: `@import "tailwindcss";
-@import "wave-kit/styles.css";`,
+@import "@jayhack/wave-kit/styles.css";`,
   },
   {
     label: "Wave field and page index",
-    code: `import { NavigationIndex, WaveField } from "wave-kit";
+    code: `import { NavigationIndex, WaveField } from "@jayhack/wave-kit";
 
 const sections = [
   ["overview", "Overview"],
@@ -125,7 +125,7 @@ export function ProjectPage() {
     code: `"use client";
 
 import { useState } from "react";
-import { Lightbox, ProgressiveImage } from "wave-kit";
+import { Lightbox, ProgressiveImage } from "@jayhack/wave-kit";
 
 const images = [
   { src: "/project-full.png", alt: "Project system diagram" },
@@ -693,7 +693,7 @@ export default function Home() {
                   install the package workspace from a GitHub checkout.
                 </p>
                 <pre className="overflow-x-auto rounded-lg border border-white/10 bg-white/[0.02] p-5 font-mono text-sm text-neutral-300">
-                  <code>npm install wave-kit tailwindcss</code>
+                  <code>npm install @jayhack/wave-kit tailwindcss</code>
                 </pre>
                 <pre className="mt-3 overflow-x-auto rounded-lg border border-white/10 bg-white/[0.02] p-5 font-mono text-sm leading-6 text-neutral-300">
                   <code>{`git clone https://github.com/jayhack/wave-kit.git
@@ -701,7 +701,7 @@ npm install ./wave-kit/packages/wave-kit tailwindcss`}</code>
                 </pre>
                 <pre className="mt-3 overflow-x-auto rounded-lg border border-white/10 bg-white/[0.02] p-5 font-mono text-sm leading-6 text-neutral-300">
                   <code>{`@import "tailwindcss";
-@import "wave-kit/styles.css";`}</code>
+@import "@jayhack/wave-kit/styles.css";`}</code>
                 </pre>
               </section>
             </article>

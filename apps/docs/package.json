@@ -16,7 +16,7 @@
     "next": "^16.2.12",
     "react": "19.2.6",
     "react-dom": "19.2.6",
-    "wave-kit": "*"
+    "@jayhack/wave-kit": "*"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "4.2.1",

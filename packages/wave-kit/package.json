@@ -1,5 +1,5 @@
 {
-  "name": "wave-kit",
+  "name": "@jayhack/wave-kit",
   "version": "0.1.0",
   "description": "The open React component system and generative wave language behind jay.ai.",
   "license": "MIT",

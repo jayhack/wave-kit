@@ -6,17 +6,17 @@ showcase site, and a Codex skill that teaches agents how to compose it.
 After the npm release:
 
 ```bash
-npm install wave-kit
+npm install @jayhack/wave-kit
 ```
 
 Until that release is visible in the registry, install
 `packages/wave-kit` from a local checkout.
 
 ```tsx
-import { Divider, TextLink, WaveField } from "wave-kit";
+import { Divider, TextLink, WaveField } from "@jayhack/wave-kit";
 ```
 
-Import Tailwind and `wave-kit/styles.css` from the application stylesheet.
+Import Tailwind and `@jayhack/wave-kit/styles.css` from the application stylesheet.
 
 ## Workspace
 

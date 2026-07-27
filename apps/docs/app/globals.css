@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "wave-kit/styles.css";
+@import "@jayhack/wave-kit/styles.css";
 
 html,
 body {

@@ -5,16 +5,16 @@ wave field, progressive lightbox images, typography, links, tabs, navigation,
 and dividers.
 
 ```bash
-npm install wave-kit
+npm install @jayhack/wave-kit
 ```
 
 ```css
 @import "tailwindcss";
-@import "wave-kit/styles.css";
+@import "@jayhack/wave-kit/styles.css";
 ```
 
 ```tsx
-import { NavigationIndex, WaveField } from "wave-kit";
+import { NavigationIndex, WaveField } from "@jayhack/wave-kit";
 ```
 
 Wave Kit is React + Tailwind CSS v4. Its stylesheet registers the package build

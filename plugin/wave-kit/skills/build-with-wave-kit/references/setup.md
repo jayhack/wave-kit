@@ -17,7 +17,7 @@ npm view wave-kit version
 When it resolves, use the host project's package manager:
 
 ```bash
-npm install wave-kit tailwindcss
+npm install @jayhack/wave-kit tailwindcss
 ```
 
 If the registry returns `404` and this repository is available locally, install
@@ -39,7 +39,7 @@ Import both stylesheets exactly once in the application's global CSS entry:
 
 ```css
 @import "tailwindcss";
-@import "wave-kit/styles.css";
+@import "@jayhack/wave-kit/styles.css";
 ```
 
 The second import registers the system font stack, utilities, and semantic
@@ -56,7 +56,7 @@ import {
   NavigationIndex,
   TextLink,
   WaveField,
-} from "wave-kit";
+} from "@jayhack/wave-kit";
 ```
 
 Give canvas components real dimensions:

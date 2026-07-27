@@ -16,7 +16,7 @@ https://raw.githubusercontent.com/jayhack/wave-kit/main/plugin/wave-kit/skills/b
 
 ## Install the React package
 
-npm install wave-kit tailwindcss
+npm install @jayhack/wave-kit tailwindcss
 
 If the npm package is not yet available, install it from a checkout:
 
@@ -26,7 +26,7 @@ npm install ./wave-kit/packages/wave-kit tailwindcss
 Then import both stylesheets once:
 
 @import "tailwindcss";
-@import "wave-kit/styles.css";
+@import "@jayhack/wave-kit/styles.css";
 
 ## Main exports
 

@@ -8,12 +8,12 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "npm run build -w wave-kit && npm run build -w @wave-kit/docs",
-    "build:package": "npm run build -w wave-kit",
+    "build": "npm run build -w @jayhack/wave-kit && npm run build -w @wave-kit/docs",
+    "build:package": "npm run build -w @jayhack/wave-kit",
     "dev": "npm run build:package && npm run dev -w @wave-kit/docs",
     "lint": "npm run lint -w @wave-kit/docs",
-    "test": "npm run test -w wave-kit && npm run test -w @wave-kit/docs",
-    "pack:check": "npm run build:package && npm pack --dry-run -w wave-kit"
+    "test": "npm run test -w @jayhack/wave-kit && npm run test -w @wave-kit/docs",
+    "pack:check": "npm run build:package && npm pack --dry-run -w @jayhack/wave-kit"
   },
   "engines": {
     "node": ">=22.13.0"
