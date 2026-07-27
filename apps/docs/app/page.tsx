@@ -304,8 +304,10 @@ export default function Home() {
               <div className="mt-6 flex min-w-0 overflow-hidden rounded-md border border-white/10 bg-white/[0.02]">
                 <pre className="min-w-0 flex-1 overflow-x-auto px-4 py-3 font-mono text-[0.78rem] leading-5 text-neutral-300">
                   <code>
-                    npx skills add jayhack/
-                    <span className="text-wave-blue-light">wave-kit</span>
+                    npx skills add{" "}
+                    <span className="text-wave-blue-light">
+                      jayhack/wave-kit
+                    </span>
                     {" --skill "}
                     <span className="text-wave-blue-light">
                       build-with-wave-kit
