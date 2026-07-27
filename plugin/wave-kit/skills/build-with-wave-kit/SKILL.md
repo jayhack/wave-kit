@@ -11,9 +11,9 @@ from classic math and physics diagrams and 1960s Japanese poster art,
 especially Kazumasa Nagai.
 
 Treat [jay.ai/design](https://jay.ai/design) as the canonical visual reference
-and the installed `wave-kit` package as the implementation source of truth.
-Compose real exports; do not copy component implementations into the host
-project.
+and the installed `@jayhack/wave-kit` package as the implementation source of
+truth. Compose real exports; do not copy component implementations into the
+host project.
 
 ## Workflow
 
@@ -41,12 +41,21 @@ project.
 - Keep the intended stack Next.js, Vercel, Tailwind CSS, and shadcn/ui unless
   the host project already has an equivalent architecture.
 - Prefer semantic page structure over wrapping every section in a card.
+- Default to a blog-post reading model: vertical scrolling, semantic sections,
+  paragraphs, and images or interactive assets interspersed with the text they
+  support.
+- Remove ornamental UI. Do not add eyebrows, sequence numbers, badges, or
+  labels that merely repeat nearby content.
+- Keep page titles restrained. Do not use oversized hero text that delays the
+  useful content or makes every page resemble a landing page.
+- Prefer simplicity and minimalism. If an element adds no meaning, navigation,
+  or function, remove it.
 - Keep hover state changes immediate. Image loading fades are allowed.
 - Keep the resting wave field black with visible black gutters between cells.
 - Use four chromatic anchors: signal blue, heat red, energy orange, and light
   yellow. Associated shades are not separate color families.
 - Do not add brown as a color family.
-- Use system sans for headings, body, labels, and eyebrows. Reserve monospace
+- Use system sans for headings, body, and meaningful labels. Reserve monospace
   for code, tokens, metrics, and technical values.
 - Use original supplied imagery with `ProgressiveImage` and `Lightbox`; do not
   substitute generic cards or a second gallery implementation.

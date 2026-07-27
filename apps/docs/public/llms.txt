@@ -18,7 +18,7 @@ https://raw.githubusercontent.com/jayhack/wave-kit/main/plugin/wave-kit/skills/b
 
 npm install @jayhack/wave-kit tailwindcss
 
-If the npm package is not yet available, install it from a checkout:
+To contribute to Wave Kit itself, install from a checkout:
 
 git clone https://github.com/jayhack/wave-kit.git
 npm install ./wave-kit/packages/wave-kit tailwindcss
@@ -40,6 +40,13 @@ Use native system sans for display, heading, body, subtle text, and labels.
 Use the platform monospace stack for code and color tokens. Keep controls
 rectangular with modest radii. Keep hover changes immediate. Use original
 images with progressive loading and the package Lightbox.
+
+Default to a blog-post reading model with vertical scrolling, semantic
+sections, paragraphs, and images or interactive assets interspersed with the
+text they support. Avoid decorative eyebrows, sequence numbers, badges, and
+labels that merely repeat nearby content. Keep titles proportional and avoid
+oversized hero text. Remove anything that adds no meaning, navigation, or
+function.
 
 ## Code and documentation
 

@@ -46,6 +46,11 @@ test("server-renders the canonical jay.ai design page", async () => {
   assert.match(html, /text-wave-red-vivid/);
   assert.match(html, /class="text-wave-red-vivid">900<\/span>/);
   assert.match(html, /text-wave-orange/);
+  assert.match(html, />Style guide</);
+  assert.match(html, /Avoid AI slop/);
+  assert.match(html, /Keep titles in proportion/);
+  assert.match(html, /Compose for vertical reading/);
+  assert.match(html, /Install the public package from npm/);
   assert.match(html, />Tech stack</);
   assert.match(html, />Next\.js</);
   assert.match(html, />Vercel</);
@@ -63,7 +68,10 @@ test("the showcase consumes React, Tailwind, and package components", async () =
 
   assert.match(page, /from "@jayhack\/wave-kit"/);
   assert.match(styles, /@import "tailwindcss"/);
-  assert.match(styles, /@import "@jayhack\/wave-kit\/styles\.css"/);
+  assert.match(
+    styles,
+    /@import "\.\.\/\.\.\/\.\.\/packages\/wave-kit\/dist\/styles\.css"/,
+  );
   assert.match(packageJson, /"@jayhack\/wave-kit": "\*"/);
   assert.doesNotMatch(packageJson, /vinext|wrangler|vite/);
   assert.doesNotMatch(page, /function (WaveField|ProgressiveImage|NavigationIndex)/);

@@ -57,6 +57,7 @@ const sections = [
   ["navigation", "Navigation"],
   ["images", "Images"],
   ["dividers", "Dividers"],
+  ["style-guide", "Style guide"],
   ["code", "Code samples"],
   ["stack", "Tech stack"],
   ["install", "Install"],
@@ -638,6 +639,49 @@ export default function Home() {
                 </div>
               </section>
 
+              <section aria-labelledby="style-guide">
+                <SectionTitle id="style-guide">Style guide</SectionTitle>
+                <p>
+                  Simplicity is an editing discipline. Every visual element
+                  should improve meaning, navigation, or reading rhythm.
+                </p>
+                <div className="mt-8 space-y-8">
+                  <div>
+                    <h3 className="text-lg font-bold text-neutral-100">
+                      Remove ornamental UI
+                    </h3>
+                    <p className="mt-2 text-neutral-400">
+                      Avoid AI slop such as eyebrows, sequence numbers, badges,
+                      and labels that only repeat nearby content. If an element
+                      adds no information or function, remove it.
+                    </p>
+                  </div>
+                  <Divider />
+                  <div>
+                    <h3 className="text-lg font-bold text-neutral-100">
+                      Keep titles in proportion
+                    </h3>
+                    <p className="mt-2 text-neutral-400">
+                      Use the smallest title that establishes hierarchy. Avoid
+                      oversized hero text that pushes useful content below the
+                      fold or turns every page into a landing page.
+                    </p>
+                  </div>
+                  <Divider />
+                  <div>
+                    <h3 className="text-lg font-bold text-neutral-100">
+                      Compose for vertical reading
+                    </h3>
+                    <p className="mt-2 text-neutral-400">
+                      Structure pages like blog posts when possible. Assume
+                      vertical scrolling, use semantic sections and paragraphs,
+                      and intersperse images or interactive assets with the
+                      text they support.
+                    </p>
+                  </div>
+                </div>
+              </section>
+
               <section aria-labelledby="code">
                 <SectionTitle id="code">Code samples</SectionTitle>
                 <p>
@@ -689,8 +733,8 @@ export default function Home() {
               <section aria-labelledby="install">
                 <SectionTitle id="install">Install</SectionTitle>
                 <p className="mb-5">
-                  Use npm when the package release is available. Until then,
-                  install the package workspace from a GitHub checkout.
+                  Install the public package from npm. Use the GitHub checkout
+                  when contributing to Wave Kit itself.
                 </p>
                 <pre className="overflow-x-auto rounded-lg border border-white/10 bg-white/[0.02] p-5 font-mono text-sm text-neutral-300">
                   <code>npm install @jayhack/wave-kit tailwindcss</code>

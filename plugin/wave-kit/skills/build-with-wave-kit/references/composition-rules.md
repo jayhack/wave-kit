@@ -16,10 +16,12 @@ them as independent color families.
 
 ## Type
 
-Use the native system sans stack installed by `@jayhack/wave-kit/styles.css`. Headlines
-are extrabold and tightly tracked; body copy is approximately 16.5px with a
-32px line height. Small labels and eyebrows stay in system sans. Reserve the
-platform monospace stack for tokens and technical values.
+Use the native system sans stack installed by
+`@jayhack/wave-kit/styles.css`. Headlines are extrabold and tightly tracked;
+body copy is approximately 16.5px with a 32px line height. Keep page titles
+proportional to the reading column and visible content. Do not use oversized
+hero text by default. Reserve the platform monospace stack for tokens and
+technical values.
 
 ## Layout and shape
 
@@ -29,6 +31,17 @@ quiet sticky index on wide screens. Panels use Tailwind `rounded-lg`; images use
 
 Buttons and backlinks are compact and rectangular. Do not turn them into pills.
 Use modest radii on panels and sections.
+
+Default to the structure of a blog post: one vertical reading flow, semantic
+sections, paragraphs, and images or interactive assets placed near the text
+they explain. Do not replace this with a dashboard grid unless the content
+genuinely requires one.
+
+Practice aggressive visual editing. Avoid decorative eyebrows, numbered section
+labels, badges, metadata chips, and other AI-generated interface filler that
+adds no meaning or function. Do not restate a heading in a smaller label above
+it. Remove any element that does not improve comprehension, navigation, or
+interaction.
 
 ## Motion
 
