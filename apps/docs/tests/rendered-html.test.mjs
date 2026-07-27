@@ -30,7 +30,9 @@ test("server-renders the canonical jay.ai design page", async () => {
 
   const html = await response.text();
   assert.match(html, /<title>Wave Kit — the jay\.ai component system<\/title>/i);
-  assert.match(html, /Jay’s component kit/);
+  assert.match(html, /<h1[^>]*>wave-kit<\/h1>/);
+  assert.match(html, /Developed for Jay Hack&#x27;s personal projects\./);
+  assert.match(html, /href="https:\/\/jay\.ai\/writing"/);
   assert.match(html, /Kazumasa Nagai — primary reference/);
   assert.match(html, /\/design\/kazumasa-nagai-inspiration\.webp/);
   assert.match(html, /\/design\/growth-inspiration\.webp/);

@@ -111,24 +111,20 @@ export default function Home() {
           </aside>
 
           <main className="mx-auto min-w-0 max-w-2xl xl:mx-0 xl:max-w-none">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <BackLink fallbackHref="https://jay.ai">jay.ai</BackLink>
-              <GitHubButton href="https://github.com/jayhack/wave-kit">
-                View source
-              </GitHubButton>
-            </div>
-
             <header className="mt-10 border-b border-white/10 pb-9">
-              <h1 className="text-4xl font-extrabold tracking-[-0.035em] text-white sm:text-5xl">
-                Jay’s component kit
-              </h1>
-              <p className="mt-4 max-w-xl text-lg leading-8 text-neutral-400">
-                A compact visual language for personal software: black canvas,
-                sharp type, quiet structure, and brief flashes of color.
-              </p>
-              <div className="mt-5 text-sm text-neutral-500">
-                Living document · jay.ai
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <h1 className="text-4xl font-extrabold tracking-[-0.035em] text-white sm:text-5xl">
+                  wave-kit
+                </h1>
+                <GitHubButton href="https://github.com/jayhack/wave-kit">
+                  View source
+                </GitHubButton>
               </div>
+              <p className="mt-4 text-sm text-neutral-500">
+                <TextLink href="https://jay.ai/writing" tone="quiet">
+                  Developed for Jay Hack&apos;s personal projects.
+                </TextLink>
+              </p>
             </header>
 
             <article className="mt-10 space-y-16 text-[1.03rem] leading-8 text-neutral-300">
@@ -380,23 +376,6 @@ export default function Home() {
                     Placeholder → responsive source set → full-resolution lightbox
                   </figcaption>
                 </figure>
-                <div className="mt-6 grid gap-3 text-sm sm:grid-cols-3">
-                  {[
-                    ["No layout shift", "width + height"],
-                    ["Fast first paint", "inline placeholder"],
-                    ["Low main-thread cost", 'decoding="async"'],
-                  ].map(([label, token]) => (
-                    <div
-                      className="rounded-lg border border-white/10 bg-white/[0.02] p-4"
-                      key={label}
-                    >
-                      <div className="font-semibold text-neutral-200">{label}</div>
-                      <div className="mt-1 font-mono text-xs text-neutral-600">
-                        {token}
-                      </div>
-                    </div>
-                  ))}
-                </div>
               </section>
 
               <section aria-labelledby="dividers">
