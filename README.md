@@ -20,9 +20,9 @@ Import Tailwind and `wave-kit/styles.css` from the application stylesheet.
 
 ## Workspace
 
-- `packages/wave-kit` — publishable React package
-- `apps/docs` — public showcase and component reference
-- `plugin/wave-kit` — installable Codex plugin with the Wave Kit skill
+- `packages/wave-kit`: publishable React package
+- `apps/docs`: public showcase and component reference
+- `plugin/wave-kit`: installable Codex plugin with the Wave Kit skill
 
 Run `npm install`, then `npm run dev`. Build everything with `npm run build`.
 

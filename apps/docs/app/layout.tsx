@@ -7,7 +7,7 @@ export const metadata: Metadata = {
       ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
       : "http://localhost:4173",
   ),
-  title: "Wave Kit — the jay.ai component system",
+  title: "Wave Kit | the jay.ai component system",
   description:
     "A compact React component system for the visual language behind jay.ai.",
   icons: {

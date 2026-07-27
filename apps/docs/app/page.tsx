@@ -20,12 +20,12 @@ const inspirationItems: LightboxItem[] = [
   {
     src: "/design/kazumasa-nagai-inspiration.webp",
     alt: "Kazumasa Nagai poster with blue wave lines surrounding a red, orange, and yellow concentric form",
-    caption: "Kazumasa Nagai — primary reference",
+    caption: "Kazumasa Nagai, primary reference",
   },
   {
     src: "/design/growth-inspiration.webp",
     alt: "Growth poster with red radial geometry and a blue gridded sphere on black",
-    caption: "Secondary reference — radial systems and optical depth",
+    caption: "Secondary reference for radial systems and optical depth",
   },
 ];
 
@@ -146,12 +146,12 @@ export default function Home() {
                   The visual system takes its clearest cue from{" "}
                   <strong className="font-semibold text-neutral-100">
                     Kazumasa Nagai
-                  </strong>
-                  —specifically the first poster below: repeated lines behaving
-                  like a field, cool blue set against concentrated heat, and
-                  movement created from disciplined geometry. The second image
-                  is a related reference for radial repetition, optical depth,
-                  and sparse type on black.
+                  </strong>. The first poster below is the primary reference,
+                  with repeated lines behaving like a field, cool blue set
+                  against concentrated heat, and movement created from
+                  disciplined geometry. The second image is a related reference
+                  for radial repetition, optical depth, and sparse type on
+                  black.
                 </p>
                 <div className="mt-7 grid items-start gap-5 sm:grid-cols-2">
                   <figure>
@@ -173,7 +173,7 @@ export default function Home() {
                       />
                     </button>
                     <figcaption className="mt-3 text-sm leading-6 text-neutral-500">
-                      Kazumasa Nagai — primary reference
+                      Kazumasa Nagai, primary reference
                     </figcaption>
                   </figure>
                   <figure>
@@ -195,7 +195,7 @@ export default function Home() {
                       />
                     </button>
                     <figcaption className="mt-3 text-sm leading-6 text-neutral-500">
-                      Secondary reference — radial systems and optical depth
+                      Secondary reference for radial systems and optical depth
                     </figcaption>
                   </figure>
                 </div>
@@ -216,11 +216,11 @@ export default function Home() {
               <section aria-labelledby="color">
                 <SectionTitle id="color">Color</SectionTitle>
                 <p>
-                  The system has four color anchors—not fourteen independent
-                  colors. Signal blue, heat red, energy orange, and light yellow
-                  carry the identity; the other values are associated shades
-                  used to give waves depth and intensity. Product UI stays
-                  neutral and usually uses only one anchor at a time.
+                  The system has four color anchors, not fourteen independent
+                  colors. Signal blue, heat red, energy orange, and light
+                  yellow carry the identity. The other values are associated
+                  shades used to give waves depth and intensity. Product UI
+                  stays neutral and usually uses only one anchor at a time.
                 </p>
                 <div className="mt-7 grid gap-3 sm:grid-cols-2">
                   {waveColorFamilies.map((family) => (
@@ -349,7 +349,8 @@ export default function Home() {
                 <p>
                   Back controls preserve in-app history when it exists and fall
                   back to a known route for direct visits. Primary tabs use a
-                  simple two-pixel underline—no filled pills or heavy chrome.
+                  simple two-pixel underline without filled pills or heavy
+                  chrome.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <BackLink fallbackHref="https://jay.ai">Back home</BackLink>

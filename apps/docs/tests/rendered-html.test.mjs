@@ -11,12 +11,12 @@ async function render() {
 
 test("server-renders the canonical jay.ai design page", async () => {
   const html = await render();
-  assert.match(html, /<title>Wave Kit — the jay\.ai component system<\/title>/i);
+  assert.match(html, /<title>Wave Kit \| the jay\.ai component system<\/title>/i);
   assert.match(html, /<h1[^>]*>wave-kit<\/h1>/);
   assert.match(html, /Design system and UI kit developed for/);
   assert.match(html, />Jay Hack<\/a>&#x27;s personal projects\./);
   assert.match(html, /href="https:\/\/jay\.ai\/writing"/);
-  assert.match(html, /Kazumasa Nagai — primary reference/);
+  assert.match(html, /Kazumasa Nagai, primary reference/);
   assert.match(html, /\/design\/kazumasa-nagai-inspiration\.webp/);
   assert.match(html, /\/design\/growth-inspiration\.webp/);
   assert.match(html, /npm install wave-kit tailwindcss/);

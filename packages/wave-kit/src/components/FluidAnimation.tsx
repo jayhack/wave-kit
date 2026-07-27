@@ -2,10 +2,10 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { faceLetterGrid } from "./faceLetterGrid";
 
 // Color palette for wave visualization (from low to high wave height).
-// Index 0 is the "resting" color — kept dim but visible so the face art is
+// Index 0 is the "resting" color. It stays dim but visible so the face art is
 // always discernible against the black canvas, even with no ripples active.
 const WAVE_COLORS = [
-  "#2a3550", // Dim slate-navy (resting — keeps face faintly visible)
+  "#2a3550", // Dim slate-navy resting color that keeps the face faintly visible
   "#34507a", // Faded navy
   "#1e6aa0", // Mid blue
   "#2090c8", // Bright blue
@@ -41,7 +41,7 @@ export interface FluidAnimationProps {
    * - "contain" (default): face fits the shorter dimension, background
    *   characters fill the longer one.
    * - "cover": face fills the longer dimension and gets cropped along the
-   *   shorter one — useful for wide banners where you want the face to
+   *   shorter one. This is useful for wide banners where you want the face to
    *   span edge-to-edge horizontally and only show a horizontal slice.
    */
   faceFit?: "contain" | "cover";
@@ -52,7 +52,7 @@ export interface FluidAnimationProps {
   /**
    * When false, the component does not fire any ripples on its own (no
    * initial splashes and no idle auto-ripples). Useful when an external
-   * caller wants full control over the wave state — e.g. the OG-image route
+   * caller wants full control over the wave state, such as the OG-image route
    * that seeds a fixed set of ripples before screenshotting.
    */
   autoRipple?: boolean;
