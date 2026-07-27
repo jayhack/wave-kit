@@ -10,61 +10,85 @@ export type TabItem = {
 
 export type TabsProps = {
   items: TabItem[];
-  defaultId?: string;
-  ariaLabel?: string;
+  label?: string;
 };
 
-export function Tabs({ items, defaultId, ariaLabel = "Sections" }: TabsProps) {
-  const [active, setActive] = useState(defaultId ?? items[0]?.id);
-  const uid = useId();
+export function Tabs({ items, label = "Examples" }: TabsProps) {
+  const [activeId, setActiveId] = useState(items[0]?.id ?? "");
+  const groupId = useId();
+  const active = items.find((item) => item.id === activeId) ?? items[0];
 
-  function onKeyDown(event: KeyboardEvent<HTMLDivElement>) {
-    if (items.length === 0) return;
-    const currentIndex = items.findIndex((item) => item.id === active);
-    if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+  function handleTabKey(
+    event: KeyboardEvent<HTMLButtonElement>,
+    currentIndex: number,
+  ) {
+    if (!items.length) return;
+    let nextIndex = currentIndex;
+    if (event.key === "ArrowRight") {
+      nextIndex = (currentIndex + 1) % items.length;
+    } else if (event.key === "ArrowLeft") {
+      nextIndex = (currentIndex - 1 + items.length) % items.length;
+    } else if (event.key === "Home") {
+      nextIndex = 0;
+    } else if (event.key === "End") {
+      nextIndex = items.length - 1;
+    } else {
+      return;
+    }
+
     event.preventDefault();
-    const nextIndex =
-      event.key === "Home"
-        ? 0
-        : event.key === "End"
-          ? items.length - 1
-          : (currentIndex + (event.key === "ArrowRight" ? 1 : -1) + items.length) % items.length;
-    const next = items[nextIndex];
-    setActive(next.id);
-    document.getElementById(`${uid}-tab-${next.id}`)?.focus();
+    setActiveId(items[nextIndex].id);
+    const tabs =
+      event.currentTarget.parentElement?.querySelectorAll<HTMLButtonElement>(
+        '[role="tab"]',
+      );
+    tabs?.[nextIndex]?.focus();
   }
 
+  if (!active) return null;
+
   return (
-    <div className="wk-tabs">
-      <div aria-label={ariaLabel} className="wk-tab-list" onKeyDown={onKeyDown} role="tablist">
-        {items.map((item) => (
-          <button
-            aria-controls={`${uid}-panel-${item.id}`}
-            aria-selected={active === item.id}
-            className="wk-tab"
-            id={`${uid}-tab-${item.id}`}
-            key={item.id}
-            onClick={() => setActive(item.id)}
-            role="tab"
-            tabIndex={active === item.id ? 0 : -1}
-            type="button"
-          >
-            {item.label}
-          </button>
-        ))}
+    <div className="overflow-hidden rounded-lg border border-white/10 bg-white/[0.02]">
+      <div
+        aria-label={label}
+        className="no-scrollbar tab-scroll-x flex gap-6 border-b border-white/10 px-5"
+        role="tablist"
+      >
+        {items.map((item, index) => {
+          const selected = item.id === active.id;
+          return (
+            <button
+              aria-controls={`${groupId}-${item.id}-panel`}
+              aria-selected={selected}
+              className={`relative shrink-0 py-3 text-sm ${
+                selected
+                  ? "font-semibold text-white"
+                  : "text-neutral-400 hover:text-neutral-100"
+              }`}
+              id={`${groupId}-${item.id}-tab`}
+              key={item.id}
+              onClick={() => setActiveId(item.id)}
+              onKeyDown={(event) => handleTabKey(event, index)}
+              role="tab"
+              tabIndex={selected ? 0 : -1}
+              type="button"
+            >
+              {item.label}
+              {selected ? (
+                <span className="absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-white" />
+              ) : null}
+            </button>
+          );
+        })}
       </div>
-      {items.map((item) => (
-        <div
-          aria-labelledby={`${uid}-tab-${item.id}`}
-          className="wk-tab-panel"
-          hidden={active !== item.id}
-          id={`${uid}-panel-${item.id}`}
-          key={item.id}
-          role="tabpanel"
-        >
-          {item.content}
-        </div>
-      ))}
+      <div
+        aria-labelledby={`${groupId}-${active.id}-tab`}
+        className="min-h-28 p-5 text-[0.98rem] leading-7 text-neutral-300"
+        id={`${groupId}-${active.id}-panel`}
+        role="tabpanel"
+      >
+        {active.content}
+      </div>
     </div>
   );
 }

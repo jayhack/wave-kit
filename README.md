@@ -9,8 +9,9 @@ npm install wave-kit
 
 ```tsx
 import { Divider, TextLink, WaveField } from "wave-kit";
-import "wave-kit/styles.css";
 ```
+
+Import Tailwind and `wave-kit/styles.css` from the application stylesheet.
 
 ## Workspace
 

@@ -8,10 +8,15 @@ and dividers.
 npm install wave-kit
 ```
 
-```tsx
-import { NavigationIndex, WaveField } from "wave-kit";
-import "wave-kit/styles.css";
+```css
+@import "tailwindcss";
+@import "wave-kit/styles.css";
 ```
 
-Wave Kit ships plain compiled CSS and has no Tailwind dependency. React and
-React DOM are peer dependencies.
+```tsx
+import { NavigationIndex, WaveField } from "wave-kit";
+```
+
+Wave Kit is React + Tailwind CSS v4. Its stylesheet registers the package build
+as a Tailwind source and installs the native system font stack and shared
+utilities. React, React DOM, and Tailwind are peer dependencies.

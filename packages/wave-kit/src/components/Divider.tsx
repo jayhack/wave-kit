@@ -1,5 +1,15 @@
-import type { HTMLAttributes } from "react";
-
-export function Divider({ className = "", ...props }: HTMLAttributes<HTMLHRElement>) {
-  return <hr className={`wk-divider ${className}`.trim()} {...props} />;
+export function Divider({
+  emphasis = "subtle",
+  className = "",
+}: {
+  emphasis?: "subtle" | "strong";
+  className?: string;
+}) {
+  return (
+    <hr
+      className={`border-0 border-t ${
+        emphasis === "strong" ? "border-white/25" : "border-white/10"
+      } ${className}`}
+    />
+  );
 }

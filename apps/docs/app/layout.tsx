@@ -1,20 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "wave-kit/styles.css";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  metadataBase: new URL("https://wave-kit.openai.site"),
+  metadataBase: new URL("https://wave-kit.jayhack-0.chatgpt.site"),
   title: "Wave Kit — the jay.ai component system",
   description:
     "A compact React component system for the visual language behind jay.ai.",
@@ -25,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Wave Kit",
     description: "The open component system behind jay.ai.",
-    images: ["/og.png"],
+    images: ["/design-og.png"],
   },
 };
 
@@ -36,11 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

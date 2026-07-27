@@ -23,30 +23,32 @@ async function render() {
   );
 }
 
-test("server-renders the Wave Kit showcase", async () => {
+test("server-renders the canonical jay.ai design page", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
   assert.match(html, /<title>Wave Kit — the jay\.ai component system<\/title>/i);
-  assert.match(html, /npm install wave-kit/);
-  assert.match(html, /class="wk-wave-field"/);
-  assert.match(html, /class="wk-index"/);
-  assert.match(html, /class="wk-image/);
-  assert.match(html, /Four anchors, including the canvas/);
+  assert.match(html, /Jay’s component kit/);
+  assert.match(html, /Kazumasa Nagai — primary reference/);
+  assert.match(html, /\/design\/kazumasa-nagai-inspiration\.webp/);
+  assert.match(html, /\/design\/growth-inspiration\.webp/);
+  assert.match(html, /npm install wave-kit tailwindcss/);
+  assert.match(html, /Four color anchors|four color anchors/);
   assert.doesNotMatch(html, />Principles</);
 });
 
-test("the showcase consumes the published package surface", async () => {
-  const [page, layout, packageJson] = await Promise.all([
+test("the showcase consumes React, Tailwind, and package components", async () => {
+  const [page, styles, packageJson] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
   ]);
 
   assert.match(page, /from "wave-kit"/);
-  assert.match(layout, /import "wave-kit\/styles\.css"/);
+  assert.match(styles, /@import "tailwindcss"/);
+  assert.match(styles, /@import "wave-kit\/styles\.css"/);
   assert.match(packageJson, /"wave-kit": "\*"/);
-  assert.doesNotMatch(page, /function (WaveField|LightboxImage|NavigationIndex)/);
+  assert.doesNotMatch(page, /function (WaveField|ProgressiveImage|NavigationIndex)/);
 });

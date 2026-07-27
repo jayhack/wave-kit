@@ -1,39 +1,39 @@
 # Component reference
 
-Import runtime pieces from `wave-kit` and import `wave-kit/styles.css` once.
+Import runtime pieces from `wave-kit`. In the application stylesheet, import
+`tailwindcss` first and `wave-kit/styles.css` second.
 
 ## Navigation and links
 
-- `BackLink`: rectangular history-aware control. `fallbackHref` is used when
-  there is no useful in-app history.
-- `GitHubButton`: rectangular external link with the GitHub mark.
-- `TextLink`: inline link. Set `external` to add a new-tab target and arrow.
-- `NavigationIndex`: accepts `items: { href, label }[]` and optional
-  `activeHref`.
+- `BackLink`: the history-aware inline back control used on jay.ai blog pages.
+  `fallbackHref` handles direct visits.
+- `GitHubButton`: compact external source button with the GitHub mark.
+- `TextLink`: inline link with `sky`, `amber`, or `quiet` tone.
+- `NavigationIndex`: accepts readonly `[id, label]` tuples.
 
 ## Structure
 
-- `Divider`: quiet full-width horizontal rule.
-- `Tabs`: accepts `items: { id, label, content }[]`, optional `defaultId`, and
-  optional `ariaLabel`. Arrow, Home, and End keys move focus.
+- `Divider`: quiet full-width rule with `subtle` or `strong` emphasis.
+- `Tabs`: accepts `items: { id, label, content }[]` and optional `label`.
+  Arrow, Home, and End keys move focus.
 
 ## Images
 
-- `LightboxImage`: progressive image plus modal viewer. Always provide `alt`,
-  intrinsic `width` and `height`, `src`, responsive `srcSet`/`sizes`, and a
-  tiny `placeholderSrc`. Use `fullSrc` for the original asset and `caption`
-  when provenance or context matters.
+- `ProgressiveImage`: use the blog image pipeline's responsive `src`,
+  `srcSet`, intrinsic `width`/`height`, and tiny inline `placeholder`.
+- `Lightbox`: accepts `items: { src, alt, caption? }[]`, `startIndex`, and
+  `onClose`. It includes gallery arrows, counter, thumbnails, backdrop close,
+  and keyboard controls.
 
 ## Generative field
 
-- `WaveField`: canvas cellular wave simulation. Props include `columns`,
-  `damping`, and `interactive`. It automatically seeds pulses and supports
-  pointer disturbance without rendering instructional UI.
+- `WaveField`: the exact jay.ai `FluidAnimation` rendered in cellular mode with
+  a black resting field and large gutters.
+- `FluidAnimation`: lower-level export for character/cell mode, face fit, cell
+  size, frame rate, device-pixel ratio, and automatic ripple control.
 
 ## Tokens
 
-- `waveColors`: black/ink plus blue, red, and yellow families with associated
-  shades.
-- `waveRadii`: small radii for controls, panels, and images.
-
-All components accept their documented native attributes where applicable.
+- `waveColorFamilies`: the four canonical anchors and their associated shades.
+- `wavePalette`: the flattened animation palette.
+- `waveColors` and `waveRadii`: lower-level token objects.

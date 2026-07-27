@@ -2,38 +2,38 @@
 
 ## Palette
 
-Use four anchors: black, blue, red, and yellow. Black is the canvas, blue is
-signal, red is heat, and yellow is energy. Lighter and darker values support
-these anchors; do not present them as new families.
+Use four anchors: signal blue, heat red, energy orange, and light yellow. Black
+is the canvas. Lighter and darker values support these anchors; do not present
+them as independent color families.
 
 ## Type
 
-Use a neutral sans serif for display and body copy. Use monospace only for
-eyebrows, code, labels, and compact system information. Eyebrows are uppercase,
-small, tracked, and always monospace.
+Use the native system sans stack installed by `wave-kit/styles.css`. Headlines
+are extrabold and tightly tracked; body copy is approximately 16.5px with a
+32px line height. Small labels and eyebrows stay in system sans. Reserve the
+platform monospace stack for tokens and technical values.
 
-## Shape and hierarchy
+## Layout and shape
 
-Controls are compact rectangles with a 3px radius. Panels and media use a 4–6px
-radius. Prefer dividers and whitespace to nested cards. Keep the navigation
-index quiet and vertical on wide layouts; it may disappear or become a compact
-horizontal index on small screens.
+Long-form pages use a centered 42rem reading column inside a 78rem shell, with a
+quiet sticky index on wide screens. Panels use Tailwind `rounded-lg`; images use
+`rounded-xl`. Prefer dividers and whitespace to unnecessary nested cards.
 
 ## Motion
 
-Hover and focus state changes are immediate: no animated color, transform,
-scale, underline, or position transitions. Progressive images may fade after
-loading. The cellular field may animate continuously and should honor the
-application's reduced-motion policy when one exists.
+Hover and focus changes are immediate: do not add transition utilities to
+hover color, border, transform, or position states. Progressive image opacity
+may fade for 500ms. The cellular field may animate continuously and already
+honors reduced motion.
 
 ## Images
 
-Reserve intrinsic dimensions, load an intentionally tiny placeholder, use
-responsive sources, decode asynchronously, and open the full asset through
-`LightboxImage`. Captions belong below the image and inside the lightbox.
+Use the original project assets when they are supplied. Reserve intrinsic
+dimensions, load a tiny inline placeholder, use responsive sources, decode
+asynchronously, and open the original asset through `Lightbox`.
 
 ## Wave field
 
-The resting state is nearly or completely black. Render separated cells with
-generous black gutters. Energy moves from blue through red to yellow, but most
-of the frame should remain black at any instant.
+Use the package `WaveField`; do not reimplement it. The resting state is black,
+cells have generous black gutters, and energy moves through the canonical
+cool-to-warm palette.

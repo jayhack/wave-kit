@@ -12,8 +12,14 @@ exports; do not copy component implementations into the host project.
 
 1. Inspect the project framework, package manager, React version, styling entry
    point, and existing user changes.
-2. Install `wave-kit` with the project's package manager.
-3. Import `wave-kit/styles.css` exactly once at the application root.
+2. Ensure the project uses React and Tailwind CSS v4. Install `wave-kit` and
+   `tailwindcss` with the project's package manager when either is missing.
+3. Import Tailwind, then `wave-kit/styles.css`, exactly once in the application
+   stylesheet:
+   ```css
+   @import "tailwindcss";
+   @import "wave-kit/styles.css";
+   ```
 4. Read [references/components.md](references/components.md) for the export and
    prop needed by the request.
 5. Read [references/composition-rules.md](references/composition-rules.md) before
@@ -26,8 +32,8 @@ exports; do not copy component implementations into the host project.
 ## Guardrails
 
 - Preserve existing application architecture and unrelated user changes.
-- Do not require Tailwind; Wave Kit ships compiled CSS.
-- Keep React and React DOM in the host application. They are peer dependencies.
+- Keep React, React DOM, and Tailwind CSS in the host application. They are peer
+  dependencies.
 - Prefer semantic page structure over wrapping every section in a card.
 - Keep hover state changes immediate. Image loading fades are allowed.
 - Keep the resting wave field black with visible black gutters between cells.

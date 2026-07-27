@@ -37,19 +37,21 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc -p tsconfig.build.json && node scripts/copy-css.mjs",
+    "build": "node scripts/clean.mjs && tsc -p tsconfig.build.json && node scripts/copy-css.mjs",
     "test": "tsc -p tsconfig.build.json --noEmit",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
     "react": ">=18.3.0",
-    "react-dom": ">=18.3.0"
+    "react-dom": ">=18.3.0",
+    "tailwindcss": ">=4.1.0"
   },
   "devDependencies": {
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "tailwindcss": "^4.2.0",
     "typescript": "^5.9.0"
   },
   "engines": {
