@@ -21,6 +21,29 @@ export const waveColors = {
   },
 } as const;
 
+export const waveTailwindColors = {
+  ink: "wave-ink",
+  paper: "wave-paper",
+  blue: {
+    deep: "wave-blue-deep",
+    base: "wave-blue",
+    vivid: "wave-blue-vivid",
+    light: "wave-blue-light",
+  },
+  red: {
+    deep: "wave-red-deep",
+    base: "wave-red",
+    vivid: "wave-red-vivid",
+    hot: "wave-red-hot",
+  },
+  yellow: {
+    orange: "wave-orange",
+    amber: "wave-amber",
+    base: "wave-yellow",
+    pale: "wave-yellow-pale",
+  },
+} as const;
+
 export const waveRadii = {
   control: "3px",
   panel: "6px",
@@ -31,26 +54,41 @@ export const waveColorFamilies = [
   {
     name: "Signal blue",
     anchor: "#2090c8",
+    token: "wave-blue-vivid",
     role: "Depth, navigation, and cool wave polarity.",
     shades: ["#2a3550", "#34507a", "#1e6aa0", "#2090c8", "#4dabd9", "#7dd3fc"],
+    shadeTokens: [
+      "wave-blue-950",
+      "wave-blue-800",
+      "wave-blue",
+      "wave-blue-vivid",
+      "wave-blue-300",
+      "wave-blue-light",
+    ],
   },
   {
     name: "Heat red",
     anchor: "#dc2626",
+    token: "wave-red-vivid",
     role: "Heat, urgency, and warm wave polarity.",
     shades: ["#b91c1c", "#dc2626"],
+    shadeTokens: ["wave-red", "wave-red-vivid"],
   },
   {
     name: "Energy orange",
     anchor: "#f97316",
+    token: "wave-orange",
     role: "The transition from heat into light.",
     shades: ["#ea580c", "#f97316", "#fb923c"],
+    shadeTokens: ["wave-orange-deep", "wave-orange", "wave-orange-light"],
   },
   {
     name: "Light yellow",
     anchor: "#fbbf24",
+    token: "wave-amber",
     role: "Peaks, highlights, and maximum energy.",
     shades: ["#fbbf24", "#fde68a", "#fef3c7"],
+    shadeTokens: ["wave-amber", "wave-yellow", "wave-yellow-pale"],
   },
 ] as const;
 

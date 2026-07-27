@@ -49,6 +49,7 @@ const sections = [
   ["navigation", "Navigation"],
   ["images", "Images"],
   ["dividers", "Dividers"],
+  ["stack", "Tech stack"],
   ["install", "Install"],
 ] as const;
 
@@ -72,6 +73,13 @@ const tabItems = [
       "Essays and notes. Every tab is a real accessible control with an associated panel.",
   },
 ];
+
+const techStack = [
+  ["Next.js", "Application framework"],
+  ["Vercel", "Hosting and delivery"],
+  ["Tailwind CSS", "Tokens and utility composition"],
+  ["shadcn/ui", "Extended interface primitives"],
+] as const;
 
 function SectionTitle({ id, children }: { id: string; children: ReactNode }) {
   return (
@@ -121,9 +129,13 @@ export default function Home() {
                 </GitHubButton>
               </div>
               <p className="mt-4 text-sm text-neutral-500">
-                <TextLink href="https://jay.ai/writing" tone="quiet">
-                  Developed for Jay Hack&apos;s personal projects.
+                Design system and UI kit developed for{" "}
+                <TextLink href="https://jay.ai/writing" tone="amber">
+                  Jay Hack
                 </TextLink>
+                &apos;s personal projects. Emphasizes simplicity + legibility,
+                drawing inspiration from physics diagrams and classic
+                math/physics diagrams.
               </p>
             </header>
 
@@ -225,21 +237,24 @@ export default function Home() {
                           <h3 className="text-sm font-semibold text-white">
                             {family.name}
                           </h3>
+                          <code className="font-mono text-[0.7rem] text-neutral-600">
+                            {family.token}
+                          </code>
                           <p className="mt-1 text-xs leading-5 text-neutral-500">
                             {family.role}
                           </p>
                         </div>
                       </div>
                       <div className="flex h-12">
-                        {family.shades.map((shade) => (
+                        {family.shades.map((shade, index) => (
                           <div
                             className="group relative flex-1"
                             key={shade}
                             style={{ backgroundColor: shade }}
-                            title={shade}
+                            title={`${family.shadeTokens[index]} · ${shade}`}
                           >
-                            <span className="absolute inset-x-0 bottom-1 hidden text-center font-mono text-[0.5rem] text-black/65 group-hover:block">
-                              {shade}
+                            <span className="absolute inset-x-0 bottom-1 hidden text-center font-mono text-[0.42rem] text-black/65 group-hover:block">
+                              {family.shadeTokens[index]}
                             </span>
                           </div>
                         ))}
@@ -389,6 +404,34 @@ export default function Home() {
                   <Divider />
                   <span>Strong</span>
                   <Divider emphasis="strong" />
+                </div>
+              </section>
+
+              <section aria-labelledby="stack">
+                <SectionTitle id="stack">Tech stack</SectionTitle>
+                <p>
+                  Wave Kit is designed for a focused application stack: Next.js
+                  for the React framework, Vercel for deployment, Tailwind CSS
+                  for named design tokens and composition, and shadcn/ui for
+                  accessible primitives when a project needs controls beyond
+                  the core kit.
+                </p>
+                <div className="mt-6 overflow-hidden rounded-md border border-white/10">
+                  {techStack.map(([name, role], index) => (
+                    <div
+                      className={`flex items-baseline justify-between gap-4 px-4 py-3 ${
+                        index === 3 ? "" : "border-b border-white/10"
+                      }`}
+                      key={name}
+                    >
+                      <strong className="font-semibold text-neutral-100">
+                        {name}
+                      </strong>
+                      <span className="text-right text-sm text-neutral-600">
+                        {role}
+                      </span>
+                    </div>
+                  ))}
                 </div>
               </section>
 

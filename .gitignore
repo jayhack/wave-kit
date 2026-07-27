@@ -3,8 +3,10 @@ dist/
 .next/
 .vinext/
 .wrangler/
+.vercel/
 .DS_Store
 *.tgz
 *.log
 .env*
 next-env.d.ts
+.vercel

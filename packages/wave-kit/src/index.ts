@@ -13,4 +13,10 @@ export { Tabs } from "./components/Tabs";
 export type { TabItem, TabsProps } from "./components/Tabs";
 export { WaveField } from "./components/WaveField";
 export type { WaveFieldProps } from "./components/WaveField";
-export { waveColorFamilies, waveColors, wavePalette, waveRadii } from "./tokens";
+export {
+  waveColorFamilies,
+  waveColors,
+  wavePalette,
+  waveRadii,
+  waveTailwindColors,
+} from "./tokens";

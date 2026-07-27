@@ -3,41 +3,29 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 async function render() {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
-  const { default: worker } = await import(workerUrl.href);
-
-  return worker.fetch(
-    new Request("http://localhost/", {
-      headers: { accept: "text/html" },
-    }),
-    {
-      ASSETS: {
-        fetch: async () => new Response("Not found", { status: 404 }),
-      },
-    },
-    {
-      waitUntil() {},
-      passThroughOnException() {},
-    },
+  return readFile(
+    new URL("../.next/server/app/index.html", import.meta.url),
+    "utf8",
   );
 }
 
 test("server-renders the canonical jay.ai design page", async () => {
-  const response = await render();
-  assert.equal(response.status, 200);
-  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
-
-  const html = await response.text();
+  const html = await render();
   assert.match(html, /<title>Wave Kit — the jay\.ai component system<\/title>/i);
   assert.match(html, /<h1[^>]*>wave-kit<\/h1>/);
-  assert.match(html, /Developed for Jay Hack&#x27;s personal projects\./);
+  assert.match(html, /Design system and UI kit developed for/);
+  assert.match(html, />Jay Hack<\/a>&#x27;s personal projects\./);
   assert.match(html, /href="https:\/\/jay\.ai\/writing"/);
   assert.match(html, /Kazumasa Nagai — primary reference/);
   assert.match(html, /\/design\/kazumasa-nagai-inspiration\.webp/);
   assert.match(html, /\/design\/growth-inspiration\.webp/);
   assert.match(html, /npm install wave-kit tailwindcss/);
   assert.match(html, /Four color anchors|four color anchors/);
+  assert.match(html, />Tech stack</);
+  assert.match(html, />Next\.js</);
+  assert.match(html, />Vercel</);
+  assert.match(html, />Tailwind CSS</);
+  assert.match(html, />shadcn\/ui</);
   assert.doesNotMatch(html, />Principles</);
 });
 
@@ -52,5 +40,18 @@ test("the showcase consumes React, Tailwind, and package components", async () =
   assert.match(styles, /@import "tailwindcss"/);
   assert.match(styles, /@import "wave-kit\/styles\.css"/);
   assert.match(packageJson, /"wave-kit": "\*"/);
+  assert.doesNotMatch(packageJson, /vinext|wrangler|vite/);
   assert.doesNotMatch(page, /function (WaveField|ProgressiveImage|NavigationIndex)/);
+});
+
+test("the package exposes semantic Tailwind color names", async () => {
+  const styles = await readFile(
+    new URL("../../../packages/wave-kit/src/styles.css", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(styles, /--color-wave-blue-vivid: #2090c8/);
+  assert.match(styles, /--color-wave-red-vivid: #dc2626/);
+  assert.match(styles, /--color-wave-orange: #f97316/);
+  assert.match(styles, /--color-wave-amber: #fbbf24/);
 });
