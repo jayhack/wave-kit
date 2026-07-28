@@ -1,6 +1,13 @@
 export { CodeBlock } from "./components/CodeBlock";
 export type { CodeBlockProps, CodeLanguage } from "./components/CodeBlock";
 export { Divider } from "./components/Divider";
+export { EditableText, EditableTitle } from "./components/EditableContent";
+export type {
+  EditableSaveHandler,
+  EditableSavePayload,
+  EditableTextProps,
+  EditableTitleProps,
+} from "./components/EditableContent";
 export { BackLink, GitHubButton, TextLink } from "./components/Links";
 export type { BackLinkProps, GitHubButtonProps, TextLinkProps } from "./components/Links";
 export { FluidAnimation } from "./components/FluidAnimation";
