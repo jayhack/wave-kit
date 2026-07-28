@@ -5,6 +5,8 @@ import {
   BackLink,
   CodeBlock,
   Divider,
+  EditableText,
+  EditableTitle,
   GitHubButton,
   Lightbox,
   NavigationIndex,
@@ -512,33 +514,56 @@ export default function Home() {
                   The stack is native system sans for speed and familiarity,
                   with the platform monospace stack for tokens and small
                   technical labels. Tight headlines meet relaxed body copy.
+                  The reading column is capped at 42rem (672px,{" "}
+                  <code className="font-mono text-[0.88em] text-neutral-400">
+                    max-w-2xl
+                  </code>
+                  ), matching the measure used by this page.
                 </p>
                 <div className="mt-6 overflow-hidden rounded-lg border border-white/10">
                   <div className="border-b border-white/10 p-6">
                     <div className="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-neutral-600">
-                      Display / 48 / 800
+                      EditableTitle · Display / 48 / 800
                     </div>
-                    <div className="mt-3 text-4xl font-extrabold tracking-[-0.035em] text-white sm:text-5xl">
-                      Intelligence in motion.
-                    </div>
-                  </div>
-                  <div className="border-b border-white/10 p-6">
-                    <div className="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-neutral-600">
-                      Heading / 24 / 800
-                    </div>
-                    <div className="mt-3 text-2xl font-extrabold tracking-tight text-neutral-50">
-                      Build the sharpest version.
+                    <div className="mt-3">
+                      <EditableTitle
+                        className="text-4xl font-extrabold tracking-[-0.035em] text-white sm:text-5xl"
+                        id="typography-display"
+                        level={3}
+                      >
+                        Intelligence in motion.
+                      </EditableTitle>
                     </div>
                   </div>
                   <div className="border-b border-white/10 p-6">
                     <div className="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-neutral-600">
-                      Body / 16.5 / 32
+                      EditableTitle · Heading / 24 / 800
                     </div>
-                    <p className="mt-3 max-w-xl text-[1.03rem] leading-8 text-neutral-300">
-                      Software should feel immediate. Structure the page so the
-                      useful thing appears first, then let detail reward
-                      attention.
-                    </p>
+                    <div className="mt-3">
+                      <EditableTitle
+                        className="text-2xl font-extrabold tracking-tight text-neutral-50"
+                        id="typography-heading"
+                        level={3}
+                      >
+                        Build the sharpest version.
+                      </EditableTitle>
+                    </div>
+                  </div>
+                  <div className="border-b border-white/10 p-6">
+                    <div className="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-neutral-600">
+                      EditableText · Body / 16.5 / 32 · Column / 42rem / 672px
+                    </div>
+                    <div className="mt-3">
+                      <EditableText
+                        className="max-w-2xl text-[1.03rem] leading-8 text-neutral-300"
+                        id="typography-body"
+                        rows={5}
+                      >
+                        Software should feel immediate. Structure the page so
+                        the useful thing appears first, then let detail reward
+                        attention.
+                      </EditableText>
+                    </div>
                   </div>
                   <div className="border-b border-white/10 p-6">
                     <div className="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-neutral-600">

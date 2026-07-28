@@ -9,6 +9,13 @@ async function render() {
   );
 }
 
+async function renderEditablePlayground() {
+  return readFile(
+    new URL("../.next/server/app/editable.html", import.meta.url),
+    "utf8",
+  );
+}
+
 test("server-renders the canonical jay.ai design page", async () => {
   const html = await render();
   assert.match(html, /<title>Wave Kit \| the jay\.ai component system<\/title>/i);
@@ -125,4 +132,17 @@ test("the cellular wave field settles and uses rounded cells", async () => {
   assert.match(source, /next\[\(gridH - 1\) \* gridW \+ x\] = 0/);
   assert.match(source, /path\.roundRect/);
   assert.match(source, /const AUTO_RIPPLE_IDLE_MS = 8000/);
+});
+
+test("editable content is static in the production render", async () => {
+  const html = await renderEditablePlayground();
+
+  assert.match(html, /<h1[^>]*>A locally editable title<\/h1>/);
+  assert.match(
+    html,
+    /<p[^>]*>Click this paragraph while the development server is running\./,
+  );
+  assert.doesNotMatch(html, /data-wave-editable/);
+  assert.doesNotMatch(html, />Save<\/button>/);
+  assert.doesNotMatch(html, />Cancel<\/button>/);
 });

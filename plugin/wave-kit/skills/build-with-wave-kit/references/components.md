@@ -28,6 +28,11 @@ const sections = [
 
 - `CodeBlock`: consistently highlighted `bash`, `css`, `text`, or `tsx`.
   Pass the source as `code` and an optional technical `label`.
+- `EditableTitle` and `EditableText`: static title and paragraph renderers that
+  become click-to-edit controls only during local development. Both require a
+  stable `id`; they save to versioned local storage by default. Pass `onSave`
+  to persist `{ id, value }` through the consuming app's development-only
+  route or server action.
 - `Divider`: quiet full-width rule with `subtle` or `strong` emphasis.
 - `Tabs`: accepts `items: { id, label, content }[]` and optional `label`.
   Arrow, Home, and End keys move focus.
