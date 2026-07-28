@@ -15,6 +15,29 @@ and the installed `@jayhack/wave-kit` package as the implementation source of
 truth. Compose real exports; do not copy component implementations into the
 host project.
 
+The primary use case is technical writing: a blog post or project writeup that
+mixes prose, Python source, and the figures generated alongside it, then ships
+as a page or a README. Optimize for that first — a vertical reading column,
+`CodeBlock` for source, and `ProgressiveImage` plus `Lightbox` for figures.
+
+## This skill is optional
+
+This skill is a convenience, not a dependency. Wave Kit works without it: a
+person or agent can install `@jayhack/wave-kit`, read this repository's
+`README.md` and the package's exported types, and compose components directly.
+Use the skill when you want the workflow and guardrails below applied
+automatically.
+
+If you do want it installed into an agent, it is published through the open
+`skills` CLI and works with any supported agent (including Claude Code):
+
+```bash
+npx skills add jayhack/wave-kit --skill build-with-wave-kit -y
+```
+
+Drop `-y` to choose the scope interactively, or add `--list` to see the
+available skills without installing anything.
+
 ## Workflow
 
 1. Inspect the project framework, package manager, React version, styling entry

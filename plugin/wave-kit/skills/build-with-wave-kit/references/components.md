@@ -26,8 +26,10 @@ const sections = [
 
 ## Structure
 
-- `CodeBlock`: consistently highlighted `bash`, `css`, `text`, or `tsx`.
-  Pass the source as `code` and an optional technical `label`.
+- `CodeBlock`: consistently highlighted `python`, `bash`, `css`, `text`, or
+  `tsx`. Pass the source as `code`, the `language`, and an optional technical
+  `label` (such as the file name). Use `python` for post source and `text` for
+  output or anything without a supported grammar.
 - `EditableTitle` and `EditableText`: static title and paragraph renderers that
   become click-to-edit controls only during local development. Both require a
   stable `id`; they save to versioned local storage by default. Pass `onSave`

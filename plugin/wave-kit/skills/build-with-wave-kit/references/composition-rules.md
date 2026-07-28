@@ -32,6 +32,60 @@ quiet sticky index on wide screens. Panels use Tailwind `rounded-lg`; images use
 Buttons and backlinks are compact and rectangular. Do not turn them into pills.
 Use modest radii on panels and sections.
 
+## Responsive layout
+
+There is one canonical page shell. Reproduce it rather than inventing a new
+responsive structure per page.
+
+```tsx
+<div className="min-h-screen bg-wave-ink text-neutral-200">
+  {/* Shell: full width, capped at 78rem, with padding that grows on wider screens */}
+  <div className="mx-auto w-full max-w-[78rem] px-5 py-10 sm:py-16">
+    {/* Below 72rem: one column. At/above 72rem: [gutter | 42rem reading column | gutter]. */}
+    <div className="min-[72rem]:grid min-[72rem]:grid-cols-[minmax(0,1fr)_minmax(0,42rem)_minmax(0,1fr)] min-[72rem]:gap-8">
+      {/* Sticky index — wide screens only */}
+      <aside className="hidden min-w-0 min-[72rem]:block">
+        <div className="sticky top-1/2 -translate-y-1/2">
+          <NavigationIndex items={sections} />
+        </div>
+      </aside>
+
+      {/* Reading column: centered 42rem below 72rem, the grid's middle cell above it */}
+      <main className="mx-auto min-w-0 max-w-2xl min-[72rem]:mx-0 min-[72rem]:max-w-none">
+        {/* sections … */}
+      </main>
+
+      {/* Balances the trailing gutter so the reading column stays centered */}
+      <div aria-hidden className="hidden min-[72rem]:block" />
+    </div>
+  </div>
+</div>
+```
+
+Rules:
+
+- The reading measure is `max-w-2xl` (42rem / 672px). Keep body content in this
+  column; do not widen prose to the full shell.
+- `72rem` (1152px) is the single layout breakpoint, expressed as the arbitrary
+  variant `min-[72rem]:` so the shell is self-contained and needs no Tailwind
+  config in the host project. It is the point at which the side gutter first
+  gets wide enough (~188px) to hold the index without crowding the 42rem
+  measure; do not lower it further or the index labels start to clip.
+- Below `72rem` the page is a single scrolling column and the sticky index is
+  hidden — that absence is intended, not a bug. Do not add a floating or fixed
+  mobile index that overlaps the text; the vertical reading flow *is* the
+  navigation on narrow screens.
+- Put `min-w-0` on grid and flex children that contain code, tables, or long
+  tokens. Without it a wide child forces the whole page to scroll sideways on a
+  phone.
+- Any element that can exceed the measure — `CodeBlock`, wide tables, diagrams —
+  must scroll inside its own `overflow-x-auto` container. `CodeBlock` already
+  does this; give hand-authored tables the same treatment. The page body itself
+  must never scroll horizontally.
+- Keep shell padding as `px-5 py-10 sm:py-16`; let the reading column collapse to
+  full width (minus padding) on small screens rather than adding extra mobile
+  breakpoints.
+
 Default to the structure of a blog post: one vertical reading flow, semantic
 sections, paragraphs, and images or interactive assets placed near the text
 they explain. Do not replace this with a dashboard grid unless the content

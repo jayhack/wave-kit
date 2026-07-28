@@ -118,7 +118,7 @@ const codeSamples = [
 @import "@jayhack/wave-kit/styles.css";`,
   },
   {
-    label: "Wave field and page index",
+    label: "Responsive page shell",
     language: "tsx",
     code: `import { NavigationIndex, WaveField } from "@jayhack/wave-kit";
 
@@ -129,16 +129,27 @@ const sections = [
 
 export function ProjectPage() {
   return (
-    <main className="min-h-screen bg-wave-ink text-neutral-300">
-      <aside className="fixed left-8 top-1/2 -translate-y-1/2">
-        <NavigationIndex items={sections} />
-      </aside>
-      <section id="overview">
-        <div className="relative aspect-[16/7] overflow-hidden rounded-lg">
-          <WaveField className="absolute inset-0 h-full w-full" />
+    <div className="min-h-screen bg-wave-ink text-neutral-200">
+      <div className="mx-auto w-full max-w-[78rem] px-5 py-10 sm:py-16">
+        <div className="min-[72rem]:grid min-[72rem]:grid-cols-[minmax(0,1fr)_minmax(0,42rem)_minmax(0,1fr)] min-[72rem]:gap-8">
+          <aside className="hidden min-w-0 min-[72rem]:block">
+            <div className="sticky top-1/2 -translate-y-1/2">
+              <NavigationIndex items={sections} />
+            </div>
+          </aside>
+
+          <main className="mx-auto min-w-0 max-w-2xl min-[72rem]:mx-0 min-[72rem]:max-w-none">
+            <section id="overview">
+              <div className="relative aspect-[16/7] overflow-hidden rounded-lg bg-wave-ink">
+                <WaveField className="absolute inset-0 h-full w-full" />
+              </div>
+            </section>
+          </main>
+
+          <div aria-hidden className="hidden min-[72rem]:block" />
         </div>
-      </section>
-    </main>
+      </div>
+    </div>
   );
 }`,
   },
@@ -199,6 +210,16 @@ export function ProjectImage() {
   language="tsx"
 />`,
   },
+  {
+    label: "Python source in a post",
+    language: "python",
+    code: `import numpy as np
+
+def fit(xs, ys):
+    # least-squares slope and intercept
+    slope = np.cov(xs, ys)[0, 1] / np.var(xs)
+    return slope, ys.mean() - slope * xs.mean()`,
+  },
 ] as const;
 
 function SectionTitle({ id, children }: { id: string; children: ReactNode }) {
@@ -246,14 +267,14 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-black text-neutral-200">
       <div className="mx-auto w-full max-w-[78rem] px-5 py-10 sm:py-16">
-        <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_minmax(0,42rem)_minmax(0,1fr)] xl:gap-8">
-          <aside className="hidden min-w-0 xl:block">
+        <div className="min-[72rem]:grid min-[72rem]:grid-cols-[minmax(0,1fr)_minmax(0,42rem)_minmax(0,1fr)] min-[72rem]:gap-8">
+          <aside className="hidden min-w-0 min-[72rem]:block">
             <div className="sticky top-1/2 -translate-y-1/2 py-1 pr-2">
               <NavigationIndex items={sections} />
             </div>
           </aside>
 
-          <main className="mx-auto min-w-0 max-w-2xl xl:mx-0 xl:max-w-none">
+          <main className="mx-auto min-w-0 max-w-2xl min-[72rem]:mx-0 min-[72rem]:max-w-none">
             <header className="mt-10 pb-9">
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <h1 className="text-4xl font-extrabold tracking-[-0.035em] text-white sm:text-5xl">
@@ -335,6 +356,14 @@ export default function Home() {
                   </span>
                 </button>
               </div>
+              <p className="mt-3 text-sm leading-6 text-neutral-600">
+                Optional. This installs the agent skill for building with Wave
+                Kit. You can also just{" "}
+                <TextLink href="#install" tone="sky">
+                  install the package
+                </TextLink>{" "}
+                and compose the components yourself.
+              </p>
             </header>
 
             <article className="mt-10 space-y-16 text-[1.03rem] leading-8 text-neutral-300">
@@ -873,7 +902,7 @@ npm install ./wave-kit/packages/wave-kit tailwindcss`}
             </footer>
           </main>
 
-          <div aria-hidden="true" className="hidden xl:block" />
+          <div aria-hidden="true" className="hidden min-[72rem]:block" />
         </div>
       </div>
 

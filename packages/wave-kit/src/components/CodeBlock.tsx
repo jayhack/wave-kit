@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-export type CodeLanguage = "bash" | "css" | "text" | "tsx";
+export type CodeLanguage = "bash" | "css" | "python" | "text" | "tsx";
 
 export type CodeBlockProps = {
   code: string;
@@ -12,15 +12,35 @@ export type CodeBlockProps = {
 const syntaxTokenPattern =
   /(\/\/[^\n]*|\/\*[\s\S]*?\*\/|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`|https?:\/\/[^\s"'`]+|<\/?[A-Za-z][\w.-]*|#[\dA-Fa-f]{3,8}\b|@[a-z-]+|--[\w-]+|\b(?:import|from|const|export|function|return|as|if|else|type|interface|extends)\b|\b(?:npm|npx|pnpm|yarn|bun|git)\b|\b(?:install|add|clone|run|build|dev)\b|\b(?:true|false|null|undefined)\b|\b(?:useState|setOpen|setLightbox)\b|\b\d+(?:\.\d+)?\b)/g;
 
+// Python uses `#` line comments and a distinct keyword set, so it needs its own
+// token pattern. The `#` comment alternative is listed before triple/single
+// quoted strings and numbers so it wins on a whole line, and `#` here never
+// means a hex color the way it can in css/tsx samples.
+const pythonTokenPattern =
+  /(#[^\n]*|"""[\s\S]*?"""|'''[\s\S]*?'''|[rbf]?"(?:\\.|[^"\\])*"|[rbf]?'(?:\\.|[^'\\])*'|@[A-Za-z_][\w.]*|\b(?:def|class|return|import|from|as|if|elif|else|for|while|in|is|not|and|or|with|try|except|finally|raise|lambda|yield|pass|break|continue|global|nonlocal|assert|del|async|await)\b|\b(?:True|False|None)\b|\b(?:self|cls)\b|\b\d+(?:\.\d+)?\b)/g;
+
+function patternForLanguage(language: CodeLanguage) {
+  return language === "python" ? pythonTokenPattern : syntaxTokenPattern;
+}
+
 function tokenClassName(token: string) {
   if (token.startsWith("//") || token.startsWith("/*")) {
     return "text-neutral-600";
+  }
+  // Python line comment: `#` followed by anything that is not a bare hex color.
+  if (token.startsWith("#") && !/^#[\dA-Fa-f]{3,8}$/.test(token)) {
+    return "text-neutral-600";
+  }
+  if (/^(True|False|None|self|cls)$/.test(token)) {
+    return "text-wave-orange-light";
   }
   if (
     token.startsWith('"') ||
     token.startsWith("'") ||
     token.startsWith("`") ||
-    token.startsWith("http")
+    token.startsWith("http") ||
+    // Python string prefixes: r"…", b'…', f"…"
+    /^[rbf]["']/.test(token)
   ) {
     return "text-wave-yellow-pale/80";
   }
@@ -50,7 +70,7 @@ function highlight(code: string, language: CodeLanguage) {
   const nodes: ReactNode[] = [];
   let cursor = 0;
 
-  for (const match of code.matchAll(syntaxTokenPattern)) {
+  for (const match of code.matchAll(patternForLanguage(language))) {
     const index = match.index;
     const token = match[0];
 
