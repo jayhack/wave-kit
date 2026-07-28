@@ -42,7 +42,7 @@ export function ProgressiveImage({
         <img
           alt=""
           aria-hidden="true"
-          className={`pointer-events-none absolute inset-0 h-full w-full scale-105 object-contain blur-md transition-opacity duration-500 ${
+          className={`pointer-events-none absolute inset-0 h-full w-full scale-105 object-cover blur-md transition-opacity duration-500 ${
             loaded ? "opacity-0" : "opacity-100"
           }`}
           height={height}
@@ -53,7 +53,7 @@ export function ProgressiveImage({
       <img
         {...props}
         alt={alt}
-        className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-500 ${
+        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
           loaded ? "opacity-100" : "opacity-0"
         }`}
         decoding="async"
