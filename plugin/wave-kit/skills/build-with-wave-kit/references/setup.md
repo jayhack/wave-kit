@@ -36,9 +36,22 @@ directory into the host application.
 Keep React, React DOM, and Tailwind in the application. Wave Kit declares them
 as peer dependencies.
 
-## Load styles
+## Wire the stylesheet
 
-Import both stylesheets exactly once in the application's global CSS entry:
+Run the setup command once from the application root:
+
+```bash
+npx wave-kit init
+```
+
+It points the global stylesheet at Wave Kit and, in a fresh `create-next-app`
+project, clears the starter's light-mode defaults (the white `--background`, the
+`--font-geist-*` remap, and the bundled Geist font wiring in `layout.tsx`) that
+otherwise fight the dark canvas. It is idempotent and preserves a stylesheet
+that already holds real custom rules, so it is safe to re-run.
+
+If you prefer to wire it by hand, import both stylesheets exactly once in the
+application's global CSS entry, `tailwindcss` first:
 
 ```css
 @import "tailwindcss";
@@ -46,7 +59,11 @@ Import both stylesheets exactly once in the application's global CSS entry:
 ```
 
 The second import registers the system font stack, utilities, and semantic
-`wave-*` Tailwind colors.
+`wave-*` Tailwind colors. Wave Kit is dark by default, so also set the base
+canvas — `color-scheme: dark` and a `wave-ink` background on `body` — and, when
+you started from `create-next-app`, delete its default `--background`/`body`
+rules and the Geist font wiring so they do not override it. (`npx wave-kit init`
+does all of this for you.)
 
 ## Start composing
 

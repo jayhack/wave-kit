@@ -1,6 +1,6 @@
 {
   "name": "@jayhack/wave-kit",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "The open React component system and generative wave language behind jay.ai.",
   "license": "MIT",
   "author": "Jay Hack",
@@ -23,9 +23,13 @@
   ],
   "files": [
     "dist",
+    "bin",
     "README.md",
     "LICENSE"
   ],
+  "bin": {
+    "wave-kit": "bin/wave-kit.mjs"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

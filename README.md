@@ -18,7 +18,16 @@ The package is published to npm. Install it alongside Tailwind CSS v4:
 npm install @jayhack/wave-kit tailwindcss
 ```
 
-Import both stylesheets once, in order, from your application's global CSS:
+Then wire the global stylesheet:
+
+```bash
+npx wave-kit init
+```
+
+`wave-kit init` points your global CSS at Wave Kit and, in a fresh
+`create-next-app` project, clears the starter's light-mode defaults so the dark
+canvas takes over. It is idempotent. To do it by hand instead, import both
+stylesheets once, in order, from your application's global CSS:
 
 ```css
 @import "tailwindcss";

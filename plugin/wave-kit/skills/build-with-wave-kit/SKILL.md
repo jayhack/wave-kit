@@ -42,8 +42,9 @@ available skills without installing anything.
 
 1. Inspect the project framework, package manager, React version, styling entry
    point, and existing user changes.
-2. Read [references/setup.md](references/setup.md), then install and configure
-   the package without replacing the host project's architecture.
+2. Read [references/setup.md](references/setup.md), then install the package and
+   run `npx wave-kit init` to wire the stylesheet, without replacing the host
+   project's architecture.
 3. Read [references/composition-rules.md](references/composition-rules.md)
    before making visual decisions.
 4. Read the relevant portion of
