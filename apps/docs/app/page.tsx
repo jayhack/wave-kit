@@ -353,7 +353,7 @@ export default function Home() {
                   <figure>
                     <button
                       aria-label="Open Kazumasa Nagai inspiration image"
-                      className="group block w-full cursor-zoom-in text-left"
+                      className="group block w-full cursor-zoom-in rounded-xl p-0 text-left outline-none focus-visible:ring-1 focus-visible:ring-wave-blue-vivid/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                       onClick={() =>
                         setLightbox({ items: inspirationItems, index: 0 })
                       }
@@ -375,7 +375,7 @@ export default function Home() {
                   <figure>
                     <button
                       aria-label="Open secondary inspiration image"
-                      className="group block w-full cursor-zoom-in text-left"
+                      className="group block w-full cursor-zoom-in rounded-xl p-0 text-left outline-none focus-visible:ring-1 focus-visible:ring-wave-blue-vivid/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                       onClick={() =>
                         setLightbox({ items: inspirationItems, index: 1 })
                       }
@@ -397,7 +397,7 @@ export default function Home() {
                   <figure>
                     <button
                       aria-label="Open No More War inspiration image"
-                      className="group block w-full cursor-zoom-in text-left"
+                      className="group block w-full cursor-zoom-in rounded-xl p-0 text-left outline-none focus-visible:ring-1 focus-visible:ring-wave-blue-vivid/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                       onClick={() =>
                         setLightbox({ items: inspirationItems, index: 2 })
                       }
@@ -630,7 +630,7 @@ export default function Home() {
                 <figure className="mt-6">
                   <button
                     aria-label="Open full-resolution image"
-                    className="group block w-full cursor-zoom-in text-left"
+                    className="group block w-full cursor-zoom-in rounded-xl p-0 text-left outline-none focus-visible:ring-1 focus-visible:ring-wave-blue-vivid/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                     onClick={() =>
                       setLightbox({
                         items: [
@@ -677,7 +677,7 @@ export default function Home() {
                     <figure key={item.src}>
                       <button
                         aria-label={`Open diagram: ${item.alt}`}
-                        className="group block w-full cursor-zoom-in text-left"
+                        className="group block w-full cursor-zoom-in rounded-lg p-0 text-left outline-none focus-visible:ring-1 focus-visible:ring-wave-blue-vivid/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                         onClick={() =>
                           setLightbox({ items: diagramItems, index })
                         }
