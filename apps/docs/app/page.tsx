@@ -130,7 +130,7 @@ const sections = [
 export function ProjectPage() {
   return (
     <main className="min-h-screen bg-wave-ink text-neutral-300">
-      <aside className="fixed left-8 top-12">
+      <aside className="fixed left-8 top-1/2 -translate-y-1/2">
         <NavigationIndex items={sections} />
       </aside>
       <section id="overview">
@@ -248,8 +248,8 @@ export default function Home() {
       <div className="mx-auto w-full max-w-[78rem] px-5 py-10 sm:py-16">
         <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_minmax(0,42rem)_minmax(0,1fr)] xl:gap-8">
           <aside className="hidden min-w-0 xl:block">
-            <div className="sticky top-16 py-1 pr-2">
-              <NavigationIndex items={sections} label="Index" />
+            <div className="sticky top-1/2 -translate-y-1/2 py-1 pr-2">
+              <NavigationIndex items={sections} />
             </div>
           </aside>
 
