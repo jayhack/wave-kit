@@ -5,6 +5,9 @@
 The public component system behind jay.ai: a compact React package, a working
 showcase site, and an agent skill that teaches agents how to compose it.
 
+**Website:** [wave-kit.dev](https://wave-kit.dev) — the live styleguide and
+component reference.
+
 Wave Kit is built for **technical writing** — blog posts and project writeups
 that mix prose, Python source, and the figures generated alongside it, then ship
 as a page or a README. It emphasizes simplicity, legibility, and a vertical
@@ -37,11 +40,14 @@ stylesheets once, in order, from your application's global CSS:
 Then compose the real exports:
 
 ```tsx
-import { CodeBlock, Lightbox, ProgressiveImage, WaveField } from "@jayhack/wave-kit";
+import { CodeBlock, ImageCard, Lightbox, ProgressiveImage, WaveField } from "@jayhack/wave-kit";
 ```
 
-`CodeBlock` highlights `python`, `bash`, `css`, `tsx`, and `text`; use
-`ProgressiveImage` with `Lightbox` for figures. See
+`CodeBlock` highlights `python`, `bash`, `css`, `json`, `tsx`, and `text`; use
+`ProgressiveImage` with `Lightbox` for figures and `ImageCard` for compact,
+image-led links with built-in lightboxes. For research writeups, register
+runs as JSON `ExperimentRecord`s and render them with `ExperimentIndex` and
+`ExperimentPage`. See [wave-kit.dev](https://wave-kit.dev) and
 [jay.ai/design](https://jay.ai/design) for the canonical visual reference and
 live examples.
 

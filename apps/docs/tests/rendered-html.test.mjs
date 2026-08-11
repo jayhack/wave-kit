@@ -63,6 +63,9 @@ test("server-renders the canonical jay.ai design page", async () => {
   assert.match(html, /CodeBlock/);
   assert.match(html, /NavigationIndex, WaveField/);
   assert.match(html, /ProgressiveImage/);
+  assert.match(html, />Image cards</);
+  assert.match(html, /LLMs Are Not a Black Box/);
+  assert.match(html, /Intervention pipeline/);
   assert.match(html, /border-wave-blue-vivid/);
   assert.match(html, /text-wave-blue-light/);
   assert.match(html, /text-wave-blue-300/);
@@ -75,6 +78,20 @@ test("server-renders the canonical jay.ai design page", async () => {
   assert.match(html, /Keep titles in proportion/);
   assert.match(html, /Compose for vertical reading/);
   assert.match(html, /Install the public package from npm/);
+  assert.match(html, />Experiment(?:<!-- -->)? registry</);
+  assert.match(html, /The 1\.5(?:<!-- -->)? MB capacity cliff/);
+  assert.match(html, /12-frame error/i);
+  assert.match(html, /4\.98(?:<!-- -->)? px/);
+  assert.match(html, /href="https:\/\/blocket-league\.vercel\.app\/nano-1p5mb\/"/);
+  assert.match(html, /2026-07-14/);
+  assert.doesNotMatch(html, /Experiment(?:<!-- -->)? \/ (?:<!-- -->)?nano-1p5mb/i);
+  assert.doesNotMatch(html, /Experiment-specific content renders here\./);
+  assert.match(html, /data-language="json"/);
+  assert.match(html, /experiments\.json/);
+  assert.match(html, /parseExperiments/);
+  assert.match(html, />Code(?:<!-- -->)? blocks</);
+  assert.match(html, /def<\/span> fib\(/);
+  assert.match(html, /Return the n-th Fibonacci number/);
   assert.match(html, />Tech stack</);
   assert.match(html, />Next\.js</);
   assert.match(html, />Vercel</);
@@ -102,7 +119,7 @@ test("the showcase consumes React, Tailwind, and package components", async () =
   assert.doesNotMatch(packageJson, /vinext|wrangler|vite/);
   assert.doesNotMatch(
     page,
-    /function (CodeBlock|WaveField|ProgressiveImage|NavigationIndex)/,
+    /function (CodeBlock|ImageCard|WaveField|ProgressiveImage|NavigationIndex|ExperimentIndex|ExperimentPage)/,
   );
 });
 
@@ -116,6 +133,23 @@ test("the package exposes semantic Tailwind color names", async () => {
   assert.match(styles, /--color-wave-red-vivid: #dc2626/);
   assert.match(styles, /--color-wave-orange: #f97316/);
   assert.match(styles, /--color-wave-amber: #fbbf24/);
+});
+
+test("image cards keep compact, aligned golden-ratio layouts", async () => {
+  const source = await readFile(
+    new URL(
+      "../../../packages/wave-kit/src/components/ImageCard.tsx",
+      import.meta.url,
+    ),
+    "utf8",
+  );
+
+  assert.match(source, /aspectRatio = "1\.618 \/ 1"/);
+  assert.match(source, /rounded-lg/);
+  assert.match(source, /px-4 py-3/);
+  assert.match(source, /truncate text-base/);
+  assert.match(source, /line-clamp-2/);
+  assert.match(source, /<Lightbox/);
 });
 
 test("the cellular wave field settles and uses rounded cells", async () => {

@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-export type CodeLanguage = "bash" | "css" | "python" | "text" | "tsx";
+export type CodeLanguage = "bash" | "css" | "json" | "python" | "text" | "tsx";
 
 export type CodeBlockProps = {
   code: string;

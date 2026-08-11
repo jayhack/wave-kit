@@ -1,6 +1,6 @@
 ---
 name: build-with-wave-kit
-description: Build, migrate, or restyle React and Next.js interfaces with Wave Kit, Jay Hack's open component system for jay.ai. Use when a user requests the jay.ai aesthetic, Wave Kit installation or components, its cellular wave motif, progressive lightbox images, navigation index, rectangular controls, tabs, dividers, typography, or named cool-to-warm Tailwind palette.
+description: Build, migrate, or restyle React and Next.js interfaces with Wave Kit, Jay Hack's open component system for jay.ai. Use when a user requests the jay.ai aesthetic, Wave Kit installation or components, its cellular wave motif, progressive lightbox images, navigation index, JSON-registered experiment indexes and pages, rectangular controls, tabs, dividers, typography, or named cool-to-warm Tailwind palette.
 ---
 
 # Build With Wave Kit
@@ -18,7 +18,8 @@ host project.
 The primary use case is technical writing: a blog post or project writeup that
 mixes prose, Python source, and the figures generated alongside it, then ships
 as a page or a README. Optimize for that first — a vertical reading column,
-`CodeBlock` for source, and `ProgressiveImage` plus `Lightbox` for figures.
+`CodeBlock` for source, `ProgressiveImage` plus `Lightbox` for figures, and
+`ImageCard` for compact image-led links.
 
 ## This skill is optional
 
