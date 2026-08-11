@@ -64,7 +64,10 @@ export function ImageCard({
           <button
             aria-label={`Open image: ${image.alt}`}
             className="group block w-full shrink-0 cursor-zoom-in overflow-hidden bg-white/[0.03] p-0 text-left outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-wave-blue-vivid"
-            onClick={() => setOpen(true)}
+            onClick={(event) => {
+              event.stopPropagation();
+              setOpen(true);
+            }}
             style={{ aspectRatio }}
             type="button"
           >
