@@ -31,7 +31,23 @@ Then import both stylesheets once:
 ## Main exports
 
 WaveField, FluidAnimation, NavigationIndex, BackLink, GitHubButton, TextLink,
-Tabs, Divider, ProgressiveImage, and Lightbox.
+Tabs, Divider, ProgressiveImage, ImageCard, Lightbox, CodeBlock, EditableTitle,
+EditableText, ExperimentIndex, ExperimentPage, ExperimentHeader,
+ExperimentMetrics, ExperimentMeta, and parseExperiments.
+
+## Experiment registry
+
+Register research experiments as a JSON array of ExperimentRecord objects:
+slug, title, description, an optional date string, optional metrics
+[{ label, value }], optional meta string map, and an optional href. Validate
+loaded JSON with parseExperiments. Render the registry with ExperimentIndex —
+a compact list of linked rows with the title, a quiet sans-serif date beside
+it, a one-line description, and a gray chevron; each row links to
+/experiments/<slug> by default, or the record's href. Render each experiment
+page with ExperimentPage, which draws the header, metrics table, and metadata
+footer from the record while its children remain free-form: figures,
+rollouts, or page-specific interactive code. Never add uppercase eyebrow
+labels or per-row metrics to the index.
 
 ## Design rules
 
@@ -40,6 +56,9 @@ Use native system sans for display, heading, body, subtle text, and labels.
 Use the platform monospace stack for code and color tokens. Keep controls
 rectangular with modest radii. Keep hover changes immediate. Use original
 images with progressive loading and the package Lightbox.
+
+ImageCard is the default compact image-led link: edge-to-edge golden-ratio
+media, one title line, no more than two detail lines, and equal row heights.
 
 Default to a blog-post reading model with vertical scrolling, semantic
 sections, paragraphs, and images or interactive assets interspersed with the
@@ -57,7 +76,7 @@ Source repository:
 https://github.com/jayhack/wave-kit
 
 Current live documentation:
-https://wave-kit-eight.vercel.app
+https://wave-kit.dev
 
 Canonical design reference:
 https://jay.ai/design

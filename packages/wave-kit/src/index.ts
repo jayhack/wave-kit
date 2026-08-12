@@ -8,10 +8,29 @@ export type {
   EditableTextProps,
   EditableTitleProps,
 } from "./components/EditableContent";
+export {
+  ExperimentHeader,
+  ExperimentIndex,
+  ExperimentMeta,
+  ExperimentMetrics,
+  ExperimentPage,
+  parseExperiments,
+} from "./components/Experiments";
+export type {
+  ExperimentHeaderProps,
+  ExperimentIndexProps,
+  ExperimentMetaProps,
+  ExperimentMetric,
+  ExperimentMetricsProps,
+  ExperimentPageProps,
+  ExperimentRecord,
+} from "./components/Experiments";
 export { BackLink, GitHubButton, TextLink } from "./components/Links";
 export type { BackLinkProps, GitHubButtonProps, TextLinkProps } from "./components/Links";
 export { FluidAnimation } from "./components/FluidAnimation";
 export type { FluidAnimationProps } from "./components/FluidAnimation";
+export { ImageCard } from "./components/ImageCard";
+export type { ImageCardImage, ImageCardProps } from "./components/ImageCard";
 export { Lightbox } from "./components/Lightbox";
 export type { LightboxItem } from "./components/Lightbox";
 export { NavigationIndex } from "./components/NavigationIndex";

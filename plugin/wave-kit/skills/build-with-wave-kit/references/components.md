@@ -26,10 +26,10 @@ const sections = [
 
 ## Structure
 
-- `CodeBlock`: consistently highlighted `python`, `bash`, `css`, `text`, or
-  `tsx`. Pass the source as `code`, the `language`, and an optional technical
-  `label` (such as the file name). Use `python` for post source and `text` for
-  output or anything without a supported grammar.
+- `CodeBlock`: consistently highlighted `python`, `bash`, `css`, `json`,
+  `text`, or `tsx`. Pass the source as `code`, the `language`, and an optional
+  technical `label` (such as the file name). Use `python` for post source and
+  `text` for output or anything without a supported grammar.
 - `EditableTitle` and `EditableText`: static title and paragraph renderers that
   become click-to-edit controls only during local development. Both require a
   stable `id`; they save to versioned local storage by default. Pass `onSave`
@@ -41,6 +41,10 @@ const sections = [
 
 ## Images
 
+- `ImageCard`: compact, equal-height image card with edge-to-edge media, a
+  golden-ratio image area by default, one title line, at most two description
+  lines, and an integrated `Lightbox`. Pass `image.fullSrc` for the original
+  asset and responsive `src`/`srcSet`/`placeholder` for the card preview.
 - `ProgressiveImage`: use the blog image pipeline's responsive `src`,
   `srcSet`, intrinsic `width`/`height`, and tiny inline `placeholder`.
 - `Lightbox`: accepts
@@ -76,6 +80,43 @@ const images = [{ src: "/work.webp", alt: "Project diagram" }];
   />
 ) : null}
 ```
+
+## Experiment registry
+
+Register research experiments as data, then render them; do not hand-build
+one-off experiment lists. The registry is a JSON array of `ExperimentRecord`:
+
+```json
+[
+  {
+    "slug": "nano-1p5mb",
+    "title": "The 1.5 MB capacity cliff",
+    "description": "A width-72, four-block transformer with 10.27x fewer parameters.",
+    "date": "2026-07-14",
+    "metrics": [{ "label": "12-frame error", "value": "4.98 px" }],
+    "meta": { "preset": "nano", "parameters": "357k" }
+  }
+]
+```
+
+- `parseExperiments`: validates loaded JSON and returns typed records. Use it
+  at the module boundary when importing a `.json` registry.
+- `ExperimentIndex`: renders the registry as a compact list of linked rows —
+  title with a quiet `• date` beside it (system sans, not monospace), a
+  one-line description, and a gray chevron. Rows link to
+  `/experiments/<slug>` unless the record sets `href`; pass `hrefFor` to
+  remap routes. Do not add eyebrow labels, badges, or per-row metrics;
+  results belong on the experiment page.
+- `ExperimentPage`: the detail-page shell. It renders the header (title, quiet
+  timestamp, description, optional `backHref`), then its free-form `children`,
+  then the record's `metrics` table and quiet `meta` footer. Page-specific
+  figures, rollouts, or interactive code belong in the children.
+- `ExperimentHeader`, `ExperimentMetrics`, `ExperimentMeta`: the individual
+  pieces when a page needs a custom arrangement. `ExperimentHeader` accepts
+  `level` (1–3) when the page already has an `h1`.
+
+All experiment components are server-renderable; only make the page a client
+component when its custom body needs state.
 
 ## Diagrams
 

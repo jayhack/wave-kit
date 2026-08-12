@@ -7,7 +7,9 @@ import {
   Divider,
   EditableText,
   EditableTitle,
+  ExperimentIndex,
   GitHubButton,
+  ImageCard,
   Lightbox,
   NavigationIndex,
   ProgressiveImage,
@@ -16,6 +18,7 @@ import {
   WaveField,
   waveColorFamilies,
   wavePalette,
+  type ExperimentRecord,
   type LightboxItem,
 } from "@jayhack/wave-kit";
 
@@ -74,8 +77,11 @@ const sections = [
   ["links", "Links"],
   ["navigation", "Navigation"],
   ["images", "Images"],
+  ["cards", "Image cards"],
   ["diagrams", "Diagrams"],
   ["dividers", "Dividers"],
+  ["code-blocks", "Code blocks"],
+  ["experiments", "Experiments"],
   ["style-guide", "Style guide"],
   ["code", "Code samples"],
   ["stack", "Tech stack"],
@@ -102,6 +108,91 @@ const tabItems = [
       "Essays and notes. Every tab is a real accessible control with an associated panel.",
   },
 ];
+
+const registeredExperiments: ExperimentRecord[] = [
+  {
+    slug: "nano-1p5mb",
+    title: "The 1.5 MB capacity cliff",
+    description:
+      "A width-72, four-block transformer trained on the same passive Blocket League curriculum as the deployed model, with 10.27× fewer parameters.",
+    date: "2026-07-14",
+    href: "https://blocket-league.vercel.app/nano-1p5mb/",
+  },
+  {
+    slug: "all-angle-control",
+    title: "The all-angle control",
+    description:
+      "A matched 3.67M-parameter control trained from scratch on all puck-motion directions.",
+    date: "2026-07-18",
+    href: "https://blocket-league.vercel.app/",
+  },
+  {
+    slug: "unseen-east",
+    title: "A 60° hole in motion",
+    description:
+      "A 3.67M-parameter transformer trained from scratch after rejecting every 24-frame window containing due-east motion.",
+    date: "2026-07-21",
+    href: "https://blocket-league.vercel.app/",
+  },
+  {
+    slug: "unseen-quadrant",
+    title: "Collision physics without the upper-right",
+    description:
+      "A 3.67M-parameter transformer trained after rejecting every 24-frame world crossing into the upper-right quadrant.",
+    date: "2026-07-26",
+    href: "https://blocket-league.vercel.app/",
+  },
+];
+
+const experimentRegistryJson = `[
+  {
+    "slug": "nano-1p5mb",
+    "title": "The 1.5 MB capacity cliff",
+    "description": "A width-72, four-block transformer with 10.27x fewer parameters.",
+    "date": "2026-07-14",
+    "metrics": [
+      { "label": "12-frame error", "value": "4.98 px" },
+      { "label": "64-frame error", "value": "19.10 px" }
+    ],
+    "meta": { "preset": "nano", "parameters": "357k" }
+  }
+]`;
+
+const fibonacciSample = `def fib(n: int) -> int:
+    """Return the n-th Fibonacci number."""
+    a, b = 0, 1
+    for _ in range(n):
+        a, b = b, a + b
+    return a
+
+print([fib(i) for i in range(8)])  # [0, 1, 1, 2, 3, 5, 8, 13]`;
+
+const experimentPagesSample = `import { ExperimentIndex, ExperimentPage, parseExperiments } from "@jayhack/wave-kit";
+import registry from "@/experiments.json";
+
+const experiments = parseExperiments(registry);
+
+// app/experiments/page.tsx — the index
+export default function ExperimentsPage() {
+  return <ExperimentIndex experiments={experiments} />;
+}
+
+// app/experiments/[slug]/page.tsx — one page per record
+export default async function Experiment({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const experiment = experiments.find((entry) => entry.slug === slug)!;
+
+  return (
+    <ExperimentPage backHref="/experiments" experiment={experiment}>
+      {/* Free-form body: figures, rollouts, experiment-specific code */}
+      <RolloutViewer slug={experiment.slug} />
+    </ExperimentPage>
+  );
+}`;
 
 const techStack = [
   ["Next.js", "Application framework"],
@@ -382,7 +473,7 @@ export default function Home() {
                   <figure>
                     <button
                       aria-label="Open Kazumasa Nagai inspiration image"
-                      className="group block w-full cursor-zoom-in rounded-xl p-0 text-left outline-none focus-visible:ring-1 focus-visible:ring-wave-blue-vivid/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                      className="group block w-full cursor-zoom-in overflow-hidden rounded-lg border border-white/10 p-0 text-left outline-none hover:border-white/25 focus-visible:border-wave-blue-vivid/60"
                       onClick={() =>
                         setLightbox({ items: inspirationItems, index: 0 })
                       }
@@ -390,7 +481,7 @@ export default function Home() {
                     >
                       <ProgressiveImage
                         alt={inspirationItems[0].alt}
-                        className="w-full rounded-xl border border-white/10 group-hover:border-white/25"
+                        className="w-full rounded-none border-0"
                         height={1417}
                         loading="eager"
                         src={inspirationItems[0].src}
@@ -404,7 +495,7 @@ export default function Home() {
                   <figure>
                     <button
                       aria-label="Open secondary inspiration image"
-                      className="group block w-full cursor-zoom-in rounded-xl p-0 text-left outline-none focus-visible:ring-1 focus-visible:ring-wave-blue-vivid/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                      className="group block w-full cursor-zoom-in overflow-hidden rounded-lg border border-white/10 p-0 text-left outline-none hover:border-white/25 focus-visible:border-wave-blue-vivid/60"
                       onClick={() =>
                         setLightbox({ items: inspirationItems, index: 1 })
                       }
@@ -412,7 +503,7 @@ export default function Home() {
                     >
                       <ProgressiveImage
                         alt={inspirationItems[1].alt}
-                        className="w-full rounded-xl border border-white/10 group-hover:border-white/25"
+                        className="w-full rounded-none border-0"
                         height={894}
                         loading="eager"
                         src={inspirationItems[1].src}
@@ -426,7 +517,7 @@ export default function Home() {
                   <figure>
                     <button
                       aria-label="Open No More War inspiration image"
-                      className="group block w-full cursor-zoom-in rounded-xl p-0 text-left outline-none focus-visible:ring-1 focus-visible:ring-wave-blue-vivid/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                      className="group block w-full cursor-zoom-in overflow-hidden rounded-lg border border-white/10 p-0 text-left outline-none hover:border-white/25 focus-visible:border-wave-blue-vivid/60"
                       onClick={() =>
                         setLightbox({ items: inspirationItems, index: 2 })
                       }
@@ -434,7 +525,7 @@ export default function Home() {
                     >
                       <ProgressiveImage
                         alt={inspirationItems[2].alt}
-                        className="w-full rounded-xl border border-white/10 group-hover:border-white/25"
+                        className="w-full rounded-none border-0"
                         height={898}
                         loading="eager"
                         src={inspirationItems[2].src}
@@ -659,7 +750,7 @@ export default function Home() {
                 <figure className="mt-6">
                   <button
                     aria-label="Open full-resolution image"
-                    className="group block w-full cursor-zoom-in rounded-xl p-0 text-left outline-none focus-visible:ring-1 focus-visible:ring-wave-blue-vivid/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                    className="group block w-full cursor-zoom-in overflow-hidden rounded-lg border border-white/10 p-0 text-left outline-none hover:border-white/25 focus-visible:border-wave-blue-vivid/60"
                     onClick={() =>
                       setLightbox({
                         items: [
@@ -676,7 +767,7 @@ export default function Home() {
                   >
                     <ProgressiveImage
                       alt={progressiveImageItems[0].alt}
-                      className="w-full rounded-xl border border-white/10 group-hover:border-white/25"
+                      className="w-full rounded-none border-0"
                       height={583}
                       onLoad={(event) =>
                         setProgressivePreviewSrc(event.currentTarget.currentSrc)
@@ -693,6 +784,45 @@ export default function Home() {
                 </figure>
               </section>
 
+              <section aria-labelledby="cards">
+                <SectionTitle id="cards">Image cards</SectionTitle>
+                <p>
+                  Image cards use a golden-ratio image by default, carry media
+                  all the way to the card edges, and keep one-line titles with
+                  at most two lines of supporting detail. When an href is
+                  provided, the entire card behaves as one link.
+                </p>
+                <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                  <ImageCard
+                    description="A compact image-led entry with a responsive preview and full-resolution source."
+                    href="https://jay.ai/blog/llms-are-not-a-black-box"
+                    image={{
+                      src: "/blog/image-cache/llms-are-not-a-black-box/header-55330a11a7-1024.webp",
+                      srcSet:
+                        "/blog/image-cache/llms-are-not-a-black-box/header-55330a11a7-672.webp 672w, /blog/image-cache/llms-are-not-a-black-box/header-55330a11a7-1024.webp 1024w",
+                      fullSrc:
+                        "/blog/images/llms-are-not-a-black-box/header.png",
+                      alt: "A diagram from the essay LLMs Are Not a Black Box",
+                      width: 1024,
+                      height: 583,
+                      placeholder: progressivePlaceholder,
+                    }}
+                    title="LLMs Are Not a Black Box"
+                  />
+                  <ImageCard
+                    description="A second card stays exactly aligned even when its source image and copy differ."
+                    href="#diagrams"
+                    image={{
+                      src: "/design/diagrams/intervention-pipeline.svg",
+                      alt: "Intervention pipeline diagram",
+                      width: 1200,
+                      height: 640,
+                    }}
+                    title="Intervention pipeline"
+                  />
+                </div>
+              </section>
+
               <section aria-labelledby="diagrams">
                 <SectionTitle id="diagrams">Diagrams</SectionTitle>
                 <p>
@@ -706,7 +836,7 @@ export default function Home() {
                     <figure key={item.src}>
                       <button
                         aria-label={`Open diagram: ${item.alt}`}
-                        className="group block w-full cursor-zoom-in rounded-lg p-0 text-left outline-none focus-visible:ring-1 focus-visible:ring-wave-blue-vivid/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                        className="group block w-full cursor-zoom-in overflow-hidden rounded-lg border border-white/10 p-0 text-left outline-none hover:border-white/25 focus-visible:border-wave-blue-vivid/60"
                         onClick={() =>
                           setLightbox({ items: diagramItems, index })
                         }
@@ -714,7 +844,7 @@ export default function Home() {
                       >
                         <ProgressiveImage
                           alt={item.alt}
-                          className="w-full rounded-lg border border-white/10 group-hover:border-white/25"
+                          className="w-full rounded-none border-0"
                           height={640}
                           src={item.src}
                           width={1200}
@@ -777,6 +907,52 @@ export default function Home() {
                   <Divider />
                   <span>Strong</span>
                   <Divider emphasis="strong" />
+                </div>
+              </section>
+
+              <section aria-labelledby="code-blocks">
+                <SectionTitle id="code-blocks">Code blocks</SectionTitle>
+                <CodeBlock
+                  code={fibonacciSample}
+                  label="fibonacci.py"
+                  language="python"
+                />
+              </section>
+
+              <section aria-labelledby="experiments">
+                <SectionTitle id="experiments">
+                  Experiment registry
+                </SectionTitle>
+                <p>
+                  Register each run as a JSON record — slug, title,
+                  description, timestamp, optional metrics and checkpoint
+                  metadata — and render the registry with{" "}
+                  <code className="font-mono text-[0.88em] text-neutral-400">
+                    ExperimentIndex
+                  </code>
+                  .
+                </p>
+                <div className="mt-6">
+                  <ExperimentIndex experiments={registeredExperiments} />
+                </div>
+                <p className="mt-3 text-sm leading-6 text-neutral-500">
+                  Live registry from the{" "}
+                  <TextLink href="https://blocket-league.vercel.app/" tone="sky">
+                    Blocket League lab
+                  </TextLink>
+                  .
+                </p>
+                <div className="mt-8 space-y-4">
+                  <CodeBlock
+                    code={experimentRegistryJson}
+                    label="experiments.json"
+                    language="json"
+                  />
+                  <CodeBlock
+                    code={experimentPagesSample}
+                    label="Registry-driven pages"
+                    language="tsx"
+                  />
                 </div>
               </section>
 
@@ -894,6 +1070,7 @@ npm install ./wave-kit/packages/wave-kit tailwindcss`}
                   />
                 </div>
               </section>
+
             </article>
 
             <footer className="mt-20 border-t border-white/10 pt-8 text-sm text-neutral-600">
