@@ -19,7 +19,8 @@ The primary use case is technical writing: a blog post or project writeup that
 mixes prose, Python source, and the figures generated alongside it, then ships
 as a page or a README. Optimize for that first — a vertical reading column,
 `CodeBlock` for source, `ProgressiveImage` plus `Lightbox` for figures, and
-`ImageCard` for compact image-led links.
+`ImageCard` for compact image-led links, and `MediaRow` for editorial indexes
+with responsive right-side previews.
 
 ## This skill is optional
 

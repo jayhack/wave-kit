@@ -64,6 +64,8 @@ test("server-renders the canonical jay.ai design page", async () => {
   assert.match(html, /NavigationIndex, WaveField/);
   assert.match(html, /ProgressiveImage/);
   assert.match(html, />Image cards</);
+  assert.match(html, />Media rows</);
+  assert.match(html, /J-Lens for video models/);
   assert.match(html, /LLMs Are Not a Black Box/);
   assert.match(html, /Intervention pipeline/);
   assert.match(html, /border-wave-blue-vivid/);
@@ -119,7 +121,7 @@ test("the showcase consumes React, Tailwind, and package components", async () =
   assert.doesNotMatch(packageJson, /vinext|wrangler|vite/);
   assert.doesNotMatch(
     page,
-    /function (CodeBlock|ImageCard|WaveField|ProgressiveImage|NavigationIndex|ExperimentIndex|ExperimentPage)/,
+    /function (CodeBlock|ImageCard|MediaRow|WaveField|ProgressiveImage|NavigationIndex|ExperimentIndex|ExperimentPage)/,
   );
 });
 
@@ -154,6 +156,23 @@ test("image cards keep compact, aligned golden-ratio layouts", async () => {
   assert.match(source, /absolute inset-0 z-10 rounded-lg/);
   assert.match(source, /line-clamp-2/);
   assert.doesNotMatch(source, /<Lightbox/);
+});
+
+test("media rows preserve responsive editorial index behavior", async () => {
+  const source = await readFile(
+    new URL(
+      "../../../packages/wave-kit/src/components/MediaRow.tsx",
+      import.meta.url,
+    ),
+    "utf8",
+  );
+
+  assert.match(source, /sm:flex sm:items-start sm:justify-between sm:gap-5/);
+  assert.match(source, /sm:w-\[180px\] md:w-\[220px\]/);
+  assert.match(source, /aspect-\[1\.91\/1\]/);
+  assert.match(source, /group-hover:text-sky-400/);
+  assert.match(source, /renderLink/);
+  assert.match(source, /fallbackSrc/);
 });
 
 test("the cellular wave field settles and uses rounded cells", async () => {
