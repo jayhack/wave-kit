@@ -14,7 +14,7 @@ export function ProgressiveImage({
   width,
   height,
   sizes = "(max-width: 712px) calc(100vw - 2.5rem), 672px",
-  className = "mx-auto w-full rounded-xl border border-white/10",
+  className = "mx-auto w-full rounded-lg border border-white/10",
   loading = "lazy",
   onLoad,
   ...props
@@ -53,9 +53,7 @@ export function ProgressiveImage({
       <img
         {...props}
         alt={alt}
-        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
-          loaded ? "opacity-100" : "opacity-0"
-        }`}
+        className="absolute inset-0 h-full w-full object-cover opacity-100"
         decoding="async"
         height={height}
         loading={loading}

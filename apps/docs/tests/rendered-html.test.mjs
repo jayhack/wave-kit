@@ -146,10 +146,14 @@ test("image cards keep compact, aligned golden-ratio layouts", async () => {
 
   assert.match(source, /aspectRatio = "1\.618 \/ 1"/);
   assert.match(source, /rounded-lg/);
-  assert.match(source, /px-4 py-3/);
-  assert.match(source, /truncate text-base/);
+  assert.match(source, /ring-1 ring-inset ring-white\/10/);
+  assert.match(source, /flex-col p-4/);
+  assert.match(source, /truncate text-sm/);
+  assert.match(source, /!m-0 truncate/);
+  assert.match(source, /\[&>p\]:!m-0/);
+  assert.match(source, /absolute inset-0 z-10 rounded-lg/);
   assert.match(source, /line-clamp-2/);
-  assert.match(source, /<Lightbox/);
+  assert.doesNotMatch(source, /<Lightbox/);
 });
 
 test("the cellular wave field settles and uses rounded cells", async () => {

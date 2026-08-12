@@ -473,7 +473,7 @@ export default function Home() {
                   <figure>
                     <button
                       aria-label="Open Kazumasa Nagai inspiration image"
-                      className="group block w-full cursor-zoom-in rounded-xl p-0 text-left outline-none focus-visible:ring-1 focus-visible:ring-wave-blue-vivid/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                      className="group block w-full cursor-zoom-in overflow-hidden rounded-lg border border-white/10 p-0 text-left outline-none hover:border-white/25 focus-visible:border-wave-blue-vivid/60"
                       onClick={() =>
                         setLightbox({ items: inspirationItems, index: 0 })
                       }
@@ -481,7 +481,7 @@ export default function Home() {
                     >
                       <ProgressiveImage
                         alt={inspirationItems[0].alt}
-                        className="w-full rounded-xl border border-white/10 group-hover:border-white/25"
+                        className="w-full rounded-none border-0"
                         height={1417}
                         loading="eager"
                         src={inspirationItems[0].src}
@@ -495,7 +495,7 @@ export default function Home() {
                   <figure>
                     <button
                       aria-label="Open secondary inspiration image"
-                      className="group block w-full cursor-zoom-in rounded-xl p-0 text-left outline-none focus-visible:ring-1 focus-visible:ring-wave-blue-vivid/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                      className="group block w-full cursor-zoom-in overflow-hidden rounded-lg border border-white/10 p-0 text-left outline-none hover:border-white/25 focus-visible:border-wave-blue-vivid/60"
                       onClick={() =>
                         setLightbox({ items: inspirationItems, index: 1 })
                       }
@@ -503,7 +503,7 @@ export default function Home() {
                     >
                       <ProgressiveImage
                         alt={inspirationItems[1].alt}
-                        className="w-full rounded-xl border border-white/10 group-hover:border-white/25"
+                        className="w-full rounded-none border-0"
                         height={894}
                         loading="eager"
                         src={inspirationItems[1].src}
@@ -517,7 +517,7 @@ export default function Home() {
                   <figure>
                     <button
                       aria-label="Open No More War inspiration image"
-                      className="group block w-full cursor-zoom-in rounded-xl p-0 text-left outline-none focus-visible:ring-1 focus-visible:ring-wave-blue-vivid/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                      className="group block w-full cursor-zoom-in overflow-hidden rounded-lg border border-white/10 p-0 text-left outline-none hover:border-white/25 focus-visible:border-wave-blue-vivid/60"
                       onClick={() =>
                         setLightbox({ items: inspirationItems, index: 2 })
                       }
@@ -525,7 +525,7 @@ export default function Home() {
                     >
                       <ProgressiveImage
                         alt={inspirationItems[2].alt}
-                        className="w-full rounded-xl border border-white/10 group-hover:border-white/25"
+                        className="w-full rounded-none border-0"
                         height={898}
                         loading="eager"
                         src={inspirationItems[2].src}
@@ -750,7 +750,7 @@ export default function Home() {
                 <figure className="mt-6">
                   <button
                     aria-label="Open full-resolution image"
-                    className="group block w-full cursor-zoom-in rounded-xl p-0 text-left outline-none focus-visible:ring-1 focus-visible:ring-wave-blue-vivid/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                    className="group block w-full cursor-zoom-in overflow-hidden rounded-lg border border-white/10 p-0 text-left outline-none hover:border-white/25 focus-visible:border-wave-blue-vivid/60"
                     onClick={() =>
                       setLightbox({
                         items: [
@@ -767,7 +767,7 @@ export default function Home() {
                   >
                     <ProgressiveImage
                       alt={progressiveImageItems[0].alt}
-                      className="w-full rounded-xl border border-white/10 group-hover:border-white/25"
+                      className="w-full rounded-none border-0"
                       height={583}
                       onLoad={(event) =>
                         setProgressivePreviewSrc(event.currentTarget.currentSrc)
@@ -789,8 +789,8 @@ export default function Home() {
                 <p>
                   Image cards use a golden-ratio image by default, carry media
                   all the way to the card edges, and keep one-line titles with
-                  at most two lines of supporting detail. Click an image to
-                  open the built-in progressive lightbox.
+                  at most two lines of supporting detail. When an href is
+                  provided, the entire card behaves as one link.
                 </p>
                 <div className="mt-6 grid gap-4 sm:grid-cols-2">
                   <ImageCard
@@ -836,7 +836,7 @@ export default function Home() {
                     <figure key={item.src}>
                       <button
                         aria-label={`Open diagram: ${item.alt}`}
-                        className="group block w-full cursor-zoom-in rounded-lg p-0 text-left outline-none focus-visible:ring-1 focus-visible:ring-wave-blue-vivid/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                        className="group block w-full cursor-zoom-in overflow-hidden rounded-lg border border-white/10 p-0 text-left outline-none hover:border-white/25 focus-visible:border-wave-blue-vivid/60"
                         onClick={() =>
                           setLightbox({ items: diagramItems, index })
                         }
@@ -844,7 +844,7 @@ export default function Home() {
                       >
                         <ProgressiveImage
                           alt={item.alt}
-                          className="w-full rounded-lg border border-white/10 group-hover:border-white/25"
+                          className="w-full rounded-none border-0"
                           height={640}
                           src={item.src}
                           width={1200}
