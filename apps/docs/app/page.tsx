@@ -11,6 +11,7 @@ import {
   GitHubButton,
   ImageCard,
   Lightbox,
+  MediaRow,
   NavigationIndex,
   ProgressiveImage,
   Tabs,
@@ -78,6 +79,7 @@ const sections = [
   ["navigation", "Navigation"],
   ["images", "Images"],
   ["cards", "Image cards"],
+  ["media-rows", "Media rows"],
   ["diagrams", "Diagrams"],
   ["dividers", "Dividers"],
   ["code-blocks", "Code blocks"],
@@ -819,6 +821,36 @@ export default function Home() {
                       height: 640,
                     }}
                     title="Intervention pipeline"
+                  />
+                </div>
+              </section>
+
+              <section aria-labelledby="media-rows">
+                <SectionTitle id="media-rows">Media rows</SectionTitle>
+                <p>
+                  Media rows are full-surface links for editorial indexes. The
+                  preview moves to the right on wider screens and stacks below
+                  the text on mobile, with progressive loading and optional
+                  line clamping built in.
+                </p>
+                <div className="mt-3">
+                  <MediaRow
+                    description="A hands-on world model lab showing how a pixel transformer learns interpretable physical dynamics."
+                    descriptionLines={3}
+                    href="https://jay.ai/writing"
+                    image={{
+                      src: "/blog/image-cache/llms-are-not-a-black-box/header-55330a11a7-1024.webp",
+                      alt: "A diagram from the essay LLMs Are Not a Black Box",
+                      placeholder: progressivePlaceholder,
+                    }}
+                    meta="Jay Hack · Jul 2026"
+                    title="J-Lens for video models"
+                  />
+                  <MediaRow
+                    description="A text-only row keeps the same hierarchy, divider, hover state, and full-width click target."
+                    href="#code"
+                    meta="Wave Kit · Component"
+                    title="MediaRow without a preview"
                   />
                 </div>
               </section>

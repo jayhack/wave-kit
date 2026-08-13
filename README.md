@@ -40,12 +40,13 @@ stylesheets once, in order, from your application's global CSS:
 Then compose the real exports:
 
 ```tsx
-import { CodeBlock, ImageCard, Lightbox, ProgressiveImage, WaveField } from "@jayhack/wave-kit";
+import { CodeBlock, ImageCard, Lightbox, MediaRow, ProgressiveImage, WaveField } from "@jayhack/wave-kit";
 ```
 
 `CodeBlock` highlights `python`, `bash`, `css`, `json`, `tsx`, and `text`; use
-`ProgressiveImage` with `Lightbox` for figures and `ImageCard` for compact,
-image-led links with built-in lightboxes. For research writeups, register
+`ProgressiveImage` with `Lightbox` for figures, `ImageCard` for compact
+image-led links, and `MediaRow` for editorial indexes with right-side previews.
+For research writeups, register
 runs as JSON `ExperimentRecord`s and render them with `ExperimentIndex` and
 `ExperimentPage`. See [wave-kit.dev](https://wave-kit.dev) and
 [jay.ai/design](https://jay.ai/design) for the canonical visual reference and

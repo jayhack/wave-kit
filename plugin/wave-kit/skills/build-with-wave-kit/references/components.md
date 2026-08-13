@@ -43,8 +43,12 @@ const sections = [
 
 - `ImageCard`: compact, equal-height image card with edge-to-edge media, a
   golden-ratio image area by default, one title line, at most two description
-  lines, and an integrated `Lightbox`. Pass `image.fullSrc` for the original
-  asset and responsive `src`/`srcSet`/`placeholder` for the card preview.
+  lines, and one full-card link target. Pass responsive
+  `src`/`srcSet`/`placeholder` for the card preview.
+- `MediaRow`: full-row editorial link with title, metadata, clamped supporting
+  copy, and an optional 1.91:1 progressive preview. Media stacks below the copy
+  on mobile and moves right at wider breakpoints. Use `renderLink` to retain a
+  host framework's client-side routing and prefetch behavior.
 - `ProgressiveImage`: use the blog image pipeline's responsive `src`,
   `srcSet`, intrinsic `width`/`height`, and tiny inline `placeholder`.
 - `Lightbox`: accepts

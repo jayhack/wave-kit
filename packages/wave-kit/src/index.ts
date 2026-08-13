@@ -33,6 +33,12 @@ export { ImageCard } from "./components/ImageCard";
 export type { ImageCardImage, ImageCardProps } from "./components/ImageCard";
 export { Lightbox } from "./components/Lightbox";
 export type { LightboxItem } from "./components/Lightbox";
+export { MediaRow } from "./components/MediaRow";
+export type {
+  MediaRowImage,
+  MediaRowLinkRenderProps,
+  MediaRowProps,
+} from "./components/MediaRow";
 export { NavigationIndex } from "./components/NavigationIndex";
 export type { NavigationIndexItem, NavigationIndexProps } from "./components/NavigationIndex";
 export { ProgressiveImage } from "./components/ProgressiveImage";

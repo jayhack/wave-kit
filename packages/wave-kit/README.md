@@ -17,15 +17,15 @@ npm install @jayhack/wave-kit
 ```
 
 ```tsx
-import { ImageCard, NavigationIndex, WaveField } from "@jayhack/wave-kit";
+import { ImageCard, MediaRow, NavigationIndex, WaveField } from "@jayhack/wave-kit";
 ```
 
 Wave Kit is React + Tailwind CSS v4. Its stylesheet registers the package build
 as a Tailwind source and installs the native system font stack and shared
 utilities. React, React DOM, and Tailwind are peer dependencies.
 
-`ImageCard` provides an edge-to-edge, golden-ratio image, compact aligned copy,
-and a built-in progressive lightbox:
+`ImageCard` provides an edge-to-edge, golden-ratio image and compact aligned
+copy in one link:
 
 ```tsx
 <ImageCard
@@ -38,6 +38,24 @@ and a built-in progressive lightbox:
     alt: "Project preview",
     width: 1024,
     height: 640,
+    placeholder: tinyPlaceholder,
+  }}
+/>
+```
+
+`MediaRow` provides the responsive editorial-index layout used on jay.ai, with
+progressive right-side media on wide screens and stacked media on mobile:
+
+```tsx
+<MediaRow
+  title="Essay title"
+  meta="Jay Hack · Jul 2026"
+  description="A short summary of the essay."
+  descriptionLines={4}
+  href="/writing/essay"
+  image={{
+    src: "/essay-preview.webp",
+    alt: "Essay preview",
     placeholder: tinyPlaceholder,
   }}
 />
