@@ -13,22 +13,37 @@ export function ThemeToggle({
 }: ThemeToggleProps) {
   useEffect(() => {
     const root = document.documentElement;
-    let saved: string | null = null;
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
 
-    try {
-      saved = window.localStorage.getItem(storageKey);
-    } catch {
-      // Fall back to the system preference when storage is unavailable.
+    function getSavedTheme(): "light" | "dark" | null {
+      let saved: string | null = null;
+
+      try {
+        saved = window.localStorage.getItem(storageKey);
+      } catch {
+        // Keep following the system preference when storage is unavailable.
+      }
+
+      return saved === "light" || saved === "dark" ? saved : null;
     }
 
-    const theme =
-      saved === "light" || saved === "dark"
-        ? saved
-        : window.matchMedia("(prefers-color-scheme: light)").matches
-          ? "light"
-          : "dark";
-    root.dataset.theme = theme;
-    root.style.colorScheme = theme;
+    function applyTheme(theme: "light" | "dark") {
+      root.dataset.theme = theme;
+      root.style.colorScheme = theme;
+    }
+
+    applyTheme(getSavedTheme() ?? (systemTheme.matches ? "dark" : "light"));
+
+    function handleSystemThemeChange(event: MediaQueryListEvent) {
+      if (getSavedTheme() === null) {
+        applyTheme(event.matches ? "dark" : "light");
+      }
+    }
+
+    systemTheme.addEventListener("change", handleSystemThemeChange);
+    return () => {
+      systemTheme.removeEventListener("change", handleSystemThemeChange);
+    };
   }, [storageKey]);
 
   function toggleTheme() {
