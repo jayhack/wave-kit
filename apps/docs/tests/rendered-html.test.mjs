@@ -57,6 +57,9 @@ test("server-renders the canonical jay.ai design page", async () => {
   assert.match(html, /text-wave-link-orange decoration-wave-link-orange/);
   assert.match(html, /data-theme-toggle/);
   assert.match(html, /Switch between light and dark mode/);
+  assert.match(html, /wave-theme-init/);
+  assert.match(html, /localStorage\.getItem/);
+  assert.match(html, /prefers-color-scheme: dark/);
   assert.match(html, /bg-wave-canvas text-wave-body/);
   assert.doesNotMatch(html, /Add the agent skill/);
   assert.match(html, /Four color anchors|four color anchors/);
@@ -166,16 +169,25 @@ test("the package exposes semantic Tailwind color names", async () => {
 });
 
 test("the theme toggle signals that it is clickable", async () => {
-  const source = await readFile(
-    new URL(
-      "../../../packages/wave-kit/src/components/ThemeToggle.tsx",
-      import.meta.url,
+  const [source, layout] = await Promise.all([
+    readFile(
+      new URL(
+        "../../../packages/wave-kit/src/components/ThemeToggle.tsx",
+        import.meta.url,
+      ),
+      "utf8",
     ),
-    "utf8",
-  );
+    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
+  ]);
 
   assert.match(source, /data-theme-toggle=""/);
   assert.match(source, /cursor-pointer/);
+  assert.match(source, /localStorage\.setItem\(storageKey, next\)/);
+  assert.match(source, /getSavedTheme\(\) \?\? \(systemTheme\.matches/);
+  assert.match(source, /systemTheme\.addEventListener\("change"/);
+  assert.match(source, /if \(getSavedTheme\(\) === null\)/);
+  assert.match(layout, /strategy="beforeInteractive"/);
+  assert.doesNotMatch(layout, /dataset\.theme="dark"/);
 });
 
 test("image cards keep compact, aligned golden-ratio layouts", async () => {
