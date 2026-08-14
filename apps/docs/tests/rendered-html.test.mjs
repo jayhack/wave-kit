@@ -66,8 +66,17 @@ test("server-renders the canonical jay.ai design page", async () => {
   assert.match(html, />Code samples</);
   assert.match(html, /aria-label="Wave Kit showcase"/);
   assert.match(html, />Components/);
+  assert.match(
+    html,
+    /id="components-showcase-tab"[\s\S]*id="style-guide-showcase-tab"/,
+  );
+  assert.match(html, /aria-labelledby="style-guide-showcase-tab"/);
   assert.match(html, />Blog playground<\/button>/);
-  assert.match(html, /Changes stay in this demo only/);
+  assert.doesNotMatch(html, /Blog styling controls/);
+  assert.doesNotMatch(html, /Blue accent|Orange accent|Narrow article|Widen article/);
+  assert.match(html, /<article class="mx-auto max-w-2xl">/);
+  assert.match(html, /text-wave-link-orange/);
+  assert.match(html, /border-wave-orange pl-5/);
   assert.match(html, /What the model learns between frames/);
   assert.match(html, /data-language="bash"/);
   assert.match(html, /data-language="css"/);
