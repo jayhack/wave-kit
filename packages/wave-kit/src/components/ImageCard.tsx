@@ -48,7 +48,9 @@ export function ImageCard({
 
   return (
     <article
-      className={`relative flex h-full min-w-0 flex-col overflow-hidden rounded-lg bg-wave-surface ring-1 ring-inset ring-wave-border ${className}`}
+      className={`relative flex h-full min-w-0 flex-col overflow-hidden rounded-lg bg-wave-surface ring-1 ring-inset ring-wave-border ${
+        href ? "transition-shadow hover:ring-wave-border-strong" : ""
+      } ${className}`}
     >
       <div
         className="block w-full shrink-0 overflow-hidden bg-wave-surface"

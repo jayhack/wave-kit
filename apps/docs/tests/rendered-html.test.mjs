@@ -176,6 +176,7 @@ test("image cards keep compact, aligned golden-ratio layouts", async () => {
   assert.match(source, /aspectRatio = "1\.618 \/ 1"/);
   assert.match(source, /rounded-lg/);
   assert.match(source, /ring-1 ring-inset ring-wave-border/);
+  assert.match(source, /hover:ring-wave-border-strong/);
   assert.match(source, /flex-col p-4/);
   assert.match(source, /truncate text-sm/);
   assert.match(source, /!m-0 truncate/);
