@@ -16,6 +16,7 @@ import {
   ProgressiveImage,
   Tabs,
   TextLink,
+  ThemeToggle,
   WaveField,
   waveColorFamilies,
   wavePalette,
@@ -222,7 +223,7 @@ const sections = [
 
 export function ProjectPage() {
   return (
-    <div className="min-h-screen bg-wave-ink text-neutral-200">
+    <div className="min-h-screen bg-wave-ink text-wave-body">
       <div className="mx-auto w-full max-w-[78rem] px-5 py-10 sm:py-16">
         <div className="min-[72rem]:grid min-[72rem]:grid-cols-[minmax(0,1fr)_minmax(0,42rem)_minmax(0,1fr)] min-[72rem]:gap-8">
           <aside className="hidden min-w-0 min-[72rem]:block">
@@ -319,7 +320,7 @@ function SectionTitle({ id, children }: { id: string; children: ReactNode }) {
   return (
     <header className="mb-6">
       <h2
-        className="scroll-mt-16 text-2xl font-extrabold tracking-tight text-neutral-50"
+        className="scroll-mt-16 text-2xl font-extrabold tracking-tight text-wave-heading"
         id={id}
       >
         {children}
@@ -330,7 +331,7 @@ function SectionTitle({ id, children }: { id: string; children: ReactNode }) {
 
 function TokenLabel({ children }: { children: ReactNode }) {
   return (
-    <code className="rounded bg-white/[0.07] px-1.5 py-0.5 font-mono text-[0.78rem] text-neutral-300">
+    <code className="rounded bg-wave-surface-raised px-1.5 py-0.5 font-mono text-[0.78rem] text-wave-body">
       {children}
     </code>
   );
@@ -358,7 +359,8 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-neutral-200">
+    <div className="min-h-screen bg-wave-canvas text-wave-body">
+      <ThemeToggle className="fixed right-5 top-5 z-50 sm:right-7 sm:top-7" />
       <div className="mx-auto w-full max-w-[78rem] px-5 py-10 sm:py-16">
         <div className="min-[72rem]:grid min-[72rem]:grid-cols-[minmax(0,1fr)_minmax(0,42rem)_minmax(0,1fr)] min-[72rem]:gap-8">
           <aside className="hidden min-w-0 min-[72rem]:block">
@@ -370,14 +372,14 @@ export default function Home() {
           <main className="mx-auto min-w-0 max-w-2xl min-[72rem]:mx-0 min-[72rem]:max-w-none">
             <header className="mt-10 pb-9">
               <div className="flex flex-wrap items-center justify-between gap-4">
-                <h1 className="text-4xl font-extrabold tracking-[-0.035em] text-white sm:text-5xl">
+                <h1 className="text-4xl font-extrabold tracking-[-0.035em] text-wave-heading sm:text-5xl">
                   wave-kit
                 </h1>
                 <GitHubButton href="https://github.com/jayhack/wave-kit">
                   View source
                 </GitHubButton>
               </div>
-              <p className="mt-4 max-w-2xl text-[1.03rem] leading-8 text-neutral-300">
+              <p className="mt-4 max-w-2xl text-[1.03rem] leading-8 text-wave-body">
                 Design system and UI kit developed for{" "}
                 <TextLink href="https://jay.ai/writing">
                   Jay Hack
@@ -385,8 +387,8 @@ export default function Home() {
                 &apos;s personal projects. Emphasizes simplicity, legibility and
                 performance for technical writing.
               </p>
-              <div className="mt-6 flex min-w-0 overflow-hidden rounded-md border border-white/10 bg-white/[0.02]">
-                <pre className="min-w-0 flex-1 overflow-x-auto px-4 py-3 font-mono text-[0.78rem] leading-5 text-neutral-300">
+              <div className="mt-6 flex min-w-0 overflow-hidden rounded-md border border-wave-border bg-wave-surface">
+                <pre className="min-w-0 flex-1 overflow-x-auto px-4 py-3 font-mono text-[0.78rem] leading-5 text-wave-body">
                   <code>
                     npx skills add{" "}
                     <span className="text-wave-blue-light">
@@ -401,7 +403,7 @@ export default function Home() {
                 </pre>
                 <button
                   aria-label="Copy skill install command"
-                  className="inline-flex shrink-0 items-center gap-2 border-l border-white/10 px-4 font-sans text-sm font-semibold text-neutral-400 hover:bg-white/[0.06] hover:text-white"
+                  className="inline-flex shrink-0 items-center gap-2 border-l border-wave-border px-4 font-sans text-sm font-semibold text-wave-muted hover:bg-wave-surface-hover hover:text-wave-heading"
                   onClick={copySkillCommand}
                   type="button"
                 >
@@ -449,7 +451,7 @@ export default function Home() {
                   </span>
                 </button>
               </div>
-              <p className="mt-3 text-sm leading-6 text-neutral-600">
+              <p className="mt-3 text-sm leading-6 text-wave-subtle">
                 Optional. This installs the agent skill for building with Wave
                 Kit. You can also just{" "}
                 <TextLink href="#install" tone="sky">
@@ -459,12 +461,12 @@ export default function Home() {
               </p>
             </header>
 
-            <article className="mt-10 space-y-16 text-[1.03rem] leading-8 text-neutral-300">
+            <article className="mt-10 space-y-16 text-[1.03rem] leading-8 text-wave-body">
               <section aria-labelledby="inspiration">
                 <SectionTitle id="inspiration">Inspiration</SectionTitle>
                 <p>
                   This design system is inspired by the work of{" "}
-                  <strong className="font-semibold text-neutral-100">
+                  <strong className="font-semibold text-wave-heading">
                     Kazumasa Nagai
                   </strong>
                   , a Japanese graphic designer, and other poster art from the
@@ -475,7 +477,7 @@ export default function Home() {
                   <figure>
                     <button
                       aria-label="Open Kazumasa Nagai inspiration image"
-                      className="group block w-full cursor-zoom-in overflow-hidden rounded-lg border border-white/10 p-0 text-left outline-none hover:border-white/25 focus-visible:border-wave-blue-vivid/60"
+                      className="group block w-full cursor-zoom-in overflow-hidden rounded-lg border border-wave-border p-0 text-left outline-none hover:border-wave-border-strong focus-visible:border-wave-blue-vivid/60"
                       onClick={() =>
                         setLightbox({ items: inspirationItems, index: 0 })
                       }
@@ -490,14 +492,14 @@ export default function Home() {
                         width={1000}
                       />
                     </button>
-                    <figcaption className="mt-3 text-sm leading-6 text-neutral-500">
+                    <figcaption className="mt-3 text-sm leading-6 text-wave-subtle">
                       Kazumasa Nagai, primary reference
                     </figcaption>
                   </figure>
                   <figure>
                     <button
                       aria-label="Open secondary inspiration image"
-                      className="group block w-full cursor-zoom-in overflow-hidden rounded-lg border border-white/10 p-0 text-left outline-none hover:border-white/25 focus-visible:border-wave-blue-vivid/60"
+                      className="group block w-full cursor-zoom-in overflow-hidden rounded-lg border border-wave-border p-0 text-left outline-none hover:border-wave-border-strong focus-visible:border-wave-blue-vivid/60"
                       onClick={() =>
                         setLightbox({ items: inspirationItems, index: 1 })
                       }
@@ -512,14 +514,14 @@ export default function Home() {
                         width={640}
                       />
                     </button>
-                    <figcaption className="mt-3 text-sm leading-6 text-neutral-500">
+                    <figcaption className="mt-3 text-sm leading-6 text-wave-subtle">
                       Secondary reference for radial systems and optical depth
                     </figcaption>
                   </figure>
                   <figure>
                     <button
                       aria-label="Open No More War inspiration image"
-                      className="group block w-full cursor-zoom-in overflow-hidden rounded-lg border border-white/10 p-0 text-left outline-none hover:border-white/25 focus-visible:border-wave-blue-vivid/60"
+                      className="group block w-full cursor-zoom-in overflow-hidden rounded-lg border border-wave-border p-0 text-left outline-none hover:border-wave-border-strong focus-visible:border-wave-blue-vivid/60"
                       onClick={() =>
                         setLightbox({ items: inspirationItems, index: 2 })
                       }
@@ -534,7 +536,7 @@ export default function Home() {
                         width={640}
                       />
                     </button>
-                    <figcaption className="mt-3 text-sm leading-6 text-neutral-500">
+                    <figcaption className="mt-3 text-sm leading-6 text-wave-subtle">
                       No More War, repeated form and concentrated color
                     </figcaption>
                   </figure>
@@ -548,7 +550,7 @@ export default function Home() {
                   simple cellular field carries energy outward from a point,
                   turning the same cool-to-warm palette into motion.
                 </p>
-                <div className="relative mt-6 aspect-[16/7] w-full overflow-hidden rounded-lg border border-white/10 bg-black">
+                <div className="relative mt-6 aspect-[16/7] w-full overflow-hidden rounded-lg border border-wave-border bg-black">
                   <WaveField className="absolute inset-0 h-full w-full" />
                 </div>
               </section>
@@ -565,22 +567,22 @@ export default function Home() {
                 <div className="mt-7 grid gap-3 sm:grid-cols-2">
                   {waveColorFamilies.map((family) => (
                     <div
-                      className="overflow-hidden rounded-lg border border-white/10 bg-white/[0.02]"
+                      className="overflow-hidden rounded-lg border border-wave-border bg-wave-surface"
                       key={family.name}
                     >
                       <div className="flex items-start gap-3 p-4">
                         <span
-                          className="mt-0.5 h-6 w-6 shrink-0 rounded-full border border-white/10"
+                          className="mt-0.5 h-6 w-6 shrink-0 rounded-full border border-wave-border"
                           style={{ backgroundColor: family.anchor }}
                         />
                         <div>
-                          <h3 className="text-sm font-semibold text-white">
+                          <h3 className="text-sm font-semibold text-wave-heading">
                             {family.name}
                           </h3>
-                          <code className="font-mono text-[0.7rem] text-neutral-600">
+                          <code className="font-mono text-[0.7rem] text-wave-subtle">
                             {family.token}
                           </code>
-                          <p className="mt-1 text-xs leading-5 text-neutral-500">
+                          <p className="mt-1 text-xs leading-5 text-wave-subtle">
                             {family.role}
                           </p>
                         </div>
@@ -612,19 +614,19 @@ export default function Home() {
                   ))}
                 </div>
                 <div className="mt-6 grid gap-3 text-sm sm:grid-cols-3">
-                  <div className="rounded-lg border border-white/10 bg-black p-4">
-                    <span className="block h-5 w-5 rounded-full border border-white/10 bg-black" />
-                    <p className="mt-3 text-white">Canvas</p>
+                  <div className="rounded-lg border border-wave-border bg-wave-surface p-4">
+                    <span className="block h-5 w-5 rounded-full border border-wave-border bg-black" />
+                    <p className="mt-3 text-wave-heading">Canvas</p>
                     <TokenLabel>#000000</TokenLabel>
                   </div>
-                  <div className="rounded-lg border border-white/10 bg-white/[0.03] p-4">
+                  <div className="rounded-lg border border-wave-border bg-wave-surface p-4">
                     <span className="block h-5 w-5 rounded-full bg-neutral-300" />
-                    <p className="mt-3 text-white">Reading text</p>
+                    <p className="mt-3 text-wave-heading">Reading text</p>
                     <TokenLabel>neutral-300</TokenLabel>
                   </div>
-                  <div className="rounded-lg border border-white/10 bg-white/[0.03] p-4">
+                  <div className="rounded-lg border border-wave-border bg-wave-surface p-4">
                     <span className="block h-5 w-5 rounded-full bg-sky-300" />
-                    <p className="mt-3 text-white">Navigation</p>
+                    <p className="mt-3 text-wave-heading">Navigation</p>
                     <TokenLabel>sky-300</TokenLabel>
                   </div>
                 </div>
@@ -637,19 +639,19 @@ export default function Home() {
                   with the platform monospace stack for tokens and small
                   technical labels. Tight headlines meet relaxed body copy.
                   The reading column is capped at 42rem (672px,{" "}
-                  <code className="font-mono text-[0.88em] text-neutral-400">
+                  <code className="font-mono text-[0.88em] text-wave-muted">
                     max-w-2xl
                   </code>
                   ), matching the measure used by this page.
                 </p>
-                <div className="mt-6 overflow-hidden rounded-lg border border-white/10">
-                  <div className="border-b border-white/10 p-6">
-                    <div className="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-neutral-600">
+                <div className="mt-6 overflow-hidden rounded-lg border border-wave-border">
+                  <div className="border-b border-wave-border p-6">
+                    <div className="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-wave-subtle">
                       EditableTitle · Display / 48 / 800
                     </div>
                     <div className="mt-3">
                       <EditableTitle
-                        className="text-4xl font-extrabold tracking-[-0.035em] text-white sm:text-5xl"
+                        className="text-4xl font-extrabold tracking-[-0.035em] text-wave-heading sm:text-5xl"
                         id="typography-display"
                         level={3}
                       >
@@ -657,13 +659,13 @@ export default function Home() {
                       </EditableTitle>
                     </div>
                   </div>
-                  <div className="border-b border-white/10 p-6">
-                    <div className="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-neutral-600">
+                  <div className="border-b border-wave-border p-6">
+                    <div className="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-wave-subtle">
                       EditableTitle · Heading / 24 / 800
                     </div>
                     <div className="mt-3">
                       <EditableTitle
-                        className="text-2xl font-extrabold tracking-tight text-neutral-50"
+                        className="text-2xl font-extrabold tracking-tight text-wave-heading"
                         id="typography-heading"
                         level={3}
                       >
@@ -671,13 +673,13 @@ export default function Home() {
                       </EditableTitle>
                     </div>
                   </div>
-                  <div className="border-b border-white/10 p-6">
-                    <div className="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-neutral-600">
+                  <div className="border-b border-wave-border p-6">
+                    <div className="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-wave-subtle">
                       EditableText · Body / 16.5 / 32 · Column / 42rem / 672px
                     </div>
                     <div className="mt-3">
                       <EditableText
-                        className="max-w-2xl text-[1.03rem] leading-8 text-neutral-300"
+                        className="max-w-2xl text-[1.03rem] leading-8 text-wave-body"
                         id="typography-body"
                         rows={5}
                       >
@@ -687,20 +689,20 @@ export default function Home() {
                       </EditableText>
                     </div>
                   </div>
-                  <div className="border-b border-white/10 p-6">
-                    <div className="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-neutral-600">
+                  <div className="border-b border-wave-border p-6">
+                    <div className="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-wave-subtle">
                       Subtle / 14 / 24
                     </div>
-                    <p className="mt-3 text-sm leading-6 text-neutral-500">
+                    <p className="mt-3 text-sm leading-6 text-wave-subtle">
                       Supporting context stays present without competing with
                       the work.
                     </p>
                   </div>
                   <div className="p-6">
-                    <div className="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-neutral-600">
+                    <div className="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-wave-subtle">
                       Code / 12.5 / 20
                     </div>
-                    <code className="mt-3 block font-mono text-[0.78rem] leading-5 text-neutral-500">
+                    <code className="mt-3 block font-mono text-[0.78rem] leading-5 text-wave-subtle">
                       wave-orange&nbsp;&nbsp;#f97316
                     </code>
                   </div>
@@ -709,7 +711,7 @@ export default function Home() {
 
               <section aria-labelledby="links">
                 <SectionTitle id="links">Links</SectionTitle>
-                <div className="rounded-lg border border-white/10 bg-white/[0.02] p-6">
+                <div className="rounded-lg border border-wave-border bg-wave-surface p-6">
                   <p>
                     Use <TextLink href="#navigation">ripe orange links by default</TextLink>,{" "}
                     <TextLink href="#images" tone="sky">
@@ -752,7 +754,7 @@ export default function Home() {
                 <figure className="mt-6">
                   <button
                     aria-label="Open full-resolution image"
-                    className="group block w-full cursor-zoom-in overflow-hidden rounded-lg border border-white/10 p-0 text-left outline-none hover:border-white/25 focus-visible:border-wave-blue-vivid/60"
+                    className="group block w-full cursor-zoom-in overflow-hidden rounded-lg border border-wave-border p-0 text-left outline-none hover:border-wave-border-strong focus-visible:border-wave-blue-vivid/60"
                     onClick={() =>
                       setLightbox({
                         items: [
@@ -780,7 +782,7 @@ export default function Home() {
                       width={1024}
                     />
                   </button>
-                  <figcaption className="mt-3 text-center text-sm text-neutral-500">
+                  <figcaption className="mt-3 text-center text-sm text-wave-subtle">
                     Placeholder → responsive source set → full-resolution lightbox
                   </figcaption>
                 </figure>
@@ -868,7 +870,7 @@ export default function Home() {
                     <figure key={item.src}>
                       <button
                         aria-label={`Open diagram: ${item.alt}`}
-                        className="group block w-full cursor-zoom-in overflow-hidden rounded-lg border border-white/10 p-0 text-left outline-none hover:border-white/25 focus-visible:border-wave-blue-vivid/60"
+                        className="group block w-full cursor-zoom-in overflow-hidden rounded-lg border border-wave-border p-0 text-left outline-none hover:border-wave-border-strong focus-visible:border-wave-blue-vivid/60"
                         onClick={() =>
                           setLightbox({ items: diagramItems, index })
                         }
@@ -882,36 +884,36 @@ export default function Home() {
                           width={1200}
                         />
                       </button>
-                      <figcaption className="mt-3 text-sm leading-6 text-neutral-500">
+                      <figcaption className="mt-3 text-sm leading-6 text-wave-subtle">
                         {item.caption}
                       </figcaption>
                     </figure>
                   ))}
                 </div>
-                <div className="mt-7 border-y border-white/10 text-sm">
-                  <div className="grid grid-cols-[auto_1fr] gap-4 border-b border-white/10 py-3">
+                <div className="mt-7 border-y border-wave-border text-sm">
+                  <div className="grid grid-cols-[auto_1fr] gap-4 border-b border-wave-border py-3">
                     <span className="mt-1 size-3 rounded-full bg-wave-paper" />
                     <p>
                       <TokenLabel>wave-paper</TokenLabel>{" "}
-                      <span className="text-neutral-500">
+                      <span className="text-wave-subtle">
                         Primary labels, titles, and high-contrast values.
                       </span>
                     </p>
                   </div>
-                  <div className="grid grid-cols-[auto_1fr] gap-4 border-b border-white/10 py-3">
+                  <div className="grid grid-cols-[auto_1fr] gap-4 border-b border-wave-border py-3">
                     <span className="mt-1 size-3 rounded-full bg-wave-blue-vivid" />
                     <p>
                       <TokenLabel>wave-blue-vivid</TokenLabel>{" "}
-                      <span className="text-neutral-500">
+                      <span className="text-wave-subtle">
                         Observations, measured structure, and primary series.
                       </span>
                     </p>
                   </div>
-                  <div className="grid grid-cols-[auto_1fr] gap-4 border-b border-white/10 py-3">
+                  <div className="grid grid-cols-[auto_1fr] gap-4 border-b border-wave-border py-3">
                     <span className="mt-1 size-3 rounded-full bg-wave-red-vivid" />
                     <p>
                       <TokenLabel>wave-red-vivid</TokenLabel>{" "}
-                      <span className="text-neutral-500">
+                      <span className="text-wave-subtle">
                         Interventions, causal emphasis, and comparison series.
                       </span>
                     </p>
@@ -920,7 +922,7 @@ export default function Home() {
                     <span className="mt-1 size-3 rounded-full bg-neutral-700" />
                     <p>
                       <TokenLabel>neutral-700</TokenLabel>{" "}
-                      <span className="text-neutral-500">
+                      <span className="text-wave-subtle">
                         Axes, guides, borders, and secondary structure.
                       </span>
                     </p>
@@ -934,7 +936,7 @@ export default function Home() {
                   Quiet rules divide long-form sections without turning every
                   idea into a card.
                 </p>
-                <div className="mt-6 space-y-5 text-sm text-neutral-500">
+                <div className="mt-6 space-y-5 text-sm text-wave-subtle">
                   <span>Subtle</span>
                   <Divider />
                   <span>Strong</span>
@@ -959,7 +961,7 @@ export default function Home() {
                   Register each run as a JSON record — slug, title,
                   description, timestamp, optional metrics and checkpoint
                   metadata — and render the registry with{" "}
-                  <code className="font-mono text-[0.88em] text-neutral-400">
+                  <code className="font-mono text-[0.88em] text-wave-muted">
                     ExperimentIndex
                   </code>
                   .
@@ -967,7 +969,7 @@ export default function Home() {
                 <div className="mt-6">
                   <ExperimentIndex experiments={registeredExperiments} />
                 </div>
-                <p className="mt-3 text-sm leading-6 text-neutral-500">
+                <p className="mt-3 text-sm leading-6 text-wave-subtle">
                   Live registry from the{" "}
                   <TextLink href="https://blocket-league.vercel.app/" tone="sky">
                     Blocket League lab
@@ -996,10 +998,10 @@ export default function Home() {
                 </p>
                 <div className="mt-8 space-y-8">
                   <div>
-                    <h3 className="text-lg font-bold text-neutral-100">
+                    <h3 className="text-lg font-bold text-wave-heading">
                       Remove ornamental UI
                     </h3>
-                    <p className="mt-2 text-neutral-400">
+                    <p className="mt-2 text-wave-muted">
                       Avoid AI slop such as eyebrows, sequence numbers, badges,
                       and labels that only repeat nearby content. If an element
                       adds no information or function, remove it.
@@ -1007,10 +1009,10 @@ export default function Home() {
                   </div>
                   <Divider />
                   <div>
-                    <h3 className="text-lg font-bold text-neutral-100">
+                    <h3 className="text-lg font-bold text-wave-heading">
                       Keep titles in proportion
                     </h3>
-                    <p className="mt-2 text-neutral-400">
+                    <p className="mt-2 text-wave-muted">
                       Use the smallest title that establishes hierarchy. Avoid
                       oversized hero text that pushes useful content below the
                       fold or turns every page into a landing page.
@@ -1018,10 +1020,10 @@ export default function Home() {
                   </div>
                   <Divider />
                   <div>
-                    <h3 className="text-lg font-bold text-neutral-100">
+                    <h3 className="text-lg font-bold text-wave-heading">
                       Compose for vertical reading
                     </h3>
-                    <p className="mt-2 text-neutral-400">
+                    <p className="mt-2 text-wave-muted">
                       Structure pages like blog posts when possible. Assume
                       vertical scrolling, use semantic sections and paragraphs,
                       and intersperse images or interactive assets with the
@@ -1060,18 +1062,18 @@ export default function Home() {
                   accessible primitives when a project needs controls beyond
                   the core kit.
                 </p>
-                <div className="mt-6 overflow-hidden rounded-md border border-white/10">
+                <div className="mt-6 overflow-hidden rounded-md border border-wave-border">
                   {techStack.map(([name, role], index) => (
                     <div
                       className={`flex items-baseline justify-between gap-4 px-4 py-3 ${
-                        index === 3 ? "" : "border-b border-white/10"
+                        index === 3 ? "" : "border-b border-wave-border"
                       }`}
                       key={name}
                     >
-                      <strong className="font-semibold text-neutral-100">
+                      <strong className="font-semibold text-wave-heading">
                         {name}
                       </strong>
-                      <span className="text-right text-sm text-neutral-600">
+                      <span className="text-right text-sm text-wave-subtle">
                         {role}
                       </span>
                     </div>
@@ -1105,7 +1107,7 @@ npm install ./wave-kit/packages/wave-kit tailwindcss`}
 
             </article>
 
-            <footer className="mt-20 border-t border-white/10 pt-8 text-sm text-neutral-600">
+            <footer className="mt-20 border-t border-wave-border pt-8 text-sm text-wave-subtle">
               Built from the components already used across jay.ai. This page is
               the source of truth for the portable kit.
             </footer>

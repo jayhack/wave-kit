@@ -48,10 +48,10 @@ export function Tabs({ items, label = "Examples" }: TabsProps) {
   if (!active) return null;
 
   return (
-    <div className="overflow-hidden rounded-lg border border-white/10 bg-white/[0.02]">
+    <div className="overflow-hidden rounded-lg border border-wave-border bg-wave-surface">
       <div
         aria-label={label}
-        className="no-scrollbar tab-scroll-x flex gap-6 border-b border-white/10 px-5"
+        className="no-scrollbar tab-scroll-x flex gap-6 border-b border-wave-border px-5"
         role="tablist"
       >
         {items.map((item, index) => {
@@ -62,8 +62,8 @@ export function Tabs({ items, label = "Examples" }: TabsProps) {
               aria-selected={selected}
               className={`relative shrink-0 py-3 text-sm ${
                 selected
-                  ? "font-semibold text-white"
-                  : "text-neutral-400 hover:text-neutral-100"
+                  ? "font-semibold text-wave-heading"
+                  : "text-wave-muted hover:text-wave-heading"
               }`}
               id={`${groupId}-${item.id}-tab`}
               key={item.id}
@@ -75,7 +75,7 @@ export function Tabs({ items, label = "Examples" }: TabsProps) {
             >
               {item.label}
               {selected ? (
-                <span className="absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-white" />
+                <span className="absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-wave-heading" />
               ) : null}
             </button>
           );
@@ -83,7 +83,7 @@ export function Tabs({ items, label = "Examples" }: TabsProps) {
       </div>
       <div
         aria-labelledby={`${groupId}-${active.id}-tab`}
-        className="min-h-28 p-5 text-[0.98rem] leading-7 text-neutral-300"
+        className="min-h-28 p-5 text-[0.98rem] leading-7 text-wave-body"
         id={`${groupId}-${active.id}-panel`}
         role="tabpanel"
       >

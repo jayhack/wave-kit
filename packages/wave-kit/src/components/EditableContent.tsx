@@ -171,8 +171,8 @@ function EditableContent({
     <div
       className={`group relative rounded-lg transition-colors ${
         editing
-          ? "bg-white/[0.04] p-3 ring-1 ring-wave-blue-vivid/70"
-          : "hover:bg-white/[0.025] hover:ring-1 hover:ring-white/10"
+          ? "bg-wave-surface-raised p-3 ring-1 ring-wave-blue-vivid/70"
+          : "hover:bg-wave-surface hover:ring-1 hover:ring-wave-border"
       }`}
       data-wave-editable={id}
     >
@@ -183,7 +183,7 @@ function EditableContent({
               aria-describedby={statusId}
               aria-label={ariaLabel}
               autoFocus
-              className={`block w-full resize-y rounded-md border border-white/15 bg-black px-3 py-2 font-sans outline-none focus:border-wave-blue-vivid ${editorClassName}`}
+              className={`block w-full resize-y rounded-md border border-wave-border-strong bg-wave-canvas px-3 py-2 font-sans text-wave-heading outline-none focus:border-wave-blue-vivid ${editorClassName}`}
               onChange={(event) => setDraft(event.currentTarget.value)}
               onKeyDown={handleEditorKeyDown}
               rows={rows}
@@ -194,7 +194,7 @@ function EditableContent({
               aria-describedby={statusId}
               aria-label={ariaLabel}
               autoFocus
-              className={`block w-full rounded-md border border-white/15 bg-black px-3 py-2 font-sans outline-none focus:border-wave-blue-vivid ${editorClassName}`}
+              className={`block w-full rounded-md border border-wave-border-strong bg-wave-canvas px-3 py-2 font-sans text-wave-heading outline-none focus:border-wave-blue-vivid ${editorClassName}`}
               onChange={(event) => setDraft(event.currentTarget.value)}
               onKeyDown={handleEditorKeyDown}
               type="text"
@@ -204,13 +204,13 @@ function EditableContent({
           <div className="mt-3 flex flex-wrap items-center justify-end gap-2">
             <span
               aria-live="polite"
-              className={`mr-auto text-xs ${error ? "text-wave-red-hot" : "text-neutral-500"}`}
+              className={`mr-auto text-xs ${error ? "text-wave-red-hot" : "text-wave-subtle"}`}
               id={statusId}
             >
               {error ?? "⌘/Ctrl + Enter to save · Esc to cancel"}
             </span>
             <button
-              className="rounded-md px-3 py-1.5 text-xs font-semibold text-neutral-400 hover:bg-white/[0.06] hover:text-white"
+              className="rounded-md px-3 py-1.5 text-xs font-semibold text-wave-muted hover:bg-wave-surface-hover hover:text-wave-heading"
               disabled={saving}
               onClick={cancelEditing}
               type="button"
@@ -242,7 +242,7 @@ function EditableContent({
           tabIndex={0}
         >
           {renderValue(currentValue)}
-          <span className="pointer-events-none absolute right-2 top-2 rounded-md bg-black/80 px-2 py-1 text-[0.65rem] font-semibold text-neutral-500 opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
+          <span className="pointer-events-none absolute right-2 top-2 rounded-md bg-wave-canvas px-2 py-1 text-[0.65rem] font-semibold text-wave-subtle opacity-0 shadow-sm ring-1 ring-wave-border transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
             Edit
           </span>
         </div>

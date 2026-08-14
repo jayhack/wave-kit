@@ -2,12 +2,12 @@ import type { MouseEvent, ReactNode } from "react";
 
 const linkStyles = {
   orange:
-    "text-wave-orange decoration-wave-orange/55 hover:text-wave-orange-light hover:decoration-wave-orange-light",
-  sky: "text-sky-300 decoration-sky-300/55 hover:text-sky-200 hover:decoration-sky-200",
+    "text-wave-link-orange decoration-wave-link-orange/55 hover:text-wave-link-orange-hover hover:decoration-wave-link-orange-hover",
+  sky: "text-wave-link-sky decoration-wave-link-sky/55 hover:text-wave-link-sky-hover hover:decoration-wave-link-sky-hover",
   amber:
-    "text-amber-300 decoration-amber-300/40 hover:text-amber-200 hover:decoration-amber-200",
+    "text-wave-link-amber decoration-wave-link-amber/40 hover:text-wave-link-amber-hover hover:decoration-wave-link-amber-hover",
   quiet:
-    "text-neutral-400 decoration-neutral-500/60 hover:text-neutral-200 hover:decoration-neutral-300",
+    "text-wave-muted decoration-wave-subtle/60 hover:text-wave-heading hover:decoration-wave-muted",
 } as const;
 
 export type TextLinkProps = {
@@ -65,7 +65,7 @@ export function BackLink({
 
   return (
     <a
-      className={`inline-flex items-center gap-2 text-sm text-gray-400 hover:text-amber-300 ${className}`}
+      className={`inline-flex items-center gap-2 text-sm text-wave-muted hover:text-wave-link-amber ${className}`}
       href={fallbackHref}
       onClick={handleClick}
     >
@@ -88,7 +88,7 @@ export function GitHubButton({
 }: GitHubButtonProps) {
   return (
     <a
-      className={`inline-flex min-h-9 items-center gap-2 rounded-lg border border-white/15 bg-white/[0.04] px-3 text-sm font-semibold text-white hover:border-white/30 hover:bg-white/[0.09] ${className}`}
+      className={`inline-flex min-h-9 items-center gap-2 rounded-lg border border-wave-border-strong bg-wave-surface-raised px-3 text-sm font-semibold text-wave-heading hover:border-wave-border-strong hover:bg-wave-surface-hover ${className}`}
       href={href}
       rel="noopener noreferrer"
       target="_blank"

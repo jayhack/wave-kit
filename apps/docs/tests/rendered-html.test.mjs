@@ -50,7 +50,10 @@ test("server-renders the canonical jay.ai design page", async () => {
     /<code>npx skills add(?:<!-- -->)? <span class="text-wave-blue-light">jayhack\/wave-kit<\/span> --skill <span class="text-wave-blue-light">build-with-wave-kit<\/span> -y<\/code>/,
   );
   assert.match(html, /aria-label="Copy skill install command"/);
-  assert.match(html, /text-wave-orange decoration-wave-orange/);
+  assert.match(html, /text-wave-link-orange decoration-wave-link-orange/);
+  assert.match(html, /data-theme-toggle/);
+  assert.match(html, /Switch between light and dark mode/);
+  assert.match(html, /bg-wave-canvas text-wave-body/);
   assert.doesNotMatch(html, /Add the agent skill/);
   assert.match(html, /Four color anchors|four color anchors/);
   assert.match(html, /Subtle \/ 14 \/ 24/);
@@ -70,11 +73,10 @@ test("server-renders the canonical jay.ai design page", async () => {
   assert.match(html, /Intervention pipeline/);
   assert.match(html, /border-wave-blue-vivid/);
   assert.match(html, /text-wave-blue-light/);
-  assert.match(html, /text-wave-blue-300/);
-  assert.match(html, /text-wave-yellow-pale\/80/);
-  assert.match(html, /text-wave-red-vivid/);
-  assert.match(html, /class="text-wave-red-vivid">900<\/span>/);
-  assert.match(html, /text-wave-orange/);
+  assert.match(html, /text-wave-syntax-keyword/);
+  assert.match(html, /text-wave-syntax-string/);
+  assert.match(html, /text-wave-syntax-number/);
+  assert.match(html, /class="text-wave-syntax-number">900<\/span>/);
   assert.match(html, />Style guide</);
   assert.match(html, /Avoid AI slop/);
   assert.match(html, /Keep titles in proportion/);
@@ -135,6 +137,9 @@ test("the package exposes semantic Tailwind color names", async () => {
   assert.match(styles, /--color-wave-red-vivid: #dc2626/);
   assert.match(styles, /--color-wave-orange: #f97316/);
   assert.match(styles, /--color-wave-amber: #fbbf24/);
+  assert.match(styles, /--color-wave-canvas: var\(--wave-canvas\)/);
+  assert.match(styles, /\[data-theme="light"\]/);
+  assert.match(styles, /--wave-canvas: #f7f5ef/);
 });
 
 test("image cards keep compact, aligned golden-ratio layouts", async () => {
@@ -148,7 +153,7 @@ test("image cards keep compact, aligned golden-ratio layouts", async () => {
 
   assert.match(source, /aspectRatio = "1\.618 \/ 1"/);
   assert.match(source, /rounded-lg/);
-  assert.match(source, /ring-1 ring-inset ring-white\/10/);
+  assert.match(source, /ring-1 ring-inset ring-wave-border/);
   assert.match(source, /flex-col p-4/);
   assert.match(source, /truncate text-sm/);
   assert.match(source, /!m-0 truncate/);
@@ -170,7 +175,7 @@ test("media rows preserve responsive editorial index behavior", async () => {
   assert.match(source, /sm:flex sm:items-start sm:justify-between sm:gap-5/);
   assert.match(source, /sm:w-\[180px\] md:w-\[220px\]/);
   assert.match(source, /aspect-\[1\.91\/1\]/);
-  assert.match(source, /group-hover:text-sky-400/);
+  assert.match(source, /group-hover:text-wave-link-sky/);
   assert.match(source, /renderLink/);
   assert.match(source, /fallbackSrc/);
 });

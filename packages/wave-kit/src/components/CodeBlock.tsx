@@ -25,14 +25,14 @@ function patternForLanguage(language: CodeLanguage) {
 
 function tokenClassName(token: string) {
   if (token.startsWith("//") || token.startsWith("/*")) {
-    return "text-neutral-600";
+    return "text-wave-subtle";
   }
   // Python line comment: `#` followed by anything that is not a bare hex color.
   if (token.startsWith("#") && !/^#[\dA-Fa-f]{3,8}$/.test(token)) {
-    return "text-neutral-600";
+    return "text-wave-subtle";
   }
   if (/^(True|False|None|self|cls)$/.test(token)) {
-    return "text-wave-orange-light";
+    return "text-wave-syntax-literal";
   }
   if (
     token.startsWith('"') ||
@@ -42,24 +42,24 @@ function tokenClassName(token: string) {
     // Python string prefixes: r"…", b'…', f"…"
     /^[rbf]["']/.test(token)
   ) {
-    return "text-wave-yellow-pale/80";
+    return "text-wave-syntax-string";
   }
   if (token.startsWith("<") || token.startsWith("--")) {
-    return "text-wave-orange";
+    return "text-wave-syntax-literal";
   }
   if (token.startsWith("@")) {
-    return "text-wave-blue-light";
+    return "text-wave-syntax-keyword";
   }
   if (/^#[\dA-Fa-f]/.test(token) || /^\d/.test(token)) {
-    return "text-wave-red-vivid";
+    return "text-wave-syntax-number";
   }
   if (/^(true|false|null|undefined)$/.test(token)) {
-    return "text-wave-orange-light";
+    return "text-wave-syntax-literal";
   }
   if (/^(useState|setOpen|setLightbox|install|add|clone|run|build|dev)$/.test(token)) {
-    return "text-wave-blue-300";
+    return "text-wave-syntax-keyword";
   }
-  return "text-wave-blue-light";
+  return "text-wave-syntax-keyword";
 }
 
 function highlight(code: string, language: CodeLanguage) {
@@ -99,15 +99,15 @@ export function CodeBlock({
 }: CodeBlockProps) {
   return (
     <div
-      className={`overflow-hidden rounded-lg border border-white/10 bg-white/[0.02] ${className}`}
+      className={`overflow-hidden rounded-lg border border-wave-border bg-wave-surface ${className}`}
       data-language={language}
     >
       {label ? (
-        <div className="border-b border-white/10 px-5 py-3 font-sans text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-neutral-600">
+        <div className="border-b border-wave-border px-5 py-3 font-sans text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-wave-subtle">
           {label}
         </div>
       ) : null}
-      <pre className="overflow-x-auto p-5 font-mono text-[0.78rem] leading-6 text-neutral-400">
+      <pre className="overflow-x-auto p-5 font-mono text-[0.78rem] leading-6 text-wave-muted">
         <code>{highlight(code, language)}</code>
       </pre>
     </div>

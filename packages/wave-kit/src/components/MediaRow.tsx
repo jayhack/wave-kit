@@ -64,7 +64,7 @@ function MediaPreview({ image }: { image: MediaRowImage }) {
   if (failed) return null;
 
   return (
-    <div className="relative mt-4 aspect-[1.91/1] shrink-0 overflow-hidden rounded-xl border border-white/10 bg-neutral-900 sm:mt-0 sm:w-[180px] md:w-[220px]">
+    <div className="relative mt-4 aspect-[1.91/1] shrink-0 overflow-hidden rounded-xl border border-wave-border bg-wave-surface-raised sm:mt-0 sm:w-[180px] md:w-[220px]">
       {image.placeholder ? (
         <img
           alt=""
@@ -113,23 +113,23 @@ export function MediaRow({
   renderLink,
 }: MediaRowProps) {
   const content = (
-    <article className={`group border-b border-white/10 py-6 ${className}`}>
+    <article className={`group border-b border-wave-border py-6 ${className}`}>
       <div
         className={
           image ? "sm:flex sm:items-start sm:justify-between sm:gap-5" : undefined
         }
       >
         <div className="min-w-0">
-          <h3 className="!m-0 text-[18px] font-semibold leading-tight text-white group-hover:text-sky-400">
+          <h3 className="!m-0 text-[18px] font-semibold leading-tight text-wave-heading group-hover:text-wave-link-sky">
             {title}
           </h3>
           {meta ? (
-            <div className="mt-2 text-[13px] leading-tight text-neutral-400">
+            <div className="mt-2 text-[13px] leading-tight text-wave-muted">
               {meta}
             </div>
           ) : null}
           <div
-            className={`mt-2 text-[16px] leading-[1.6] text-neutral-300 [&>p]:!m-0 ${
+            className={`mt-2 text-[16px] leading-[1.6] text-wave-body [&>p]:!m-0 ${
               descriptionLines ? clampClasses[descriptionLines] : ""
             }`}
           >

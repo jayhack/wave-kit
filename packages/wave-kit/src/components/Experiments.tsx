@@ -80,34 +80,34 @@ export function ExperimentIndex({
 }: ExperimentIndexProps) {
   return (
     <div
-      className={`overflow-hidden rounded-lg border border-white/10 bg-white/[0.02] ${className}`}
+      className={`overflow-hidden rounded-lg border border-wave-border bg-wave-surface ${className}`}
     >
       {experiments.map((experiment, index) => (
         <a
-          className={`group flex items-center justify-between gap-6 px-5 py-4 no-underline hover:bg-white/[0.04] sm:px-6 ${
-            index === 0 ? "" : "border-t border-white/10"
+          className={`group flex items-center justify-between gap-6 px-5 py-4 no-underline hover:bg-wave-surface-raised sm:px-6 ${
+            index === 0 ? "" : "border-t border-wave-border"
           }`}
           href={hrefFor(experiment)}
           key={experiment.slug}
         >
           <div className="min-w-0">
             <div className="flex items-baseline gap-2.5">
-              <h3 className="truncate text-lg font-bold tracking-tight text-neutral-50">
+              <h3 className="truncate text-lg font-bold tracking-tight text-wave-heading">
                 {experiment.title}
               </h3>
               {experiment.date ? (
-                <span className="shrink-0 text-sm text-neutral-600">
+                <span className="shrink-0 text-sm text-wave-subtle">
                   • {experiment.date}
                 </span>
               ) : null}
             </div>
-            <p className="mt-1 truncate text-sm leading-6 text-neutral-500">
+            <p className="mt-1 truncate text-sm leading-6 text-wave-subtle">
               {experiment.description}
             </p>
           </div>
           <svg
             aria-hidden="true"
-            className="size-4 shrink-0 text-neutral-600 group-hover:text-neutral-300"
+            className="size-4 shrink-0 text-wave-subtle group-hover:text-wave-body"
             fill="none"
             viewBox="0 0 24 24"
           >
@@ -145,7 +145,7 @@ export function ExperimentHeader({
     <header className={className}>
       {backHref ? (
         <a
-          className="inline-flex items-center gap-2 text-sm text-neutral-400 no-underline hover:text-amber-300"
+          className="inline-flex items-center gap-2 text-sm text-wave-muted no-underline hover:text-wave-link-amber"
           href={backHref}
         >
           <span aria-hidden="true" className="text-xs">
@@ -155,16 +155,16 @@ export function ExperimentHeader({
         </a>
       ) : null}
       <Title
-        className={`text-3xl font-extrabold tracking-tight text-white sm:text-4xl ${
+        className={`text-3xl font-extrabold tracking-tight text-wave-heading sm:text-4xl ${
           backHref ? "mt-6" : ""
         }`}
       >
         {experiment.title}
       </Title>
       {experiment.date ? (
-        <div className="mt-3 text-sm text-neutral-600">{experiment.date}</div>
+        <div className="mt-3 text-sm text-wave-subtle">{experiment.date}</div>
       ) : null}
-      <p className="mt-4 max-w-2xl text-[1.03rem] leading-8 text-neutral-300">
+      <p className="mt-4 max-w-2xl text-[1.03rem] leading-8 text-wave-body">
         {experiment.description}
       </p>
     </header>
@@ -181,16 +181,16 @@ export function ExperimentMetrics({ metrics, className = "" }: ExperimentMetrics
     return null;
   }
   return (
-    <dl className={`overflow-hidden rounded-lg border border-white/10 ${className}`}>
+    <dl className={`overflow-hidden rounded-lg border border-wave-border ${className}`}>
       {metrics.map((metric, index) => (
         <div
           className={`flex items-baseline justify-between gap-4 px-4 py-3 ${
-            index === 0 ? "" : "border-t border-white/10"
+            index === 0 ? "" : "border-t border-wave-border"
           }`}
           key={metric.label}
         >
-          <dt className="text-sm text-neutral-400">{metric.label}</dt>
-          <dd className="text-right font-mono text-sm text-neutral-100">
+          <dt className="text-sm text-wave-muted">{metric.label}</dt>
+          <dd className="text-right font-mono text-sm text-wave-heading">
             {metric.value}
           </dd>
         </div>
@@ -211,12 +211,12 @@ export function ExperimentMeta({ meta, className = "" }: ExperimentMetaProps) {
   }
   return (
     <dl
-      className={`space-y-1.5 border-t border-white/10 pt-5 font-mono text-[0.78rem] leading-5 ${className}`}
+      className={`space-y-1.5 border-t border-wave-border pt-5 font-mono text-[0.78rem] leading-5 ${className}`}
     >
       {entries.map(([key, value]) => (
         <div className="flex flex-wrap gap-x-4" key={key}>
-          <dt className="text-neutral-600">{key}</dt>
-          <dd className="min-w-0 break-all text-neutral-400">{value}</dd>
+          <dt className="text-wave-subtle">{key}</dt>
+          <dd className="min-w-0 break-all text-wave-muted">{value}</dd>
         </div>
       ))}
     </dl>

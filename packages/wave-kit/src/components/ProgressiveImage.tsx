@@ -14,7 +14,7 @@ export function ProgressiveImage({
   width,
   height,
   sizes = "(max-width: 712px) calc(100vw - 2.5rem), 672px",
-  className = "mx-auto w-full rounded-lg border border-white/10",
+  className = "mx-auto w-full rounded-lg border border-wave-border",
   loading = "lazy",
   onLoad,
   ...props
@@ -31,7 +31,7 @@ export function ProgressiveImage({
 
   return (
     <span
-      className={`relative block max-w-full overflow-hidden bg-white/[0.03] ${className}`}
+      className={`relative block max-w-full overflow-hidden bg-wave-surface ${className}`}
       style={
         width && height
           ? { aspectRatio: `${Number(width)} / ${Number(height)}` }

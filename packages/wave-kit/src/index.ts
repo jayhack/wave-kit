@@ -45,6 +45,8 @@ export { ProgressiveImage } from "./components/ProgressiveImage";
 export type { ProgressiveImageProps } from "./components/ProgressiveImage";
 export { Tabs } from "./components/Tabs";
 export type { TabItem, TabsProps } from "./components/Tabs";
+export { ThemeToggle } from "./components/ThemeToggle";
+export type { ThemeToggleProps } from "./components/ThemeToggle";
 export { WaveField } from "./components/WaveField";
 export type { WaveFieldProps } from "./components/WaveField";
 export {

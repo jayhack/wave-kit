@@ -48,21 +48,21 @@ export function ImageCard({
 
   return (
     <article
-      className={`relative flex h-full min-w-0 flex-col overflow-hidden rounded-lg bg-white/[0.03] ring-1 ring-inset ring-white/10 ${className}`}
+      className={`relative flex h-full min-w-0 flex-col overflow-hidden rounded-lg bg-wave-surface ring-1 ring-inset ring-wave-border ${className}`}
     >
       <div
-        className="block w-full shrink-0 overflow-hidden bg-white/[0.03]"
+        className="block w-full shrink-0 overflow-hidden bg-wave-surface"
         style={{ aspectRatio }}
       >
         {cardImage}
       </div>
 
       <div className="pointer-events-none flex min-h-[5.75rem] flex-1 flex-col p-4">
-        <h3 className="!m-0 truncate text-sm font-semibold leading-5 text-neutral-100">
+        <h3 className="!m-0 truncate text-sm font-semibold leading-5 text-wave-heading">
           {title}
         </h3>
         {description ? (
-          <div className="mt-1 line-clamp-2 min-h-10 text-sm leading-5 text-neutral-400 [&>p]:!m-0">
+          <div className="mt-1 line-clamp-2 min-h-10 text-sm leading-5 text-wave-muted [&>p]:!m-0">
             {description}
           </div>
         ) : null}
