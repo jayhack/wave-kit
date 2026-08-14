@@ -66,6 +66,11 @@ test("server-renders the canonical jay.ai design page", async () => {
   assert.match(html, />Code samples</);
   assert.match(html, /aria-label="Wave Kit showcase"/);
   assert.match(html, />Components/);
+  assert.match(
+    html,
+    /id="components-showcase-tab"[\s\S]*id="style-guide-showcase-tab"/,
+  );
+  assert.match(html, /aria-labelledby="style-guide-showcase-tab"/);
   assert.match(html, />Blog playground<\/button>/);
   assert.match(html, /Changes stay in this demo only/);
   assert.match(html, /What the model learns between frames/);

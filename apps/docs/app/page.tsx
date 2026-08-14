@@ -85,7 +85,6 @@ const componentSections = [
   ["dividers", "Dividers"],
   ["code-blocks", "Code blocks"],
   ["experiments", "Experiments"],
-  ["style-guide", "Style guide"],
 ] as const;
 
 const codeSections = [
@@ -96,6 +95,7 @@ const codeSections = [
 
 const showcaseViews = [
   ["components", "Components"],
+  ["style-guide", "Style guide"],
   ["code", "Code samples"],
   ["blog", "Blog playground"],
 ] as const;
@@ -1205,49 +1205,56 @@ export default function Home() {
                 </div>
               </section>
 
-              <section aria-labelledby="style-guide">
-                <SectionTitle id="style-guide">Style guide</SectionTitle>
-                <p>
-                  Simplicity is an editing discipline. Every visual element
-                  should improve meaning, navigation, or reading rhythm.
-                </p>
-                <div className="mt-8 space-y-8">
-                  <div>
-                    <h3 className="text-lg font-bold text-wave-heading">
-                      Remove ornamental UI
-                    </h3>
-                    <p className="mt-2 text-wave-muted">
-                      Avoid AI slop such as eyebrows, sequence numbers, badges,
-                      and labels that only repeat nearby content. If an element
-                      adds no information or function, remove it.
-                    </p>
-                  </div>
-                  <Divider />
-                  <div>
-                    <h3 className="text-lg font-bold text-wave-heading">
-                      Keep titles in proportion
-                    </h3>
-                    <p className="mt-2 text-wave-muted">
-                      Use the smallest title that establishes hierarchy. Avoid
-                      oversized hero text that pushes useful content below the
-                      fold or turns every page into a landing page.
-                    </p>
-                  </div>
-                  <Divider />
-                  <div>
-                    <h3 className="text-lg font-bold text-wave-heading">
-                      Compose for vertical reading
-                    </h3>
-                    <p className="mt-2 text-wave-muted">
-                      Structure pages like blog posts when possible. Assume
-                      vertical scrolling, use semantic sections and paragraphs,
-                      and intersperse images or interactive assets with the
-                      text they support.
-                    </p>
-                  </div>
-                </div>
-              </section>
+              </div>
 
+              <div
+                aria-labelledby="style-guide-showcase-tab"
+                hidden={activeView !== "style-guide"}
+                id="style-guide-showcase-panel"
+                role="tabpanel"
+              >
+                <section aria-labelledby="style-guide">
+                  <SectionTitle id="style-guide">Style guide</SectionTitle>
+                  <p>
+                    Simplicity is an editing discipline. Every visual element
+                    should improve meaning, navigation, or reading rhythm.
+                  </p>
+                  <div className="mt-8 space-y-8">
+                    <div>
+                      <h3 className="text-lg font-bold text-wave-heading">
+                        Remove ornamental UI
+                      </h3>
+                      <p className="mt-2 text-wave-muted">
+                        Avoid AI slop such as eyebrows, sequence numbers,
+                        badges, and labels that only repeat nearby content. If
+                        an element adds no information or function, remove it.
+                      </p>
+                    </div>
+                    <Divider />
+                    <div>
+                      <h3 className="text-lg font-bold text-wave-heading">
+                        Keep titles in proportion
+                      </h3>
+                      <p className="mt-2 text-wave-muted">
+                        Use the smallest title that establishes hierarchy.
+                        Avoid oversized hero text that pushes useful content
+                        below the fold or turns every page into a landing page.
+                      </p>
+                    </div>
+                    <Divider />
+                    <div>
+                      <h3 className="text-lg font-bold text-wave-heading">
+                        Compose for vertical reading
+                      </h3>
+                      <p className="mt-2 text-wave-muted">
+                        Structure pages like blog posts when possible. Assume
+                        vertical scrolling, use semantic sections and
+                        paragraphs, and intersperse images or interactive assets
+                        with the text they support.
+                      </p>
+                    </div>
+                  </div>
+                </section>
               </div>
 
               <div
