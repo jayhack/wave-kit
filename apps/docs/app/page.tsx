@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useState, type KeyboardEvent, type ReactNode } from "react";
 import {
   BackLink,
   CodeBlock,
@@ -71,7 +71,7 @@ const progressivePlaceholder =
 const skillInstallCommand =
   "npx skills add jayhack/wave-kit --skill build-with-wave-kit -y";
 
-const sections = [
+const componentSections = [
   ["inspiration", "Inspiration"],
   ["wave", "Wave motif"],
   ["color", "Color"],
@@ -86,10 +86,21 @@ const sections = [
   ["code-blocks", "Code blocks"],
   ["experiments", "Experiments"],
   ["style-guide", "Style guide"],
+] as const;
+
+const codeSections = [
   ["code", "Code samples"],
   ["stack", "Tech stack"],
   ["install", "Install"],
 ] as const;
+
+const showcaseViews = [
+  ["components", "Components"],
+  ["code", "Code samples"],
+  ["blog", "Blog playground"],
+] as const;
+
+type ShowcaseView = (typeof showcaseViews)[number][0];
 
 const tabItems = [
   {
@@ -337,8 +348,135 @@ function TokenLabel({ children }: { children: ReactNode }) {
   );
 }
 
+function BlogPlayground() {
+  const [accent, setAccent] = useState<"blue" | "orange">("blue");
+  const [measure, setMeasure] = useState<"focused" | "wide">("focused");
+  const [title, setTitle] = useState("What the model learns between frames");
+  const [introduction, setIntroduction] = useState(
+    "A small visual study of how motion emerges inside a video model. Click the title or this paragraph to try the editable states.",
+  );
+
+  const accentClass =
+    accent === "blue" ? "text-wave-link-sky" : "text-wave-link-orange";
+
+  return (
+    <div className="space-y-8" id="blog-playground">
+      <div className="rounded-lg border border-wave-border bg-wave-surface p-4 sm:flex sm:items-center sm:justify-between sm:gap-6">
+        <div>
+          <h2 className="font-bold text-wave-heading">Blog playground</h2>
+          <p className="mt-1 text-sm leading-6 text-wave-muted">
+            Try the controls and edit the copy. Changes stay in this demo only.
+          </p>
+        </div>
+        <div className="mt-4 flex flex-wrap gap-2 sm:mt-0" aria-label="Blog styling controls">
+          <button
+            aria-pressed={accent === "blue"}
+            className={`rounded-md border px-3 py-1.5 text-xs font-semibold transition-colors ${
+              accent === "blue"
+                ? "border-wave-blue-vivid bg-wave-blue-vivid text-black"
+                : "border-wave-border text-wave-muted hover:text-wave-heading"
+            }`}
+            onClick={() => setAccent("blue")}
+            type="button"
+          >
+            Blue accent
+          </button>
+          <button
+            aria-pressed={accent === "orange"}
+            className={`rounded-md border px-3 py-1.5 text-xs font-semibold transition-colors ${
+              accent === "orange"
+                ? "border-wave-orange bg-wave-orange text-black"
+                : "border-wave-border text-wave-muted hover:text-wave-heading"
+            }`}
+            onClick={() => setAccent("orange")}
+            type="button"
+          >
+            Orange accent
+          </button>
+          <button
+            aria-pressed={measure === "wide"}
+            className="rounded-md border border-wave-border px-3 py-1.5 text-xs font-semibold text-wave-muted transition-colors hover:text-wave-heading"
+            onClick={() =>
+              setMeasure((current) =>
+                current === "focused" ? "wide" : "focused",
+              )
+            }
+            type="button"
+          >
+            {measure === "focused" ? "Widen article" : "Narrow article"}
+          </button>
+        </div>
+      </div>
+
+      <article
+        className={`mx-auto transition-[max-width] duration-300 ${
+          measure === "focused" ? "max-w-xl" : "max-w-2xl"
+        }`}
+      >
+        <div className="relative aspect-[16/7] overflow-hidden rounded-lg border border-wave-border bg-black">
+          <WaveField className="absolute inset-0 h-full w-full" />
+        </div>
+        <header className="pb-8 pt-8">
+          <p className={`text-sm font-semibold ${accentClass}`}>
+            Research note · 8 min read
+          </p>
+          <div className="mt-3">
+            <EditableTitle
+              className="text-3xl font-extrabold tracking-[-0.035em] text-wave-heading sm:text-5xl"
+              demo
+              id="blog-demo-title"
+              level={2}
+              onSave={({ value }) => setTitle(value)}
+            >
+              {title}
+            </EditableTitle>
+          </div>
+          <div className="mt-5">
+            <EditableText
+              className="text-lg leading-8 text-wave-muted"
+              demo
+              id="blog-demo-introduction"
+              onSave={({ value }) => setIntroduction(value)}
+              rows={5}
+            >
+              {introduction}
+            </EditableText>
+          </div>
+        </header>
+
+        <Divider />
+
+        <div className="space-y-6 py-8 text-[1.03rem] leading-8 text-wave-body">
+          <p>
+            A model never sees motion directly. It sees a sequence of still
+            images and learns which changes tend to follow others. The useful
+            question is not whether it memorized pixels, but where a stable
+            representation of direction begins to appear.
+          </p>
+          <blockquote className={`border-l-2 pl-5 text-xl leading-8 text-wave-heading ${
+            accent === "blue" ? "border-wave-blue-vivid" : "border-wave-orange"
+          }`}>
+            The gap between two frames is where the model has to invent a
+            theory of the world.
+          </blockquote>
+          <CodeBlock
+            code={`const probe = trainLinearProbe({\n  layer: 8,\n  target: "motion_direction",\n});`}
+            label="A probe for direction"
+            language="tsx"
+          />
+          <p className="text-wave-muted">
+            This is a visual sandbox, so edits reset when the page reloads and
+            nothing is written to the blog source.
+          </p>
+        </div>
+      </article>
+    </div>
+  );
+}
+
 
 export default function Home() {
+  const [activeView, setActiveView] = useState<ShowcaseView>("components");
   const [skillCopied, setSkillCopied] = useState(false);
   const [progressivePreviewSrc, setProgressivePreviewSrc] = useState<
     string | undefined
@@ -358,6 +496,33 @@ export default function Home() {
     }
   }
 
+  function handleShowcaseKeyDown(
+    event: KeyboardEvent<HTMLButtonElement>,
+    currentIndex: number,
+  ) {
+    let nextIndex = currentIndex;
+    if (event.key === "ArrowRight") {
+      nextIndex = (currentIndex + 1) % showcaseViews.length;
+    } else if (event.key === "ArrowLeft") {
+      nextIndex =
+        (currentIndex - 1 + showcaseViews.length) % showcaseViews.length;
+    } else if (event.key === "Home") {
+      nextIndex = 0;
+    } else if (event.key === "End") {
+      nextIndex = showcaseViews.length - 1;
+    } else {
+      return;
+    }
+
+    event.preventDefault();
+    setActiveView(showcaseViews[nextIndex][0]);
+    const tabs =
+      event.currentTarget.parentElement?.querySelectorAll<HTMLButtonElement>(
+        '[role="tab"]',
+      );
+    tabs?.[nextIndex]?.focus();
+  }
+
   return (
     <div className="min-h-screen bg-wave-canvas text-wave-body">
       <ThemeToggle className="fixed right-5 top-5 z-50 sm:right-7 sm:top-7" />
@@ -365,7 +530,11 @@ export default function Home() {
         <div className="min-[72rem]:grid min-[72rem]:grid-cols-[minmax(0,1fr)_minmax(0,42rem)_minmax(0,1fr)] min-[72rem]:gap-8">
           <aside className="hidden min-w-0 min-[72rem]:block">
             <div className="sticky top-1/2 -translate-y-1/2 py-1 pr-2">
-              <NavigationIndex items={sections} />
+              {activeView === "components" ? (
+                <NavigationIndex items={componentSections} />
+              ) : activeView === "code" ? (
+                <NavigationIndex items={codeSections} />
+              ) : null}
             </div>
           </aside>
 
@@ -454,14 +623,60 @@ export default function Home() {
               <p className="mt-3 text-sm leading-6 text-wave-subtle">
                 Optional. This installs the agent skill for building with Wave
                 Kit. You can also just{" "}
-                <TextLink href="#install" tone="sky">
+                <button
+                  className="text-wave-link-sky underline decoration-wave-link-sky/55 underline-offset-2 hover:text-wave-link-sky-hover hover:decoration-wave-link-sky-hover"
+                  onClick={() => setActiveView("code")}
+                  type="button"
+                >
                   install the package
-                </TextLink>{" "}
+                </button>{" "}
                 and compose the components yourself.
               </p>
+
+              <div
+                aria-label="Wave Kit showcase"
+                className="no-scrollbar tab-scroll-x mt-9 flex gap-7 border-b border-wave-border"
+                role="tablist"
+              >
+                {showcaseViews.map(([id, label], index) => {
+                  const selected = activeView === id;
+                  return (
+                    <button
+                      aria-controls={`${id}-showcase-panel`}
+                      aria-selected={selected}
+                      className={`relative shrink-0 pb-3 text-sm transition-colors ${
+                        selected
+                          ? "font-semibold text-wave-heading"
+                          : "text-wave-muted hover:text-wave-heading"
+                      }`}
+                      id={`${id}-showcase-tab`}
+                      key={id}
+                      onClick={() => setActiveView(id)}
+                      onKeyDown={(event) =>
+                        handleShowcaseKeyDown(event, index)
+                      }
+                      role="tab"
+                      tabIndex={selected ? 0 : -1}
+                      type="button"
+                    >
+                      {label}
+                      {selected ? (
+                        <span className="absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-wave-heading" />
+                      ) : null}
+                    </button>
+                  );
+                })}
+              </div>
             </header>
 
-            <article className="mt-10 space-y-16 text-[1.03rem] leading-8 text-wave-body">
+            <article className="mt-10 text-[1.03rem] leading-8 text-wave-body">
+              <div
+                aria-labelledby="components-showcase-tab"
+                className="space-y-16"
+                hidden={activeView !== "components"}
+                id="components-showcase-panel"
+                role="tabpanel"
+              >
               <section aria-labelledby="inspiration">
                 <SectionTitle id="inspiration">Inspiration</SectionTitle>
                 <p>
@@ -1033,6 +1248,16 @@ export default function Home() {
                 </div>
               </section>
 
+              </div>
+
+              <div
+                aria-labelledby="code-showcase-tab"
+                className="space-y-16"
+                hidden={activeView !== "code"}
+                id="code-showcase-panel"
+                role="tabpanel"
+              >
+
               <section aria-labelledby="code">
                 <SectionTitle id="code">Code samples</SectionTitle>
                 <p>
@@ -1104,6 +1329,17 @@ npm install ./wave-kit/packages/wave-kit tailwindcss`}
                   />
                 </div>
               </section>
+
+              </div>
+
+              <div
+                aria-labelledby="blog-showcase-tab"
+                hidden={activeView !== "blog"}
+                id="blog-showcase-panel"
+                role="tabpanel"
+              >
+                <BlogPlayground />
+              </div>
 
             </article>
 

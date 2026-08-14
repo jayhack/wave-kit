@@ -22,6 +22,7 @@ type EditableContentProps = {
   id: string;
   value: string;
   ariaLabel: string;
+  demo?: boolean;
   editorClassName?: string;
   multiline: boolean;
   rows?: number;
@@ -33,6 +34,7 @@ export type EditableTextProps = {
   id: string;
   children: string;
   className?: string;
+  demo?: boolean;
   rows?: number;
   onSave?: EditableSaveHandler;
 };
@@ -41,6 +43,7 @@ export type EditableTitleProps = {
   id: string;
   children: string;
   className?: string;
+  demo?: boolean;
   level?: 1 | 2 | 3 | 4 | 5 | 6;
   onSave?: EditableSaveHandler;
 };
@@ -67,11 +70,12 @@ function EditableContent({
   editorClassName = "",
   multiline,
   rows = 5,
+  demo = false,
   onSave,
   renderValue,
 }: EditableContentProps) {
   const statusId = useId();
-  const [enabled, setEnabled] = useState(false);
+  const [enabled, setEnabled] = useState(demo);
   const [currentValue, setCurrentValue] = useState(value);
   const [draft, setDraft] = useState(value);
   const [editing, setEditing] = useState(false);
@@ -80,8 +84,8 @@ function EditableContent({
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setEnabled(isLocalDevelopment());
-  }, []);
+    setEnabled(demo || isLocalDevelopment());
+  }, [demo]);
 
   useEffect(() => {
     setCurrentValue(value);
@@ -89,7 +93,7 @@ function EditableContent({
   }, [value]);
 
   useEffect(() => {
-    if (!enabled || onSave) {
+    if (!enabled || demo || onSave) {
       return;
     }
 
@@ -98,7 +102,7 @@ function EditableContent({
       setCurrentValue(storedValue);
       setDraft(storedValue);
     }
-  }, [enabled, id, onSave]);
+  }, [demo, enabled, id, onSave]);
 
   useEffect(() => {
     if (status !== "saved") {
@@ -133,7 +137,7 @@ function EditableContent({
     try {
       if (onSave) {
         await onSave({ id, value: draft });
-      } else {
+      } else if (!demo) {
         window.localStorage.setItem(storageKey(id), draft);
       }
       setCurrentValue(draft);
@@ -263,6 +267,7 @@ export function EditableText({
   id,
   children,
   className = "",
+  demo = false,
   rows = 5,
   onSave,
 }: EditableTextProps) {
@@ -270,6 +275,7 @@ export function EditableText({
     <EditableContent
       ariaLabel={`Edit text: ${id}`}
       editorClassName={className}
+      demo={demo}
       id={id}
       multiline
       onSave={onSave}
@@ -284,6 +290,7 @@ export function EditableTitle({
   id,
   children,
   className = "",
+  demo = false,
   level = 2,
   onSave,
 }: EditableTitleProps) {
@@ -291,6 +298,7 @@ export function EditableTitle({
     <EditableContent
       ariaLabel={`Edit title: ${id}`}
       editorClassName={className}
+      demo={demo}
       id={id}
       multiline={false}
       onSave={onSave}

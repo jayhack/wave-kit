@@ -60,6 +60,11 @@ test("server-renders the canonical jay.ai design page", async () => {
   assert.match(html, /Code \/ 12\.5 \/ 20/);
   assert.match(html, /wave-orange.*#f97316/);
   assert.match(html, />Code samples</);
+  assert.match(html, /aria-label="Wave Kit showcase"/);
+  assert.match(html, />Components/);
+  assert.match(html, />Blog playground<\/button>/);
+  assert.match(html, /Changes stay in this demo only/);
+  assert.match(html, /What the model learns between frames/);
   assert.match(html, /data-language="bash"/);
   assert.match(html, /data-language="css"/);
   assert.match(html, /Highlighted code/);
@@ -207,4 +212,12 @@ test("editable content is static in the production render", async () => {
   assert.doesNotMatch(html, /data-wave-editable/);
   assert.doesNotMatch(html, />Save<\/button>/);
   assert.doesNotMatch(html, />Cancel<\/button>/);
+});
+
+test("demo editable content remains interactive in production", async () => {
+  const html = await render();
+
+  assert.match(html, /data-wave-editable="blog-demo-title"/);
+  assert.match(html, /data-wave-editable="blog-demo-introduction"/);
+  assert.match(html, /Edit title: blog-demo-title/);
 });
