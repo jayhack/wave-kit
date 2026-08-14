@@ -121,6 +121,11 @@ test("the showcase consumes React, Tailwind, and package components", async () =
   ]);
 
   assert.match(page, /from "@jayhack\/wave-kit"/);
+  assert.match(page, /sticky top-0 z-40 flex gap-7/);
+  assert.match(
+    page,
+    /cursor-pointer pb-3 text-sm transition-colors focus-visible:outline-none/,
+  );
   assert.match(styles, /@import "tailwindcss"/);
   assert.match(
     styles,

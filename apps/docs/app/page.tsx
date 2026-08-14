@@ -632,42 +632,42 @@ export default function Home() {
                 </button>{" "}
                 and compose the components yourself.
               </p>
-
-              <div
-                aria-label="Wave Kit showcase"
-                className="no-scrollbar tab-scroll-x mt-9 flex gap-7 border-b border-wave-border"
-                role="tablist"
-              >
-                {showcaseViews.map(([id, label], index) => {
-                  const selected = activeView === id;
-                  return (
-                    <button
-                      aria-controls={`${id}-showcase-panel`}
-                      aria-selected={selected}
-                      className={`relative shrink-0 pb-3 text-sm transition-colors ${
-                        selected
-                          ? "font-semibold text-wave-heading"
-                          : "text-wave-muted hover:text-wave-heading"
-                      }`}
-                      id={`${id}-showcase-tab`}
-                      key={id}
-                      onClick={() => setActiveView(id)}
-                      onKeyDown={(event) =>
-                        handleShowcaseKeyDown(event, index)
-                      }
-                      role="tab"
-                      tabIndex={selected ? 0 : -1}
-                      type="button"
-                    >
-                      {label}
-                      {selected ? (
-                        <span className="absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-wave-heading" />
-                      ) : null}
-                    </button>
-                  );
-                })}
-              </div>
             </header>
+
+            <div
+              aria-label="Wave Kit showcase"
+              className="no-scrollbar tab-scroll-x sticky top-0 z-40 flex gap-7 border-b border-wave-border bg-wave-canvas pt-3"
+              role="tablist"
+            >
+              {showcaseViews.map(([id, label], index) => {
+                const selected = activeView === id;
+                return (
+                  <button
+                    aria-controls={`${id}-showcase-panel`}
+                    aria-selected={selected}
+                    className={`relative shrink-0 cursor-pointer pb-3 text-sm transition-colors focus-visible:outline-none ${
+                      selected
+                        ? "font-semibold text-wave-heading"
+                        : "text-wave-muted hover:text-wave-heading"
+                    }`}
+                    id={`${id}-showcase-tab`}
+                    key={id}
+                    onClick={() => setActiveView(id)}
+                    onKeyDown={(event) =>
+                      handleShowcaseKeyDown(event, index)
+                    }
+                    role="tab"
+                    tabIndex={selected ? 0 : -1}
+                    type="button"
+                  >
+                    {label}
+                    {selected ? (
+                      <span className="absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-wave-heading" />
+                    ) : null}
+                  </button>
+                );
+              })}
+            </div>
 
             <article className="mt-10 text-[1.03rem] leading-8 text-wave-body">
               <div
