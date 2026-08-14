@@ -34,7 +34,8 @@ const sections = [
   become click-to-edit controls only during local development. Both require a
   stable `id`; they save to versioned local storage by default. Pass `onSave`
   to persist `{ id, value }` through the consuming app's development-only
-  route or server action.
+  route or server action. Pass `demo` for a production-visible playground that
+  keeps edits in memory only and resets on reload.
 - `Divider`: quiet full-width rule with `subtle` or `strong` emphasis.
 - `Tabs`: accepts `items: { id, label, content }[]` and optional `label`.
   Arrow, Home, and End keys move focus.

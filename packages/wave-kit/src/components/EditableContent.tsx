@@ -22,6 +22,7 @@ type EditableContentProps = {
   id: string;
   value: string;
   ariaLabel: string;
+  demo?: boolean;
   editorClassName?: string;
   multiline: boolean;
   rows?: number;
@@ -33,6 +34,7 @@ export type EditableTextProps = {
   id: string;
   children: string;
   className?: string;
+  demo?: boolean;
   rows?: number;
   onSave?: EditableSaveHandler;
 };
@@ -41,6 +43,7 @@ export type EditableTitleProps = {
   id: string;
   children: string;
   className?: string;
+  demo?: boolean;
   level?: 1 | 2 | 3 | 4 | 5 | 6;
   onSave?: EditableSaveHandler;
 };
@@ -67,11 +70,12 @@ function EditableContent({
   editorClassName = "",
   multiline,
   rows = 5,
+  demo = false,
   onSave,
   renderValue,
 }: EditableContentProps) {
   const statusId = useId();
-  const [enabled, setEnabled] = useState(false);
+  const [enabled, setEnabled] = useState(demo);
   const [currentValue, setCurrentValue] = useState(value);
   const [draft, setDraft] = useState(value);
   const [editing, setEditing] = useState(false);
@@ -80,8 +84,8 @@ function EditableContent({
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setEnabled(isLocalDevelopment());
-  }, []);
+    setEnabled(demo || isLocalDevelopment());
+  }, [demo]);
 
   useEffect(() => {
     setCurrentValue(value);
@@ -89,7 +93,7 @@ function EditableContent({
   }, [value]);
 
   useEffect(() => {
-    if (!enabled || onSave) {
+    if (!enabled || demo || onSave) {
       return;
     }
 
@@ -98,7 +102,7 @@ function EditableContent({
       setCurrentValue(storedValue);
       setDraft(storedValue);
     }
-  }, [enabled, id, onSave]);
+  }, [demo, enabled, id, onSave]);
 
   useEffect(() => {
     if (status !== "saved") {
@@ -133,7 +137,7 @@ function EditableContent({
     try {
       if (onSave) {
         await onSave({ id, value: draft });
-      } else {
+      } else if (!demo) {
         window.localStorage.setItem(storageKey(id), draft);
       }
       setCurrentValue(draft);
@@ -171,8 +175,8 @@ function EditableContent({
     <div
       className={`group relative rounded-lg transition-colors ${
         editing
-          ? "bg-white/[0.04] p-3 ring-1 ring-wave-blue-vivid/70"
-          : "hover:bg-white/[0.025] hover:ring-1 hover:ring-white/10"
+          ? "bg-wave-surface-raised p-3 ring-1 ring-wave-blue-vivid/70"
+          : "hover:bg-wave-surface hover:ring-1 hover:ring-wave-border"
       }`}
       data-wave-editable={id}
     >
@@ -183,7 +187,7 @@ function EditableContent({
               aria-describedby={statusId}
               aria-label={ariaLabel}
               autoFocus
-              className={`block w-full resize-y rounded-md border border-white/15 bg-black px-3 py-2 font-sans outline-none focus:border-wave-blue-vivid ${editorClassName}`}
+              className={`block w-full resize-y rounded-md border border-wave-border-strong bg-wave-canvas px-3 py-2 font-sans text-wave-heading outline-none focus:border-wave-blue-vivid ${editorClassName}`}
               onChange={(event) => setDraft(event.currentTarget.value)}
               onKeyDown={handleEditorKeyDown}
               rows={rows}
@@ -194,7 +198,7 @@ function EditableContent({
               aria-describedby={statusId}
               aria-label={ariaLabel}
               autoFocus
-              className={`block w-full rounded-md border border-white/15 bg-black px-3 py-2 font-sans outline-none focus:border-wave-blue-vivid ${editorClassName}`}
+              className={`block w-full rounded-md border border-wave-border-strong bg-wave-canvas px-3 py-2 font-sans text-wave-heading outline-none focus:border-wave-blue-vivid ${editorClassName}`}
               onChange={(event) => setDraft(event.currentTarget.value)}
               onKeyDown={handleEditorKeyDown}
               type="text"
@@ -204,13 +208,13 @@ function EditableContent({
           <div className="mt-3 flex flex-wrap items-center justify-end gap-2">
             <span
               aria-live="polite"
-              className={`mr-auto text-xs ${error ? "text-wave-red-hot" : "text-neutral-500"}`}
+              className={`mr-auto text-xs ${error ? "text-wave-red-hot" : "text-wave-subtle"}`}
               id={statusId}
             >
               {error ?? "⌘/Ctrl + Enter to save · Esc to cancel"}
             </span>
             <button
-              className="rounded-md px-3 py-1.5 text-xs font-semibold text-neutral-400 hover:bg-white/[0.06] hover:text-white"
+              className="rounded-md px-3 py-1.5 text-xs font-semibold text-wave-muted hover:bg-wave-surface-hover hover:text-wave-heading"
               disabled={saving}
               onClick={cancelEditing}
               type="button"
@@ -242,7 +246,7 @@ function EditableContent({
           tabIndex={0}
         >
           {renderValue(currentValue)}
-          <span className="pointer-events-none absolute right-2 top-2 rounded-md bg-black/80 px-2 py-1 text-[0.65rem] font-semibold text-neutral-500 opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
+          <span className="pointer-events-none absolute right-2 top-2 rounded-md bg-wave-canvas px-2 py-1 text-[0.65rem] font-semibold text-wave-subtle opacity-0 shadow-sm ring-1 ring-wave-border transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
             Edit
           </span>
         </div>
@@ -263,6 +267,7 @@ export function EditableText({
   id,
   children,
   className = "",
+  demo = false,
   rows = 5,
   onSave,
 }: EditableTextProps) {
@@ -270,6 +275,7 @@ export function EditableText({
     <EditableContent
       ariaLabel={`Edit text: ${id}`}
       editorClassName={className}
+      demo={demo}
       id={id}
       multiline
       onSave={onSave}
@@ -284,6 +290,7 @@ export function EditableTitle({
   id,
   children,
   className = "",
+  demo = false,
   level = 2,
   onSave,
 }: EditableTitleProps) {
@@ -291,6 +298,7 @@ export function EditableTitle({
     <EditableContent
       ariaLabel={`Edit title: ${id}`}
       editorClassName={className}
+      demo={demo}
       id={id}
       multiline={false}
       onSave={onSave}

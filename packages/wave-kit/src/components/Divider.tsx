@@ -8,7 +8,7 @@ export function Divider({
   return (
     <hr
       className={`border-0 border-t ${
-        emphasis === "strong" ? "border-white/25" : "border-white/10"
+        emphasis === "strong" ? "border-wave-border-strong" : "border-wave-border"
       } ${className}`}
     />
   );

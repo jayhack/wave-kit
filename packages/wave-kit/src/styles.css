@@ -22,6 +22,103 @@
   --color-wave-amber: #fbbf24;
   --color-wave-yellow: #fde68a;
   --color-wave-yellow-pale: #fef3c7;
+  --color-wave-canvas: var(--wave-canvas);
+  --color-wave-surface: var(--wave-surface);
+  --color-wave-surface-raised: var(--wave-surface-raised);
+  --color-wave-surface-hover: var(--wave-surface-hover);
+  --color-wave-border: var(--wave-border);
+  --color-wave-border-strong: var(--wave-border-strong);
+  --color-wave-heading: var(--wave-heading);
+  --color-wave-body: var(--wave-body);
+  --color-wave-muted: var(--wave-muted);
+  --color-wave-subtle: var(--wave-subtle);
+  --color-wave-link-orange: var(--wave-link-orange);
+  --color-wave-link-orange-hover: var(--wave-link-orange-hover);
+  --color-wave-link-sky: var(--wave-link-sky);
+  --color-wave-link-sky-hover: var(--wave-link-sky-hover);
+  --color-wave-link-amber: var(--wave-link-amber);
+  --color-wave-link-amber-hover: var(--wave-link-amber-hover);
+  --color-wave-syntax-string: var(--wave-syntax-string);
+  --color-wave-syntax-keyword: var(--wave-syntax-keyword);
+  --color-wave-syntax-literal: var(--wave-syntax-literal);
+  --color-wave-syntax-number: var(--wave-syntax-number);
+}
+
+:root,
+[data-theme="dark"] {
+  --wave-canvas: #000000;
+  --wave-surface: rgba(255, 255, 255, 0.025);
+  --wave-surface-raised: rgba(255, 255, 255, 0.055);
+  --wave-surface-hover: rgba(255, 255, 255, 0.09);
+  --wave-border: rgba(255, 255, 255, 0.1);
+  --wave-border-strong: rgba(255, 255, 255, 0.23);
+  --wave-heading: #fafafa;
+  --wave-body: #d4d4d4;
+  --wave-muted: #a3a3a3;
+  --wave-subtle: #737373;
+  --wave-link-orange: #fb923c;
+  --wave-link-orange-hover: #fdba74;
+  --wave-link-sky: #7dd3fc;
+  --wave-link-sky-hover: #bae6fd;
+  --wave-link-amber: #fde68a;
+  --wave-link-amber-hover: #fef3c7;
+  --wave-syntax-string: #fef3c7;
+  --wave-syntax-keyword: #7dd3fc;
+  --wave-syntax-literal: #fb923c;
+  --wave-syntax-number: #ff6467;
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --wave-canvas: #f7f5ef;
+  --wave-surface: rgba(20, 18, 13, 0.025);
+  --wave-surface-raised: rgba(20, 18, 13, 0.055);
+  --wave-surface-hover: rgba(20, 18, 13, 0.085);
+  --wave-border: rgba(20, 18, 13, 0.12);
+  --wave-border-strong: rgba(20, 18, 13, 0.25);
+  --wave-heading: #171612;
+  --wave-body: #3c3a34;
+  --wave-muted: #646159;
+  --wave-subtle: #77736a;
+  --wave-link-orange: #ad3b08;
+  --wave-link-orange-hover: #7c2d12;
+  --wave-link-sky: #075f8c;
+  --wave-link-sky-hover: #0c4a6e;
+  --wave-link-amber: #805500;
+  --wave-link-amber-hover: #623f00;
+  --wave-syntax-string: #77500a;
+  --wave-syntax-keyword: #075f8c;
+  --wave-syntax-literal: #a33b12;
+  --wave-syntax-number: #b91c1c;
+  color-scheme: light;
+}
+
+html {
+  background: var(--wave-canvas);
+}
+
+html,
+body {
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.wave-theme-icon-light {
+  display: none;
+}
+
+[data-theme="light"] .wave-theme-icon-light {
+  display: block;
+}
+
+[data-theme="light"] .wave-theme-icon-dark {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html,
+  body {
+    transition: none;
+  }
 }
 
 @utility no-scrollbar {

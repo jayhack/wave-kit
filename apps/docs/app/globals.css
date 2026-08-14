@@ -3,8 +3,7 @@
 
 html,
 body {
-  @apply bg-black text-white;
-  color-scheme: dark;
+  @apply bg-wave-canvas text-wave-heading;
   font-feature-settings: "cv11", "ss01", "ss03";
   -webkit-font-smoothing: antialiased;
 }

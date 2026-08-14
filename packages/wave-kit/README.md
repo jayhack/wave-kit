@@ -66,7 +66,8 @@ progressive right-side media on wide screens and stacked media on mobile:
 `EditableTitle` and `EditableText` become editable only in development builds
 served from `localhost`, `127.0.0.1`, or `::1`. Save uses versioned local
 storage by default. Pass `onSave` to persist through a development API route or
-server action instead.
+server action instead. For a public, non-persistent component preview, pass
+`demo`; edits remain in memory and reset when the page reloads.
 
 ```tsx
 <EditableTitle id="post-title" level={1}>
@@ -74,9 +75,9 @@ server action instead.
 </EditableTitle>
 
 <EditableText
+  demo
   id="post-introduction"
-  onSave={async ({ id, value }) => saveDraft({ id, value })}
 >
-  Draft introduction.
+  Try editing this preview.
 </EditableText>
 ```
