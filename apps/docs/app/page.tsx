@@ -349,75 +349,19 @@ function TokenLabel({ children }: { children: ReactNode }) {
 }
 
 function BlogPlayground() {
-  const [accent, setAccent] = useState<"blue" | "orange">("blue");
-  const [measure, setMeasure] = useState<"focused" | "wide">("focused");
   const [title, setTitle] = useState("What the model learns between frames");
   const [introduction, setIntroduction] = useState(
     "A small visual study of how motion emerges inside a video model. Click the title or this paragraph to try the editable states.",
   );
 
-  const accentClass =
-    accent === "blue" ? "text-wave-link-sky" : "text-wave-link-orange";
-
   return (
-    <div className="space-y-8" id="blog-playground">
-      <div className="rounded-lg border border-wave-border bg-wave-surface p-4 sm:flex sm:items-center sm:justify-between sm:gap-6">
-        <div>
-          <h2 className="font-bold text-wave-heading">Blog playground</h2>
-          <p className="mt-1 text-sm leading-6 text-wave-muted">
-            Try the controls and edit the copy. Changes stay in this demo only.
-          </p>
-        </div>
-        <div className="mt-4 flex flex-wrap gap-2 sm:mt-0" aria-label="Blog styling controls">
-          <button
-            aria-pressed={accent === "blue"}
-            className={`rounded-md border px-3 py-1.5 text-xs font-semibold transition-colors ${
-              accent === "blue"
-                ? "border-wave-blue-vivid bg-wave-blue-vivid text-black"
-                : "border-wave-border text-wave-muted hover:text-wave-heading"
-            }`}
-            onClick={() => setAccent("blue")}
-            type="button"
-          >
-            Blue accent
-          </button>
-          <button
-            aria-pressed={accent === "orange"}
-            className={`rounded-md border px-3 py-1.5 text-xs font-semibold transition-colors ${
-              accent === "orange"
-                ? "border-wave-orange bg-wave-orange text-black"
-                : "border-wave-border text-wave-muted hover:text-wave-heading"
-            }`}
-            onClick={() => setAccent("orange")}
-            type="button"
-          >
-            Orange accent
-          </button>
-          <button
-            aria-pressed={measure === "wide"}
-            className="rounded-md border border-wave-border px-3 py-1.5 text-xs font-semibold text-wave-muted transition-colors hover:text-wave-heading"
-            onClick={() =>
-              setMeasure((current) =>
-                current === "focused" ? "wide" : "focused",
-              )
-            }
-            type="button"
-          >
-            {measure === "focused" ? "Widen article" : "Narrow article"}
-          </button>
-        </div>
-      </div>
-
-      <article
-        className={`mx-auto transition-[max-width] duration-300 ${
-          measure === "focused" ? "max-w-xl" : "max-w-2xl"
-        }`}
-      >
+    <div id="blog-playground">
+      <article className="mx-auto max-w-2xl">
         <div className="relative aspect-[16/7] overflow-hidden rounded-lg border border-wave-border bg-black">
           <WaveField className="absolute inset-0 h-full w-full" />
         </div>
         <header className="pb-8 pt-8">
-          <p className={`text-sm font-semibold ${accentClass}`}>
+          <p className="text-sm font-semibold text-wave-link-orange">
             Research note · 8 min read
           </p>
           <div className="mt-3">
@@ -453,9 +397,7 @@ function BlogPlayground() {
             question is not whether it memorized pixels, but where a stable
             representation of direction begins to appear.
           </p>
-          <blockquote className={`border-l-2 pl-5 text-xl leading-8 text-wave-heading ${
-            accent === "blue" ? "border-wave-blue-vivid" : "border-wave-orange"
-          }`}>
+          <blockquote className="border-l-2 border-wave-orange pl-5 text-xl leading-8 text-wave-heading">
             The gap between two frames is where the model has to invent a
             theory of the world.
           </blockquote>
