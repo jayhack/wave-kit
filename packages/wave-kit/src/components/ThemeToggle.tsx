@@ -48,7 +48,7 @@ export function ThemeToggle({
     <button
       aria-label="Switch between light and dark mode"
       data-theme-toggle=""
-      className={`group inline-flex size-10 items-center justify-center rounded-full border border-wave-border bg-wave-canvas text-wave-muted shadow-sm transition-colors hover:border-wave-border-strong hover:bg-wave-surface-hover hover:text-wave-heading focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wave-link-sky ${className}`}
+      className={`group inline-flex size-10 cursor-pointer items-center justify-center rounded-full border border-wave-border bg-wave-canvas text-wave-muted shadow-sm transition-colors hover:border-wave-border-strong hover:bg-wave-surface-hover hover:text-wave-heading focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wave-link-sky ${className}`}
       onClick={toggleTheme}
       title="Switch color theme"
       type="button"

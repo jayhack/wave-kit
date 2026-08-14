@@ -50,6 +50,10 @@ test("server-renders the canonical jay.ai design page", async () => {
     /<code>npx skills add(?:<!-- -->)? <span class="text-wave-blue-light">jayhack\/wave-kit<\/span> --skill <span class="text-wave-blue-light">build-with-wave-kit<\/span> -y<\/code>/,
   );
   assert.match(html, /aria-label="Copy skill install command"/);
+  assert.match(
+    html,
+    /aria-label="Copy skill install command" class="[^"]*cursor-pointer/,
+  );
   assert.match(html, /text-wave-link-orange decoration-wave-link-orange/);
   assert.match(html, /data-theme-toggle/);
   assert.match(html, /Switch between light and dark mode/);
@@ -147,6 +151,19 @@ test("the package exposes semantic Tailwind color names", async () => {
   assert.match(styles, /--wave-canvas: #f7f5ef/);
 });
 
+test("the theme toggle signals that it is clickable", async () => {
+  const source = await readFile(
+    new URL(
+      "../../../packages/wave-kit/src/components/ThemeToggle.tsx",
+      import.meta.url,
+    ),
+    "utf8",
+  );
+
+  assert.match(source, /data-theme-toggle=""/);
+  assert.match(source, /cursor-pointer/);
+});
+
 test("image cards keep compact, aligned golden-ratio layouts", async () => {
   const source = await readFile(
     new URL(
@@ -166,6 +183,20 @@ test("image cards keep compact, aligned golden-ratio layouts", async () => {
   assert.match(source, /absolute inset-0 z-10 rounded-lg/);
   assert.match(source, /line-clamp-2/);
   assert.doesNotMatch(source, /<Lightbox/);
+});
+
+test("lightbox images stay contained within the available viewport height", async () => {
+  const source = await readFile(
+    new URL(
+      "../../../packages/wave-kit/src/components/Lightbox.tsx",
+      import.meta.url,
+    ),
+    "utf8",
+  );
+
+  assert.match(source, /relative min-h-0 w-full flex-1 overflow-hidden/);
+  assert.match(source, /absolute inset-0 h-full w-full rounded-lg object-contain/);
+  assert.doesNotMatch(source, /grid min-h-0 w-full flex-1 place-items-center/);
 });
 
 test("media rows preserve responsive editorial index behavior", async () => {

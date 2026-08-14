@@ -572,7 +572,7 @@ export default function Home() {
                 </pre>
                 <button
                   aria-label="Copy skill install command"
-                  className="inline-flex shrink-0 items-center gap-2 border-l border-wave-border px-4 font-sans text-sm font-semibold text-wave-muted hover:bg-wave-surface-hover hover:text-wave-heading"
+                  className="inline-flex shrink-0 cursor-pointer items-center gap-2 border-l border-wave-border px-4 font-sans text-sm font-semibold text-wave-muted hover:bg-wave-surface-hover hover:text-wave-heading"
                   onClick={copySkillCommand}
                   type="button"
                 >

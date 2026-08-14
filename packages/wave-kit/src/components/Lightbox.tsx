@@ -22,12 +22,12 @@ function LightboxImage({ item }: { item: LightboxItem }) {
   const showPreview = item.previewSrc && item.previewSrc !== item.src;
 
   return (
-    <div className="grid min-h-0 w-full flex-1 place-items-center">
+    <div className="relative min-h-0 w-full flex-1 overflow-hidden">
       {item.placeholder ? (
         <img
           alt=""
           aria-hidden="true"
-          className={`pointer-events-none col-start-1 row-start-1 h-full w-full scale-105 rounded-lg object-contain blur-md transition-opacity duration-300 ${
+          className={`pointer-events-none absolute inset-0 h-full w-full scale-105 rounded-lg object-contain blur-md transition-opacity duration-300 ${
             fullLoaded || showPreview ? "opacity-0" : "opacity-100"
           }`}
           src={item.placeholder}
@@ -37,7 +37,7 @@ function LightboxImage({ item }: { item: LightboxItem }) {
         <img
           alt=""
           aria-hidden="true"
-          className={`pointer-events-none col-start-1 row-start-1 h-full w-full rounded-lg object-contain shadow-2xl transition-opacity duration-300 ${
+          className={`pointer-events-none absolute inset-0 h-full w-full rounded-lg object-contain shadow-2xl transition-opacity duration-300 ${
             fullLoaded ? "opacity-0" : "opacity-100"
           }`}
           src={item.previewSrc}
@@ -45,7 +45,7 @@ function LightboxImage({ item }: { item: LightboxItem }) {
       ) : null}
       <img
         alt={item.alt}
-        className={`col-start-1 row-start-1 h-full w-full rounded-lg object-contain shadow-2xl transition-opacity duration-300 ${
+        className={`absolute inset-0 h-full w-full rounded-lg object-contain shadow-2xl transition-opacity duration-300 ${
           fullLoaded || !showPreview ? "opacity-100" : "opacity-0"
         }`}
         decoding="async"
