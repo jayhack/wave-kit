@@ -204,7 +204,46 @@ export function Lightbox({
 
       <figure
         className="flex h-[72vh] w-[88vw] min-h-0 flex-col items-center gap-3"
-        onClick={(event) => event.stopPropagation()}
+        onClick={(event) => {
+          const images = Array.from(
+            event.currentTarget.querySelectorAll("img"),
+          );
+          const image =
+            images.find(
+              (candidate) =>
+                candidate.getAttribute("aria-hidden") !== "true" &&
+                candidate.naturalWidth > 0 &&
+                candidate.naturalHeight > 0,
+            ) ??
+            images.find(
+              (candidate) =>
+                candidate.naturalWidth > 0 && candidate.naturalHeight > 0,
+            );
+
+          // object-contain leaves transparent space inside the image element's
+          // box. Only stop the backdrop click when the pointer is over the
+          // pixels that are actually rendered, not that transparent padding.
+          if (image) {
+            const bounds = image.getBoundingClientRect();
+            const scale = Math.min(
+              bounds.width / image.naturalWidth,
+              bounds.height / image.naturalHeight,
+            );
+            const renderedWidth = image.naturalWidth * scale;
+            const renderedHeight = image.naturalHeight * scale;
+            const left = bounds.left + (bounds.width - renderedWidth) / 2;
+            const top = bounds.top + (bounds.height - renderedHeight) / 2;
+
+            if (
+              event.clientX >= left &&
+              event.clientX <= left + renderedWidth &&
+              event.clientY >= top &&
+              event.clientY <= top + renderedHeight
+            ) {
+              event.stopPropagation();
+            }
+          }
+        }}
       >
         <LightboxImage item={current} key={current.src} />
         {current.caption ? (
